@@ -2,29 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- favicon 설정 -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <!-- iphone용 favicon 설정 -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+
+    <!-- 경량화 폰트 적용 -->
+    <link
+      href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- 기본 meta 태그 설정 -->
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no initial-scale=1 maximum-scale=1 minimum-scale=1"
+    />
     <meta name="theme-color" content="#000000" />
+    <meta name="author" content="4공6프" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="영화들을 망에 담아 다른 사람들과 공유하는 소셜 사이트"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta
+      name="keywords"
+      content="Movie, Playlist, Movie List, Movie Share, Movie Share Site, OTT, OTT Movie, OTT Movie Share, OTT Movie Share Site"
+    />
+    <!-- Open Graph (Facebook, Linkedin) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Movie Mang" />
+    <meta
+      property="og:description"
+      content="영화들을 망에 담아 다른 사람들과 공유하는 소셜 사이트"
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/logo.svg" />
+    <!-- TODO:Domain 나오면 content에 url 정보 넣기 -->
+    <meta property="og:url" content="" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- twitter card (Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Movie Mang" />
+    <meta
+      name="twitter:description"
+      content="영화들을 망에 담아 다른 사람들과 공유하는 소셜 사이트"
+    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo.svg" />
+    <!-- TODO:Domain 나오면 content에 url 정보 넣기 -->
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:creator" content="4공6프" />
+    <title>Movie Mang</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -1,6 +1,6 @@
 import thunk from "redux-thunk";
 import { applyMiddleware, compose, createStore } from "redux";
-import { createRootReducer } from "@/data/rootReducer";
+import { createRootReducer } from "@data/rootReducer";
 
 const rootReducer = createRootReducer();
 

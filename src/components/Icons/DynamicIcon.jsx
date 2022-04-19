@@ -22,7 +22,7 @@ export default function DynamicIcon(props) {
 DynamicIcon.propTypes = {
   clickedIcon: PropTypes.func.isRequired,
   unClickedIcon: PropTypes.func.isRequired,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.string,
   onClick: PropTypes.func,
   isClicked: PropTypes.bool,

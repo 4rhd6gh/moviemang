@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function StaticIcon(props) {
-  const { icon, size, color, onClick, onMouseEnter, onMouseLeave } = props;
+  const { icon, size, color, onClick } = props;
   const StaticIcon = icon;
   let iconSize = size;
   if (iconSize === "small") {
@@ -13,7 +13,11 @@ export default function StaticIcon(props) {
     iconSize = "w-10 h-10";
   }
 
-  return <StaticIcon className={`${iconSize} ${color}`}></StaticIcon>;
+  return (
+    <StaticIcon
+      className={`${iconSize} ${color} hover:opacity-80`}
+    ></StaticIcon>
+  );
 }
 
 StaticIcon.propTypes = {
@@ -21,6 +25,4 @@ StaticIcon.propTypes = {
   size: PropTypes.string,
   color: PropTypes.string,
   onClick: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
 };

@@ -13,6 +13,7 @@ export default function MainPage() {
       <div className="text-blue-500 ">안녕하세요</div>
       <StaticIcon icon={CgTwitter} size={"large"} color={"text-blue-500"} />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <DynamicIcon
         clickedIcon={FaHeart}
         unClickedIcon={FaRegHeart}
@@ -20,6 +21,9 @@ export default function MainPage() {
         color={"text-blue-500"}
         isClicked={true}
 =======
+=======
+
+>>>>>>> d631536a9e7eb4dd8cbbc688be26478d6a0baae7
       <Button
         text="first"
         type="button"
@@ -33,7 +37,10 @@ export default function MainPage() {
         border={"border-2 border-indigo-900 rounded-full"}
         focus={"focus:outline-none focus:ring-1 focus:ring-offset-2"}
         onClick={onClick}
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> d631536a9e7eb4dd8cbbc688be26478d6a0baae7
       />
     </div>
   );

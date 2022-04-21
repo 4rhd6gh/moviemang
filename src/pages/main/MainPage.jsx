@@ -4,10 +4,13 @@ import Button from "@component/Buttons/Button";
 import { CgTwitter } from "react-icons/cg";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import DynamicIcon from "../../components/Icons/DynamicIcon";
+
 import Appbar from "../common/appbar/Appbar";
+
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
   return (
+
     // 전체 container
     <div className="container ml-auto mr-auto pt-28">
       {/* 상단 appbar */}
@@ -60,6 +63,7 @@ export default function MainPage() {
       <footer className="w-full text-white bg-gray-600 h-36 ">
         footer 영역
       </footer>
+
     </div>
   );
 }

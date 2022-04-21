@@ -1,7 +1,6 @@
 import React from "react";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { CgFacebook, CgTwitter, CgGoogle } from "react-icons/cg";
-import { Meta } from "@storybook/react";
 
 export default {
   title: "Icon/StaticIcon", //components 폴더 아래 폴더명을 시작으로 jsx 파일명까지를 title로 표시

@@ -16,9 +16,9 @@ export default {
 
 const Template = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
+export const Contained = Template.bind({});
 
-Primary.args = {
+Contained.args = {
   variant: "contained",
   text: "button",
   type: "button",

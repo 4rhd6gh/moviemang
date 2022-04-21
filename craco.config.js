@@ -11,6 +11,7 @@ module.exports = {
       "@data": path.resolve(__dirname, "src/data/"),
       "@page": path.resolve(__dirname, "src/pages/"),
       "@component": path.resolve(__dirname, "src/components/"),
+      "@constant": path.resolve(__dirname, "src/constants"),
     },
   },
 };

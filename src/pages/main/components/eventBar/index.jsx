@@ -25,13 +25,8 @@ export default function EventBar(props) {
             onClick={onClick}
             text={eventType}
             type="button"
-            cursor="pointer"
-            textColor={"text-indigo-900"}
-            backgroundColor={"hover:bg-indigo-100"}
-            borderWidth={"border-2"}
-            borderColor={"border-indigo-900"}
-            borderRadius={"rounded-full"}
-            focus={true}
+            variant="contained"
+            size={"small"}
           />
         </div>
       </div>

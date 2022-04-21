@@ -2,12 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Button(props) {
-  const { variant, text, type, size, focus, onClick } = props;
+  const { variant, text, type, size = "small", focus = false, onClick } = props;
 
-  let buttonType =
-    variant === "contained"
-      ? "bg-sky-700 text-gray-100"
-      : "text-indigo-900 border-2 border-indigo-900 hover:bg-indigo-100";
+  let buttonType = variant;
+  if (variant === "contained") {
+    buttonType = "bg-sky-700 text-gray-100";
+  } else if (variant === "outlined") {
+    buttonType =
+      "text-indigo-900 border-2 border-indigo-900 hover:bg-indigo-100";
+  } else if (variant === "disabled") {
+    buttonType = "bg-gray-600 text-gray-300 cursor-default";
+  }
 
   let buttonSize = size;
   buttonSize = buttonSize === "large" ? "text-2xl" : "text-base";
@@ -30,8 +35,8 @@ export default function Button(props) {
 }
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(["contained", "outlined"]).isRequired,
-  text: PropTypes.string,
+  variant: PropTypes.oneOf(["contained", "outlined", "disabled"]).isRequired,
+  text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   size: PropTypes.oneOf(["small", "large"]),
   focus: PropTypes.bool,

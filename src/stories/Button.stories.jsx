@@ -5,7 +5,10 @@ export default {
   title: "Button",
   component: Button,
   argTypes: {
-    variant: { control: { type: "radio" }, options: ["contained", "outlined"] },
+    variant: {
+      control: { type: "radio" },
+      options: ["contained", "outlined", "disabled"],
+    },
     text: { control: "text" },
     type: { control: { type: "radio" }, options: ["submit", "button"] },
     size: { control: { type: "radio" }, options: ["small", "large"] },
@@ -20,7 +23,7 @@ export const Contained = Template.bind({});
 
 Contained.args = {
   variant: "contained",
-  text: "button",
+  text: "contained",
   type: "button",
   size: "small",
   focus: true,
@@ -30,7 +33,17 @@ export const Outlined = Template.bind({});
 
 Outlined.args = {
   variant: "outlined",
-  text: "button",
+  text: "outlined",
+  type: "button",
+  size: "large",
+  focus: true,
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  variant: "disabled",
+  text: "disabled",
   type: "button",
   size: "small",
   focus: true,

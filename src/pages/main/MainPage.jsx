@@ -4,6 +4,7 @@ import Button from "@component/Buttons/Button";
 import { CgTwitter } from "react-icons/cg";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import DynamicIcon from "../../components/Icons/DynamicIcon";
+import SearchBar from "../components/SearchBar";
 export default function MainPage() {
   function onClick() {
     alert("onClick!!");
@@ -11,6 +12,7 @@ export default function MainPage() {
   return (
     <div>
       <div className="text-blue-500 ">안녕하세요</div>
+      <SearchBar />
       <StaticIcon icon={CgTwitter} size={"large"} color={"text-blue-500"} />
       <Button
         variant="outlined"

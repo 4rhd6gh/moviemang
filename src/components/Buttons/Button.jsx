@@ -2,21 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Button(props) {
-  const {
-    text,
-    type,
-    size,
-    textColor,
-    backgroundColor,
-    borderWidth,
-    borderColor,
-    borderRadius,
-    focus,
-    cursor,
-    onClick,
-  } = props;
-  let cursorType = cursor;
-  cursorType = cursorType === "pointer" ? "cursor-pointer" : "cursor-auto";
+  const { variant, text, type, size, focus, onClick } = props;
+
+  let buttonType =
+    variant === "contained"
+      ? "bg-sky-700 text-gray-100"
+      : "text-indigo-900 border-2 border-indigo-900 hover:bg-indigo-100";
 
   let buttonSize = size;
   buttonSize = buttonSize === "large" ? "text-2xl" : "text-base";
@@ -30,7 +21,7 @@ export default function Button(props) {
   return (
     <button
       type={type}
-      className={`px-4 py-1 m-1 ${buttonSize} ${textColor} ${backgroundColor} ${borderWidth} ${borderColor} ${borderRadius} ${buttonFocus} ${cursorType}`}
+      className={`px-4 py-1 m-1 cursor-pointer rounded-full ${buttonType} ${buttonSize} ${buttonFocus} `}
       onClick={onClick}
     >
       {text}
@@ -39,15 +30,10 @@ export default function Button(props) {
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(["contained", "outlined"]).isRequired,
+  text: PropTypes.string,
   type: PropTypes.string.isRequired,
-  size: PropTypes.string,
-  textColor: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  borderWidth: PropTypes.string,
-  borderColor: PropTypes.string,
-  borderRadius: PropTypes.string,
+  size: PropTypes.oneOf(["small", "large"]),
   focus: PropTypes.bool,
-  cursor: PropTypes.string,
   onClick: PropTypes.func,
 };

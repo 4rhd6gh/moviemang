@@ -8,7 +8,7 @@ export default {
     eventName: { control: "text" },
     eventType: {
       control: { type: "radio" },
-      options: ["small", "medium", "large"],
+      options: ["투표", "설문", "이벤트"],
     },
     onClick: { action: "clicked" },
   },

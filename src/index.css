@@ -5,3 +5,17 @@
 * {
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
+
+@layer components {
+  .playListCard_section {
+    @apply w-[1200px] h-[700px] pt-4 ml-auto mr-auto;
+  }
+
+  .playListCard_item_container {
+    @apply flex items-center justify-between w-[100%] h-[500px] pl-10 pr-10 mt-3 ml-auto mr-auto;
+  }
+
+  .playListCard_item {
+    @apply w-[270px] h-[500px];
+  }
+}

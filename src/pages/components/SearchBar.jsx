@@ -11,7 +11,7 @@ export default function SearchBar(props) {
         type="search"
         name="search"
         placeholder="Search"
-        className="sm:flex w-3/12 max-w-sm bg-white h-10 px-5 pr-10 rounded-full border-4 text-sm focus:outline-none"
+        className="w-3/12 h-10 max-w-sm px-5 pr-10 text-sm bg-white border-4 rounded-full sm:flex focus:outline-none"
       />
       <StaticIcon icon={FaSearch} size={"small"} color={"text-gray-200"} />
     </div>

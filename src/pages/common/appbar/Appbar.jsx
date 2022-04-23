@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-
+import SearchBar from "@page/common/appbar/SearchBar";
 export default function Appbar() {
   // TODO 검색바 컴포넌트로 대체
   // TODO 타이포그래피 변경
@@ -18,11 +18,7 @@ export default function Appbar() {
       {/* 로고 및 검색바 부분 */}
       <div className="flex items-center h-20 pl-16 pr-8 mainPart w-[1300px] mr-auto ml-auto max-w-[1300px]">
         <h1 className="text-3xl italic font-extrabold">MovieMang</h1>
-        <input
-          className="h-10 pl-4 ml-48 border-2 rounded-3xl w-96"
-          type="text"
-          placeholder="원하는 영화를 검색하세요"
-        />
+        <SearchBar />
         <div className="ml-auto mr-20 text-l nav_container">
           <a className="ml-4 mr-4" href="">
             PLAYLISTS

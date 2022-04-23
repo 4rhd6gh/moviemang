@@ -31,12 +31,15 @@ mm_instance.interceptors.request.use(function (config) {
 // response interceptor HTTP error handling
 mm_instance.interceptors.response.use(
   function (response) {
+    if (response.status === 200) {
+    } else if (response.status === 201) {
+    } else if (response.status === 204) {
+    }
     return response;
   },
   function (error) {
     if (error.status === 404) {
     } else if (error.status === 401) {
-    } else if (error.status === 403) {
     } else if (error.status === 500) {
     } else {
     }

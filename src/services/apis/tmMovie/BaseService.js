@@ -24,8 +24,6 @@ export function setAccessToken(pAccessToken, pRefreshToken) {
 
 tm_instance.interceptors.request.use();
 
-tm_instance.interceptors.response.use();
-
 // response interceptor HTTP error handling
 tm_instance.interceptors.response.use(
   function (response) {

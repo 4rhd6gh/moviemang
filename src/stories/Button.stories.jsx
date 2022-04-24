@@ -7,11 +7,12 @@ export default {
   argTypes: {
     variant: {
       control: { type: "radio" },
-      options: ["contained", "outlined", "disabled"],
+      options: ["contained", "outlined"],
     },
     text: { control: "text" },
     type: { control: { type: "radio" }, options: ["submit", "button"] },
     size: { control: { type: "radio" }, options: ["small", "large"] },
+    disabled: { control: { type: "boolean" } },
     focus: { control: { type: "boolean" } },
     onClick: { action: "clicked" },
   },
@@ -26,6 +27,7 @@ Contained.args = {
   text: "contained",
   type: "button",
   size: "small",
+  disabled: false,
   focus: true,
 };
 
@@ -36,15 +38,17 @@ Outlined.args = {
   text: "outlined",
   type: "button",
   size: "large",
+  disabled: false,
   focus: true,
 };
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  variant: "disabled",
+  variant: "contained",
   text: "disabled",
   type: "button",
   size: "small",
+  disabled: true,
   focus: true,
 };

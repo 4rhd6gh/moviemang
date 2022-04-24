@@ -3,14 +3,15 @@ import Tag from "@component/Tag/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";
-
+import LoginModal from "@page/common/modal/LoginModal";
 import Appbar from "../common/appbar/Appbar";
 
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
+  const [showModal, setShowModal] = React.useState(false);
   return (
     <div className="container ml-auto mr-auto pt-28">
-      <Appbar />
+      <Appbar onOpenModal={setShowModal} />
       <div className="flex pl-6 text-2xl items-center w-[1250px] mr-auto ml-auto pt-6">
         <h1 className="pr-4 text-base">인기태그</h1>
         {Mock.popularTags.tags.map((tag, index) => {
@@ -91,6 +92,7 @@ export default function MainPage() {
       <footer className="w-full text-white bg-gray-600 h-36 ">
         footer 영역
       </footer>
+      <LoginModal open={showModal} onClose={setShowModal} />
     </div>
   );
 }

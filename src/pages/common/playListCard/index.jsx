@@ -32,7 +32,7 @@ function ImageOneLine(props) {
 }
 
 function ImageTwoLine(props) {
-  const { images, len } = props;
+  const { images } = props;
   return (
     <>
       <div>
@@ -89,7 +89,7 @@ export default function PlayListCard(props) {
         {imgLen < 6 ? (
           <ImageOneLine images={imageArray} len={imgLen} />
         ) : (
-          <ImageTwoLine images={imageArray} len={imgLen} />
+          <ImageTwoLine images={imageArray} />
         )}
       </div>
       <div className="w-[246px] ">

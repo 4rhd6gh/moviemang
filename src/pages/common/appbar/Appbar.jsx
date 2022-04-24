@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import SearchBar from "@page/common/appbar/SearchBar";
-export default function Appbar() {
+export default function Appbar(props) {
+  const { onOpenModal } = props;
   // TODO 검색바 컴포넌트로 대체
   // TODO 타이포그래피 변경
   // TODO 로고 컴포넌트로 변경
@@ -11,7 +12,9 @@ export default function Appbar() {
       {/* 상단 로그인 회원가입 부분 */}
       <div className="flex w-full h-8 border-b-[1.5px] topPart">
         <div className="flex items-center justify-between pr-8 ml-auto font-light">
-          <p className="ml-2 mr-2">로그인</p>
+          <p className="ml-2 mr-2" onClick={() => onOpenModal(true)}>
+            로그인
+          </p>
           <p className="ml-2 mr-2">회원가입</p>
         </div>
       </div>

@@ -11,7 +11,7 @@ export default {
     },
     text: { control: "text" },
     type: { control: { type: "radio" }, options: ["submit", "button"] },
-    size: { control: { type: "radio" }, options: ["small", "large"] },
+    size: { control: { type: "radio" }, options: ["small", "medium", "large"] },
     disabled: { control: { type: "boolean" } },
     focus: { control: { type: "boolean" } },
     onClick: { action: "clicked" },
@@ -37,7 +37,7 @@ Outlined.args = {
   variant: "outlined",
   text: "outlined",
   type: "button",
-  size: "large",
+  size: "medium",
   disabled: false,
   focus: true,
 };
@@ -48,7 +48,7 @@ Disabled.args = {
   variant: "contained",
   text: "disabled",
   type: "button",
-  size: "small",
+  size: "large",
   disabled: true,
   focus: true,
 };

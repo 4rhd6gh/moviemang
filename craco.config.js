@@ -12,6 +12,7 @@ module.exports = {
       "@page": path.resolve(__dirname, "src/pages/"),
       "@component": path.resolve(__dirname, "src/components/"),
       "@constant": path.resolve(__dirname, "src/constants"),
+      "@api": path.resolve(__dirname, "src/services/apis"),
     },
   },
 };

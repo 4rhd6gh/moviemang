@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
-import Tag from "@component/Tag/Tag";
+import Tag from "@component/Tag";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmarkFill } from "react-icons/bs";
+import Tooltip from "@component/Tooltip";
 
 function ImageOneLine(props) {
   const { images, len } = props;
@@ -105,12 +106,14 @@ export default function PlayListCard(props) {
             color="text-gray-300"
           />
           <span className="text-xs text-gray-300">{likeCount}</span>
-          <div className="ml-3">
-            <StaticIcon
-              icon={BsBookmarkFill}
-              size="small"
-              color="text-gray-300"
-            />
+          <div className="ml-3" id="bookmark">
+            <Tooltip tooltipText="해당 플레이리스트를 즐겨찾기 해두고 영화를 감상하세요.">
+              <StaticIcon
+                icon={BsBookmarkFill}
+                size="small"
+                color="text-gray-300"
+              />
+            </Tooltip>
           </div>
           <span className="ml-3 text-xs text-gray-300">
             영화 {movieCount}편

@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "@component/Tag/Tag";
+import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";

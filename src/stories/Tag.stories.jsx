@@ -1,8 +1,8 @@
 import React from "react";
-import Tag from "@component/Tag/Tag";
+import Tag from "@component/Tag";
 
 export default {
-  title: "Tag/Tag", //components 폴더 아래 폴더명을 시작으로 jsx 파일명까지를 title로 표시
+  title: "Tag", //components 폴더 아래 폴더명을 시작으로 jsx 파일명까지를 title로 표시
   component: Tag,
   argTypes: {
     text: { control: "text" },

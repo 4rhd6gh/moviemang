@@ -2,13 +2,16 @@ import React from "react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@component/Buttons/Button";
+import Input from "@component/Inputs/Input";
 
 export default function LoginModal(props) {
   const { open = false, onClose } = props;
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
+    email: Yup.string()
+      .email("이메일 형태가 아닙니다.")
+      .required("이메일을 입력하지 않았습니다."),
 
-    password: Yup.string().required("Password is required"),
+    password: Yup.string().required("패스워드를 입력하지 않았습니다."),
   });
 
   return (
@@ -41,46 +44,52 @@ export default function LoginModal(props) {
                     console.log(values);
                   }}
                 >
-                  <Form>
-                    <div className="relative flex-auto p-6">
-                      <div className="mb-3 ">
-                        email
-                        <Field
-                          name="email"
-                          type="email"
-                          placeholder="Email"
-                          className="block w-full p-2 mt-1 text-lg bg-transparent border rounded-lg focus:outline-none"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className="py-1 text-xs text-red-500"
+                  {({ handleChange, handleBlur }) => (
+                    <Form>
+                      <div className="relative flex-auto p-6">
+                        <div className="mb-3 ">
+                          email
+                          <Field
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            component={Input}
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            className="py-1 text-xs text-red-500"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          password
+                          <Field
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            component={Input}
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            className="py-1 text-xs text-red-500"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
+                        <Button
+                          variant="contained"
+                          text="Login"
+                          type="submit"
+                          size="large"
                         />
                       </div>
-                      <div className="mb-3">
-                        password
-                        <Field
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          className="block w-full p-2 mt-1 text-lg bg-transparent border rounded-lg focus:outline-none"
-                        />
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          className="py-1 text-xs text-red-500"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
-                      <Button
-                        variant="contained"
-                        text="Login"
-                        type="submit"
-                        size="large"
-                      />
-                    </div>
-                  </Form>
+                    </Form>
+                  )}
                 </Formik>
               </div>
             </div>

@@ -1,7 +1,19 @@
 import React from "react";
+import { Form, Formik, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import Button from "@component/Buttons/Button";
+import Input from "@component/Inputs/Input";
 
 export default function LoginModal(props) {
   const { open = false, onClose } = props;
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("이메일 형태가 아닙니다.")
+      .required("이메일을 입력하지 않았습니다."),
+
+    password: Yup.string().required("패스워드를 입력하지 않았습니다."),
+  });
+
   return (
     <>
       {open ? (
@@ -10,7 +22,7 @@ export default function LoginModal(props) {
             <div className="relative w-auto max-w-3xl mx-auto my-6">
               <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  <h3 className="text-3xl font-semibold">Login</h3>
                   <button
                     className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none opacity-5 focus:outline-none"
                     onClick={() => onClose(false)}
@@ -20,31 +32,65 @@ export default function LoginModal(props) {
                     </span>
                   </button>
                 </div>
-                <div className="relative flex-auto p-6">
-                  <p className="my-4 text-lg leading-relaxed text-slate-500">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p>
-                </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-slate-200">
-                  <button
-                    className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-red-500 uppercase transition-all duration-150 ease-linear outline-none background-transparent focus:outline-none"
-                    type="button"
-                    onClick={() => onClose(false)}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none"
-                    type="button"
-                    onClick={() => onClose(false)}
-                  >
-                    Save Changes
-                  </button>
-                </div>
+                <Formik
+                  initialValues={{
+                    email: "",
+                    password: "",
+                  }}
+                  validationSchema={LoginSchema}
+                  onSubmit={(values) => {
+                    // same shape as initial values
+                    onClose(false);
+                    console.log(values);
+                  }}
+                >
+                  {({ handleChange, handleBlur }) => (
+                    <Form>
+                      <div className="relative flex-auto p-6">
+                        <div className="mb-3 ">
+                          email
+                          <Field
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            component={Input}
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            className="py-1 text-xs text-red-500"
+                          />
+                        </div>
+                        <div className="mb-3">
+                          password
+                          <Field
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            component={Input}
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            className="py-1 text-xs text-red-500"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
+                        <Button
+                          variant="contained"
+                          text="Login"
+                          type="submit"
+                          size="large"
+                        />
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>

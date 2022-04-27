@@ -24,7 +24,13 @@ export default function Button(props) {
   }
 
   let buttonSize = size;
-  buttonSize = buttonSize === "large" ? "text-2xl" : "text-base";
+  if (buttonSize === "small") {
+    buttonSize = "px-4 py-1 text-base";
+  } else if (buttonSize === "medium") {
+    buttonSize = "px-8 py-1 text-lg";
+  } else if (buttonSize === "large") {
+    buttonSize = "px-16 py-2 text-lg";
+  }
 
   let buttonFocus = focus;
   buttonFocus = buttonFocus
@@ -34,7 +40,7 @@ export default function Button(props) {
   return (
     <button
       type={type}
-      className={`px-4 py-1 m-1 cursor-pointer rounded-full ${buttonType} ${buttonSize} ${buttonFocus} `}
+      className={` m-1 cursor-pointer rounded-lg ${buttonType} ${buttonSize} ${buttonFocus} `}
       onClick={onClick}
     >
       {text}
@@ -46,7 +52,7 @@ Button.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined"]).isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(["small", "large"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   disabled: PropTypes.bool,
   focus: PropTypes.bool,
   onClick: PropTypes.func,

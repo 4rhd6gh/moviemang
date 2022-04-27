@@ -26,13 +26,19 @@ export default function MovieList() {
             </h1>
           </div>
         </div>
-        <div className="w-[1280px]">
-          <div className="flex justify-between ml-auto mr-auto">
-            <div className="">
+        <div className="flex justify-center w-full">
+          <div className=" w-[70%]">
+            <div className="flex flex-wrap justify-between ml-16 mr-16">
               {movieList.map((movie) => (
-                <MovieCard
-                  poster_path={Constants.TM_MOVIE_IMAGE_URL + movie.poster_path}
-                />
+                <div className="pt-5 pr-14">
+                  <MovieCard
+                    poster_path={
+                      Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
+                    }
+                    title={movie.title}
+                    release_date={movie.release_date}
+                  />
+                </div>
               ))}
             </div>
           </div>

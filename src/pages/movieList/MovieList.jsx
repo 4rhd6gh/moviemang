@@ -37,6 +37,7 @@ export default function MovieList() {
                     }
                     title={movie.title}
                     release_date={movie.release_date}
+                    vote_average={movie.vote_average}
                   />
                 </div>
               ))}

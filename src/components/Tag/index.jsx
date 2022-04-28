@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Tag(props) {
-  const { text, size, onClick } = props;
+  const { text, size = "medium", onClick } = props;
   let textSize = size;
   if (textSize === "small") {
     textSize = "text-xs";

@@ -20,12 +20,12 @@ export default function Appbar(props) {
         }`}
     >
       {/* 로고 및 검색바 부분 */}
-      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[800px] ">
+      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[700px] md:pr-0 md:pl-0 md:bg-blue-600 ">
         {/* 로고 */}
         <div className="relative flex items-center">
           <div className="text-[70px] font-bold logo text-themePink flex items-center ">
             M
-            <span className="mt-2 ml-2 text-4xl tracking-wider text-white">
+            <span className="mt-2 ml-[2px] text-4xl tracking-wider text-white">
               OVIEMAN
               <span className="text-themePink ml-[1px] text-4xl">G</span>
             </span>
@@ -36,13 +36,13 @@ export default function Appbar(props) {
         </div>
         <SearchBar />
         <div className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
-          <a className="ml-4 mr-4 cursor-pointer hover:text-textHighlightColor">
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
             PLAYLISTS
           </a>
-          <a className="ml-4 mr-4 cursor-pointer hover:text-textHighlightColor ">
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
             MOVIES
           </a>
-          <a className="ml-4 mr-4 cursor-pointer hover:text-textHighlightColor">
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
             LOG IN
           </a>
           <Button
@@ -56,8 +56,10 @@ export default function Appbar(props) {
 
           {/* <BsFillPersonFill className="w-8 h-8" /> */}
         </div>
+        <div className="flex ml-auto">
+          <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 md:block" />
+        </div>
       </div>
-      <MenuIcon className="hidden w-12 h-12 p-2 mr-5 border-2 md:block" />
     </header>
   );
 }

@@ -15,14 +15,12 @@ module.exports = {
       },
     },
     screens: {
-      mobile: { max: "640px" },
-      // => @media (max-width: 640px) { ... }
-
-      md: { max: "960px" },
-      // => @media (max-width: 960px) { ... }
-
       tablet: { max: "1200px" },
       // => @media (max-width: 1200px) { ... }
+      md: { max: "960px" },
+      // => @media (max-width: 960px) { ... }
+      mobile: { max: "767px" },
+      // => @media (max-width: 640px) { ... }
     },
   },
   variants: {

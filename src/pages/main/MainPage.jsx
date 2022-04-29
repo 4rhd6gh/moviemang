@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";
 import LoginModal from "@page/common/modal/LoginModal";
 import Appbar from "../common/appbar/Appbar";
-import BackgroundImg from "../../assets/backgroundImg.PNG";
 
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
@@ -40,7 +38,7 @@ export default function MainPage() {
 
       <section className=" pt-4 w-[1200px] tablet:w-[970px] md:w-[800px] mr-auto ml-auto">
         <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl ">
-          #좋아요가 가장 많은
+          # 좋아요가 가장 많은
         </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {
@@ -61,7 +59,7 @@ export default function MainPage() {
       </section>
       <section className=" w-[1200px] mt-6 mr-auto ml-auto h-[400px] pt-4 mb-4 tablet:w-[970px]">
         <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl">
-          #태그기반 추천
+          # 태그기반 추천
         </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {
@@ -90,7 +88,7 @@ export default function MainPage() {
 
       <section className=" w-[1200px] mt-6 mr-auto ml-auto h-[400px] pt-4 mb-4 tablet:w-[970px]">
         <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl">
-          #태그기반 추천
+          # 태그기반 추천
         </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {

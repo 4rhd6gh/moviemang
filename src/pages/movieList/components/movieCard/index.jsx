@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes, { func } from "prop-types";
-import { CgMathPercent } from "react-icons";
+import { CgMathPercent } from "react-icons/cg";
 
 export default function MovieCard(props) {
   const { poster_path, title, vote_average, release_date } = props;
@@ -37,19 +37,21 @@ export default function MovieCard(props) {
 
   return (
     <div className="relative overflow-hidden border-solid rounded-lg border-1">
-      <div className="image w-[159px]">
+      <div className="image w-[159px] h-[300px]">
         <div className="wrapper">
           <img
             src={poster_path}
             alt={title}
             className=" object-cover h-[220px] w-[159px]"
           />
-          <canvas
-            width={"40px"}
-            height={"40px"}
-            onClick={drawCanvas}
-            ref={canvasRef}
-          />
+          <div className="absolute bottom-16 right-4">
+            <canvas
+              width={"40px"}
+              height={"40px"}
+              onClick={drawCanvas}
+              ref={canvasRef}
+            />
+          </div>
           <div className=" absolute bottom-[4.5rem] right-6 text-white">
             <div className="flex">
               <div>
@@ -64,7 +66,7 @@ export default function MovieCard(props) {
           </div>
         </div>
         <div className="absolute bottom-9 right-4"></div>
-        <div className="mt-3 ">
+        <div className="mt-4">
           <h2 className="text-sm font-bold text-white ">{title}</h2>
         </div>
         <div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
@@ -10,11 +11,22 @@ import BackgroundImg from "../../assets/backgroundImg.PNG";
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
   const [showModal, setShowModal] = React.useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+  });
   return (
-    <div className="container ml-auto mr-auto pt-28">
+    <div
+      className={`container ml-auto mr-auto md:pt-28 ${
+        scrollPosition > 200 ? "pt-28" : ""
+      }`}
+    >
       <div className="fixed backgroundImg"></div>
       <div className="backgroundCover"></div>
-      <Appbar onOpenModal={setShowModal} />
+      <Appbar onOpenModal={setShowModal} scrollPosition={scrollPosition} />
       <div className="flex pl-6 text-2xl items-center w-[1250px] mr-auto ml-auto pt-6">
         <h1 className="pr-4 text-base">인기태그</h1>
         {Mock.popularTags.tags.map((tag, index) => {
@@ -26,12 +38,14 @@ export default function MainPage() {
         })}
       </div>
 
-      <section className=" pt-4  w-[1200px] mr-auto ml-auto">
-        <h1 className="ml-6 text-2xl text-textMainColor">좋아요 순</h1>
+      <section className=" pt-4 w-[1200px] tablet:w-[970px] md:w-[800px] mr-auto ml-auto">
+        <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl ">
+          #좋아요가 가장 많은
+        </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="tablet:last:hidden">
                 <PlayListCard
                   title={movie.title}
                   id={movie.id}
@@ -45,12 +59,14 @@ export default function MainPage() {
           })}
         </div>
       </section>
-      <section className=" w-[1200px] mr-auto ml-auto h-[400px] pt-4 mb-4 ">
-        <h1 className="ml-6 text-2xl">태그기반 추천</h1>
+      <section className=" w-[1200px] mt-6 mr-auto ml-auto h-[400px] pt-4 mb-4 tablet:w-[970px]">
+        <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl">
+          #태그기반 추천
+        </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="tablet:last:hidden">
                 <PlayListCard
                   title={movie.title}
                   id={movie.id}
@@ -65,19 +81,21 @@ export default function MainPage() {
         </div>
       </section>
 
-      <aside className="mt-20 mb-16 border-t-2 border-b-2">
+      <aside className="mt-20 mb-10">
         <EventBar
           eventType="투표"
           eventName="여름이 오면 가장 먼저 생각나는 오싹한 호러영화를 투표해주세요!"
         />
       </aside>
 
-      <section className="w-[1200px] mr-auto ml-auto h-[400px] pt-4 ">
-        <h1 className="ml-6 text-2xl">좋아요 순</h1>
+      <section className=" w-[1200px] mt-6 mr-auto ml-auto h-[400px] pt-4 mb-4 tablet:w-[970px]">
+        <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl">
+          #태그기반 추천
+        </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
           {Mock.playList.playList.map((movie, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="tablet:last:hidden">
                 <PlayListCard
                   title={movie.title}
                   id={movie.id}
@@ -91,8 +109,8 @@ export default function MainPage() {
           })}
         </div>
       </section>
-      <div className="w-full h-20 mt-16 text-white bg-gray-400">분리영역</div>
-      <footer className="w-full text-white bg-gray-600 h-36 ">
+      <div className="w-full h-20 mt-16"></div>
+      <footer className="w-full text-textHighlightColor h-36 ">
         footer 영역
       </footer>
       <LoginModal open={showModal} onClose={setShowModal} />

@@ -39,36 +39,36 @@ function ImageTwoLine(props) {
       <div>
         <img
           src={images[0]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
         <img
           src={images[1]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
       </div>
       <div>
         <img
           src={images[2]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
         <img
           src={images[3]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
       </div>
       <div>
         <img
           src={images[4]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
         <img
           src={images[5]}
-          alt="moives"
+          alt="movies"
           className="object-cover h-[123px] w-[82px]"
         />
       </div>
@@ -85,7 +85,7 @@ export default function PlayListCard(props) {
     imageArray.slice(0, 3);
   }
   return (
-    <div className="mb-2 overflow-hidden rounded-xl">
+    <div className="mb-2 overflow-hidden playlistCard rounded-xl">
       {/* className="border-gray-300 border-solid border-[1.5px]" */}
       <div className="flex items-center justify-center w-[246px] rounded-lg">
         {imgLen < 6 ? (

@@ -4,19 +4,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        headerbg: "#417D7A",
         textMainColor: "#abb7ca",
-        textSideColor: "#a5a5a5",
+        textHighlightColor: "#dcf836",
         baseColor: "#1b1b1b;",
+        headerBackgroundColor: "#0f2133",
         cardBackgroundColor: "#020d18",
+        eventBarBackgroundColor: "#06121e",
+        searchBarBackgroundColor: "#233a50",
+        themePink: "#dd003f",
       },
     },
     screens: {
       mobile: { max: "640px" },
       // => @media (max-width: 640px) { ... }
 
+      md: { max: "960px" },
+      // => @media (max-width: 960px) { ... }
+
       tablet: { max: "1200px" },
-      // => @media (max-width: 1024px) { ... }
+      // => @media (max-width: 1200px) { ... }
     },
   },
   variants: {

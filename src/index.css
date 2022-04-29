@@ -27,7 +27,7 @@
   background-color: #020d18;
   top: 0;
   left: 0;
-  opacity: 0.8;
+  opacity: 0.9;
   z-index: -1;
 }
 
@@ -42,5 +42,11 @@
 
   .playListCard_item {
     @apply w-[270px] h-[500px];
+  }
+
+  .header_noscroll {
+  }
+
+  .header_scroll {
   }
 }

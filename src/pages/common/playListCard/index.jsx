@@ -85,16 +85,17 @@ export default function PlayListCard(props) {
     imageArray.slice(0, 3);
   }
   return (
-    <div className="border-gray-300 border-solid border-[1.5px]">
-      <div className="flex items-center justify-center w-[246px]">
+    <div className="mb-2 overflow-hidden rounded-xl">
+      {/* className="border-gray-300 border-solid border-[1.5px]" */}
+      <div className="flex items-center justify-center w-[246px] rounded-lg">
         {imgLen < 6 ? (
           <ImageOneLine images={imageArray} len={imgLen} />
         ) : (
           <ImageTwoLine images={imageArray} />
         )}
       </div>
-      <div className="w-[246px] ">
-        <h4 className="p-3 text-sm h-[60px] text-indigo-900">{title}</h4>
+      <div className="w-[246px] bg-transparent bg-cardBackgroundColor rounded-b-xl">
+        <h4 className="p-3 text-sm h-[60px] text-textMainColor">{title}</h4>
         <div className="flex justify-start">
           <span className="ml-4 mr-1 text-xs text-red-600">ID</span>
           <span className="text-xs">{id}</span>
@@ -119,7 +120,7 @@ export default function PlayListCard(props) {
             영화 {movieCount}편
           </span>
         </div>
-        <div className="flex items-center justify-start pl-3 mt-3 mb-3">
+        <div className="flex items-center justify-start pb-4 pl-3 mt-3">
           {tagArray.map((tag, index) => (
             <div className="pl-2" key={index}>
               <Tag key={index} text={tag} size="small" />

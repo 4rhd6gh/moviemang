@@ -106,7 +106,7 @@ export default function PlayListCard(props) {
             size="small"
             color="text-gray-300"
           />
-          <span className="text-xs text-gray-300">{likeCount}</span>
+          <span className="ml-[3px] text-xs text-gray-300">{likeCount}</span>
           <div className="ml-3" id="bookmark">
             <Tooltip tooltipText="해당 플레이리스트를 즐겨찾기 해두고 영화를 감상하세요.">
               <StaticIcon

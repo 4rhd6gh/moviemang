@@ -36,14 +36,14 @@ export default function MainPage() {
         })}
       </div>
 
-      <section className=" pt-4 w-[1200px] tablet:w-[970px] md:w-[800px] mr-auto ml-auto">
-        <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl ">
+      <section className=" pt-4 w-[1200px] tablet:w-[970px] md:w-[700px] mr-auto ml-auto">
+        <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl md:ml-8 md:text-lg">
           # 좋아요가 가장 많은
         </h1>
-        <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10">
+        <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10 md:w-[700px] md:justify-center">
           {Mock.playList.playList.map((movie, index) => {
             return (
-              <div key={index} className="tablet:last:hidden">
+              <div key={index} className="md:last:hidden">
                 <PlayListCard
                   title={movie.title}
                   id={movie.id}

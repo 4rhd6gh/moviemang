@@ -20,7 +20,7 @@ export default function Appbar(props) {
         }`}
     >
       {/* 로고 및 검색바 부분 */}
-      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[700px] md:pr-0 md:pl-0 md:bg-blue-600 ">
+      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[600px] md:pr-0 md:pl-0 mobile:w-full mobile:pr-10 mobile:pl-10 mobile:min-w-[437px] ">
         {/* 로고 */}
         <div className="relative flex items-center">
           <div className="text-[70px] font-bold logo text-themePink flex items-center ">
@@ -52,12 +52,15 @@ export default function Appbar(props) {
             color="text-white"
             backgroundColor="bg-themePink"
             borderRadius="rounded-2xl"
+            onClick={() => {
+              onOpenModal(true);
+            }}
           ></Button>
 
           {/* <BsFillPersonFill className="w-8 h-8" /> */}
         </div>
         <div className="flex ml-auto">
-          <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 md:block" />
+          <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
         </div>
       </div>
     </header>

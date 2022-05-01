@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 
 export default function SearchBar() {
   return (
-    <div className="relative mt-[10px] ml-10 w-[350px]  tablet:w-[220px] tablet:ml-6 md:w-[300px]  mobile:hidden">
+    <div className="relative mt-[10px] ml-10 w-[350px]  tablet:w-[220px] tablet:ml-6 md:hidden  mobile:hidden">
       <input
         type="search"
         name="search"

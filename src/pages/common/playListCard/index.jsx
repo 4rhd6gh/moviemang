@@ -10,11 +10,11 @@ function ImageOneLine(props) {
   const { images, len } = props;
   let width;
   if (len === 1) {
-    width = "w-[246px]";
+    width = "w-full";
   } else if (len === 2) {
-    width = "w-[123px]";
+    width = "w-1/2";
   } else if (len === 3) {
-    width = "w-[82px]";
+    width = "w-1/3";
   }
   return (
     <>
@@ -22,9 +22,9 @@ function ImageOneLine(props) {
         return (
           <img
             key={index}
-            className={`object-cover h-[246px] ${width}`}
+            className={`object-cover h-full inline-block ${width}`}
             src={image}
-            alt="moives"
+            alt="movies"
           />
         );
       })}
@@ -36,40 +36,37 @@ function ImageTwoLine(props) {
   const { images } = props;
   return (
     <>
-      <div>
+      <div className="flex flex-wrap w-full h-full">
         <img
           src={images[0]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
         <img
           src={images[1]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
-      </div>
-      <div>
+
         <img
           src={images[2]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
         <img
           src={images[3]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
-      </div>
-      <div>
         <img
           src={images[4]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
         <img
           src={images[5]}
           alt="movies"
-          className="object-cover h-[123px] w-[82px]"
+          className="object-cover w-1/3 h-1/2"
         />
       </div>
     </>
@@ -85,16 +82,15 @@ export default function PlayListCard(props) {
     imageArray.slice(0, 3);
   }
   return (
-    <div className="mb-2 overflow-hidden playlistCard rounded-xl">
-      {/* className="border-gray-300 border-solid border-[1.5px]" */}
-      <div className="flex items-center justify-center w-[246px] rounded-lg">
+    <div className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2">
+      <div className="h-[246px] w-full bg-white rounded-lg tablet:h-[200px] md:h-[150px]">
         {imgLen < 6 ? (
           <ImageOneLine images={imageArray} len={imgLen} />
         ) : (
           <ImageTwoLine images={imageArray} />
         )}
       </div>
-      <div className="w-[246px] bg-transparent bg-cardBackgroundColor rounded-b-xl">
+      <div className="bg-transparent bg-cardBackgroundColor rounded-b-xl">
         <h4 className="p-3 text-sm h-[60px] text-textMainColor">{title}</h4>
         <div className="flex justify-start">
           <span className="ml-4 mr-1 text-xs text-red-600">ID</span>

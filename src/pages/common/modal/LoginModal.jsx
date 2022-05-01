@@ -3,9 +3,14 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@component/Buttons/Button";
 import Input from "@component/Inputs/Input";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import * as actions from "@data/rootActions";
 
 export default function LoginModal(props) {
   const { open = false, onClose } = props;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("이메일 형태가 아닙니다.")
@@ -15,9 +20,6 @@ export default function LoginModal(props) {
   });
 
   const onCloseModal = (e) => {
-    console.log("e.target: ", e.target.type);
-    console.log("e.tarcurrentTargetget: ", e.currentTarget.type);
-    console.log(e.target === e.currentTarget && e.target.type !== "submit");
     if (e.target === e.currentTarget) {
       onClose(false);
     }
@@ -52,7 +54,7 @@ export default function LoginModal(props) {
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
                     // same shape as initial values
-                    console.log(values);
+                    dispatch(actions.user.login(values));
                   }}
                 >
                   {({ handleChange, handleBlur }) => (

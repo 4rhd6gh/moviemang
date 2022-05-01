@@ -3,7 +3,7 @@ import * as Constants from "@constant";
 
 const mm_instance = axios.create();
 
-mm_instance.defaults.baseURL = Constants.TM_MOVIE_URL;
+mm_instance.defaults.baseURL = Constants.MOVIE_MANG_URL;
 mm_instance.defaults.timeout = Constants.DEFAULT_TIME_OUT;
 
 export const serviceConfig = {
@@ -20,6 +20,12 @@ const refreshToken = "";
 export function setAccessToken(pAccessToken, pRefreshToken) {
   accessToken = pAccessToken;
   refreshToken = pRefreshToken;
+}
+
+export async function axiosRequest() {
+  const response = await mm_instance.request(serviceConfig);
+  console.log("baseservice----------" + response);
+  return response.data;
 }
 
 // request interceptor

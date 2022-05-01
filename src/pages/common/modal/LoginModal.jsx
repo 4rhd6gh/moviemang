@@ -85,7 +85,7 @@ export default function LoginModal(props) {
                           variant="contained"
                           text="Login"
                           type="submit"
-                          size="large"
+                          width={48}
                         />
                       </div>
                     </Form>

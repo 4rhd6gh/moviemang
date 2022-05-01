@@ -3,6 +3,10 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@component/Button";
 import Input from "@component/Input";
+import ToggleSwitch from "@page/common/ToggleSwitch";
+import StaticIcon from "@component/Icons/StaticIcon";
+import Tooltip from "@component/Tooltip";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 export default function JoinModal(props) {
   const { open = false, onClose } = props;
@@ -179,7 +183,19 @@ export default function JoinModal(props) {
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
+                        <div className="flex mt-3">
+                          메일 구독 서비스
+                          <Tooltip tooltipText="메일 구독 서비스 설명">
+                            <StaticIcon
+                              icon={AiOutlineQuestionCircle}
+                              size="small"
+                              color="text-gray-300"
+                            />
+                          </Tooltip>
+                          <ToggleSwitch />
+                        </div>
                       </div>
+
                       <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
                         <Button
                           variant="contained"

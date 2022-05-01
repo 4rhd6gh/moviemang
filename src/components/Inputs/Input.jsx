@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Input(props) {
-  const { type, placeholder, handleChange, handleBlur, disabled } = props;
+  const { inputName, type, placeholder, handleChange, handleBlur, disabled } =
+    props;
 
   return (
     <input
-      name={type}
+      name={inputName}
       type={type}
       placeholder={placeholder}
       onChange={handleChange}

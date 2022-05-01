@@ -40,7 +40,6 @@ export default function LoginModal(props) {
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
                     // same shape as initial values
-                    onClose(false);
                     console.log(values);
                   }}
                 >
@@ -51,6 +50,7 @@ export default function LoginModal(props) {
                           email
                           <Field
                             name="email"
+                            inputName="email"
                             type="email"
                             placeholder="Email"
                             handleChange={handleChange}
@@ -67,6 +67,7 @@ export default function LoginModal(props) {
                           password
                           <Field
                             name="password"
+                            inputName="password"
                             type="password"
                             placeholder="Password"
                             handleChange={handleChange}

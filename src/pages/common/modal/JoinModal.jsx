@@ -61,7 +61,6 @@ export default function JoinModal(props) {
                   validationSchema={JoinSchema}
                   onSubmit={(values) => {
                     // same shape as initial values
-                    onClose(false);
                     console.log(values);
                   }}
                 >
@@ -71,6 +70,7 @@ export default function JoinModal(props) {
                         <div className="flex ">
                           <Field
                             name="nickName"
+                            inputName="nickName"
                             type="text"
                             placeholder="닉네임"
                             handleChange={handleChange}
@@ -97,6 +97,7 @@ export default function JoinModal(props) {
                         <div className="flex">
                           <Field
                             name="email"
+                            inputName="email"
                             type="email"
                             placeholder="Email"
                             handleChange={handleChange}
@@ -124,6 +125,7 @@ export default function JoinModal(props) {
                         <div className="flex">
                           <Field
                             name="number"
+                            inputName="number"
                             type="text"
                             placeholder="인증번호"
                             handleChange={handleChange}
@@ -148,6 +150,7 @@ export default function JoinModal(props) {
                         <div className="mb-3">
                           <Field
                             name="password"
+                            inputName="password"
                             type="password"
                             placeholder="Password"
                             handleChange={handleChange}
@@ -162,7 +165,8 @@ export default function JoinModal(props) {
                         </div>
                         <div className="mb-3">
                           <Field
-                            name="password"
+                            name="passwordConfirm"
+                            inputName="passwordConfirm"
                             type="password"
                             placeholder="Password comfirm"
                             handleChange={handleChange}
@@ -170,7 +174,7 @@ export default function JoinModal(props) {
                             component={Input}
                           />
                           <ErrorMessage
-                            name="password"
+                            name="passwordConfirm"
                             component="div"
                             className="py-1 text-xs text-red-500"
                           />

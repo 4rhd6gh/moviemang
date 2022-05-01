@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { MdLocalMovies } from "react-icons/md";
-import Button from "@component/Buttons/Button";
+import Button from "@component/Button";
 
 export default function EventBar(props) {
   const { eventType, eventName, onClick } = props;

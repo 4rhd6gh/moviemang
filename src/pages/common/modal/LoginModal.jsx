@@ -1,8 +1,8 @@
 import React from "react";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Button from "@component/Buttons/Button";
-import Input from "@component/Inputs/Input";
+import Button from "@component/Button";
+import Input from "@component/Input";
 
 export default function LoginModal(props) {
   const { open = false, onClose } = props;

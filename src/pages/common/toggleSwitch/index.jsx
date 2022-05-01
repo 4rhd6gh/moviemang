@@ -7,7 +7,7 @@ export default function ToggleSwitch(props) {
   return (
     <div
       className={
-        "md:w-14 md:h-7 w-12 h-6 flex items-center rounded-full p-1 cursor-pointer " +
+        "md:w-14 md:h-7 w-12 h-6 mx-2 flex items-center rounded-full p-1 cursor-pointer " +
         (toggle ? "bg-gray-300/50" : "bg-blue-300/50 ")
       }
       onClick={() => {

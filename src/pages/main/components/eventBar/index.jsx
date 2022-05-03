@@ -6,8 +6,9 @@ import Button from "@component/Button";
 
 export default function EventBar(props) {
   const { eventType, eventName, onClick } = props;
+
   return (
-    <div className="bg-gray-300 ">
+    <div className="bg-eventBarBackgroundColor ">
       <div className="container flex items-center justify-center p-10 overflow-hidden">
         <div className="mr-8 ">
           <StaticIcon
@@ -17,17 +18,20 @@ export default function EventBar(props) {
           />
         </div>
         <div>
-          <h4 className="text-indigo-900 ">#{eventType}</h4>
-          <p className="text-2xl ">{eventName}</p>
+          <h4 className="text-textHighlightColor">#{eventType}</h4>
+          <p className="text-2xl text-textMainColor tablet:text-lg ">
+            {eventName}
+          </p>
         </div>
-        <div>
+        <div className="mt-6 ml-3">
           <Button
-            onClick={onClick}
-            text={eventType}
+            text="투표"
+            size="medium"
             type="button"
-            variant="contained"
-            size={"small"}
-          />
+            color="text-white"
+            backgroundColor="bg-themePink"
+            borderRadius="rounded-2xl"
+          ></Button>
         </div>
       </div>
     </div>

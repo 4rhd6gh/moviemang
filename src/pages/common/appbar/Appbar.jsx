@@ -1,36 +1,66 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import SearchBar from "@page/common/appbar/SearchBar";
+import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
+import { HiMenu as MenuIcon } from "react-icons/hi";
+import Button from "@component/Button";
+
 export default function Appbar(props) {
-  const { onOpenLoginModal, onOpenJoinModal } = props;
-  // TODO 검색바 컴포넌트로 대체
-  // TODO 타이포그래피 변경
-  // TODO 로고 컴포넌트로 변경
+  const { onOpenModal, scrollPosition } = props;
+
   return (
     // 전체 container
-    <header className="fixed top-0 flex flex-col w-full h-28 border-b-[1.5px] z-10 bg-white">
-      {/* 상단 로그인 회원가입 부분 */}
-      <div className="flex w-full h-8 border-b-[1.5px] topPart">
-        <div className="flex items-center justify-between pr-8 ml-auto font-light">
-          <p className="ml-2 mr-2" onClick={() => onOpenLoginModal(true)}>
-            로그인
-          </p>
-          <p className="ml-2 mr-2" onClick={() => onOpenJoinModal(true)}>
-            회원가입
-          </p>
-        </div>
-      </div>
+
+    <header
+      className={`z-10 flex items-center justify-center w-full pt-5 pb-5 text-white
+        bg-transparent h-28 md:fixed md:top-0 md:bg-headerBackgroundColor ${
+          scrollPosition > 200
+            ? "fixed top-0 bg-headerBackgroundColor ease duration-300 h-28 "
+            : ""
+        }`}
+    >
       {/* 로고 및 검색바 부분 */}
-      <div className="flex items-center h-20 pl-16 pr-8 mainPart w-[1300px] mr-auto ml-auto max-w-[1300px]">
-        <h1 className="text-3xl italic font-extrabold">MovieMang</h1>
+      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[600px] md:pr-0 md:pl-0 mobile:w-full mobile:pr-10 mobile:pl-10 mobile:min-w-[437px] ">
+        {/* 로고 */}
+        <div className="relative flex items-center">
+          <div className="text-[70px] font-bold logo text-themePink flex items-center ">
+            M
+            <span className="mt-2 ml-[2px] text-4xl tracking-wider text-white">
+              OVIEMAN
+              <span className="text-themePink ml-[1px] text-4xl">G</span>
+            </span>
+          </div>
+          <div className="absolute text-[70px] font-bold top-[-7px] left-[4px] logo text-themePink z-[-1] opacity-[0.5]">
+            M
+          </div>
+        </div>
         <SearchBar />
-        <div className="ml-auto mr-20 text-l nav_container">
-          <a className="ml-4 mr-4" href="">
+        <div className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
             PLAYLISTS
           </a>
-          <a className="ml-4 mr-4" href="">
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
             MOVIES
           </a>
+          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
+            LOG IN
+          </a>
+          <Button
+            text="JOIN"
+            size="small"
+            type="button"
+            color="text-white"
+            backgroundColor="bg-themePink"
+            borderRadius="rounded-2xl"
+            onClick={() => {
+              onOpenModal(true);
+            }}
+          ></Button>
+
+          {/* <BsFillPersonFill className="w-8 h-8" /> */}
+        </div>
+        <div className="flex ml-auto">
+          <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
         </div>
       </div>
     </header>

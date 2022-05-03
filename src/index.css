@@ -1,7 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-family: "Dosis", "sans-serif";
+}
+
+.backgroundImg {
+  background: url("./assets/backgroundImg.PNG");
+  width: 100vw;
+  position: fixed;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  top: 0;
+}
+
+.backgroundCover {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #020d18;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+@layer components {
+  .playListCard_section {
+    @apply w-[1200px] h-[700px] pt-4 ml-auto mr-auto;
+  }
+
+  .playListCard_item_container {
+    @apply flex items-center justify-between w-[100%] h-[500px] pl-10 pr-10 mt-3 ml-auto mr-auto;
+  }
+
+  .playListCard_item {
+    @apply w-[270px] h-[500px];
+  }
+
+  .header_noscroll {
+  }
+
+  .header_scroll {
+  }
 }

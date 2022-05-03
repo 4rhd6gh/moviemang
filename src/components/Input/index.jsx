@@ -19,5 +19,10 @@ export default function Input(props) {
 }
 
 Input.propTypes = {
+  inputName: PropTypes.string,
   type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
+  disabled: PropTypes.bool,
 };

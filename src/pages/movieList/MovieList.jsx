@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Appbar from "@page/common/appbar/Appbar";
-import * as MovieService from "@api/tmMovie/movie";
 import MovieCard from "./components/movieCard";
 import * as Constants from "@constant";
+import { useSelector, useDispatch } from "react-redux";
+import * as action from "@data/rootActions";
+import * as selector from "@data/rootSelectors";
 
 export default function MovieList() {
   const [showModal, setShowModal] = useState(false);
-  const [movieList, setMovieList] = useState([]);
+  const dispatch = useDispatch();
+  const movieArray = useSelector(selector.movie.getPopularMovieList);
   async function getMovieList() {
-    const response = await MovieService.getMovieList("GET", "/popular", {}, 1);
-    setMovieList(response.results);
+    console.log("getMovieList");
+    dispatch(action.movie.getPopularMovieList());
   }
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function MovieList() {
         <div className="flex justify-center w-full">
           <div className=" w-[70%]">
             <div className="flex flex-wrap justify-between ml-16 mr-16">
-              {movieList.map((movie) => (
+              {movieArray.map((movie) => (
                 <div className="pt-5 pr-14">
                   <MovieCard
                     poster_path={

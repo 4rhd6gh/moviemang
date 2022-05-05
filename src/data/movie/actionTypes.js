@@ -1,3 +1,2 @@
-import * as movie from "@data/movie/actions";
-
-export { movie };
+export const POPULAR_MOVIE_LIST_SUCCESS = "POPULAR_MOVIE_LIST_SUCCESS";
+export const POPULAR_MOVIE_LIST_FAILURE = "POPULAR_MOVIE_LIST_FAILURE";

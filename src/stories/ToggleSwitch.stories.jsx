@@ -1,5 +1,5 @@
 import React from "react";
-import ToggleSwitch from "@page/common/toggleSwitch";
+import ToggleSwitch from "@page/common/ToggleSwitch";
 
 export default {
   title: "Common/ToggleSwitch",

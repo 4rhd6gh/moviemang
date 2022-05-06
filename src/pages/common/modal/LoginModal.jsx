@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Button from "@component/Buttons/Button";
-import Input from "@component/Inputs/Input";
+import Button from "@component/Button";
+import Input from "@component/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as actions from "@data/rootActions";
@@ -64,6 +65,7 @@ export default function LoginModal(props) {
                           email
                           <Field
                             name="email"
+                            inputName="email"
                             type="email"
                             placeholder="Email"
                             handleChange={handleChange}
@@ -80,6 +82,7 @@ export default function LoginModal(props) {
                           password
                           <Field
                             name="password"
+                            inputName="password"
                             type="password"
                             placeholder="Password"
                             handleChange={handleChange}
@@ -98,7 +101,7 @@ export default function LoginModal(props) {
                           variant="contained"
                           text="Login"
                           type="submit"
-                          size="large"
+                          width={48}
                         />
                       </div>
                     </Form>
@@ -113,3 +116,8 @@ export default function LoginModal(props) {
     </>
   );
 }
+
+LoginModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

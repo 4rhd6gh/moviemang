@@ -12,6 +12,7 @@ module.exports = {
         eventBarBackgroundColor: "#06121e",
         searchBarBackgroundColor: "#233a50",
         themePink: "#dd003f",
+        movieCardBackgroundColor: "#020d18",
       },
     },
     screens: {

@@ -1,6 +1,6 @@
 import * as ActionTypes from "@data/rootActionTypes";
 
-const initialState = {};
+const initialState = { popMovieList: [] };
 
 export default function movie(state = initialState, action) {
   switch (action.type) {

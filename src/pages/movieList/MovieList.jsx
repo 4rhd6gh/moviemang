@@ -32,8 +32,8 @@ export default function MovieList() {
         <div className="flex justify-center w-full">
           <div className=" w-[70%]">
             <div className="flex flex-wrap justify-between ml-16 mr-16">
-              {movieArray.map((movie) => (
-                <div className="pt-5 pr-14">
+              {movieArray.map((movie, index) => (
+                <div className="pt-5 pr-14" key={index}>
                   <MovieCard
                     poster_path={
                       Constants.TM_MOVIE_IMAGE_URL + movie.poster_path

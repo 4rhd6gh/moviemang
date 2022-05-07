@@ -8,7 +8,12 @@ export default function MovieList() {
   const [showModal, setShowModal] = useState(false);
   const [movieList, setMovieList] = useState([]);
   async function getMovieList() {
-    const response = await MovieService.getMovieList("GET", "/popular", {}, 1);
+    const response = await MovieService.getMovieList(
+      "GET",
+      "movie/popular",
+      {},
+      1
+    );
     setMovieList(response.results);
   }
 

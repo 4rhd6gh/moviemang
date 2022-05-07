@@ -3,11 +3,13 @@ import Appbar from "@page/common/appbar/Appbar";
 import * as MovieService from "@api/tmMovie/movie";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
+import { useLocation } from "react-router-dom";
 
 export default function MovieList() {
   const [showModal, setShowModal] = useState(false);
   const [movieList, setMovieList] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+
+  const location = useLocation();
 
   async function getSearchMovieList() {
     const response = await MovieService.getSearchMovieList(
@@ -15,7 +17,7 @@ export default function MovieList() {
       "search/movie",
       {},
       1,
-      searchValue
+      location.state.value
     );
     const movies = response.results;
     setMovieList(movies);
@@ -23,11 +25,11 @@ export default function MovieList() {
 
   useEffect(() => {
     getSearchMovieList();
-  }, [searchValue]);
+  }, [location.state.value]);
 
   return (
     <div className="container ml-auto mr-auto pt-28 ">
-      <Appbar onOpenModal={setShowModal} setSearchValue={setSearchValue} />
+      <Appbar onOpenModal={setShowModal} />
       <div className=" bg-[#020d18] ">
         <div className="flex justify-center ">
           <div>
@@ -42,6 +44,7 @@ export default function MovieList() {
               {movieList.map((movie) => (
                 <div className="py-5 w-full">
                   <MovieSearchCard
+                    key={movie.title}
                     poster_path={
                       Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
                     }

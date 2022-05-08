@@ -3,7 +3,7 @@ import PropTypes, { func } from "prop-types";
 import { CgMathPercent } from "react-icons/cg";
 
 export default function MovieCard(props) {
-  const { poster_path, title, vote_average, release_date } = props;
+  const { poster_path, title, vote_average, release_date, onClick } = props;
   const canvasRef = React.createRef(null);
 
   function drawCanvas() {
@@ -48,7 +48,7 @@ export default function MovieCard(props) {
             <canvas
               width={"40px"}
               height={"40px"}
-              onClick={drawCanvas}
+              onClick={onClick}
               ref={canvasRef}
             />
           </div>

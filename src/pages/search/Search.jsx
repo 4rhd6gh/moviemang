@@ -5,7 +5,7 @@ import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useLocation } from "react-router-dom";
 
-export default function MovieList() {
+export default function Search() {
   const [showModal, setShowModal] = useState(false);
   const [movieList, setMovieList] = useState([]);
 
@@ -40,9 +40,9 @@ export default function MovieList() {
         </div>
         <div className="flex justify-center w-full">
           <div className=" w-[70%]">
-            <div className="flex flex-wrap flex-col justify-between ml-16 mr-16">
+            <div className="flex flex-col flex-wrap justify-between ml-16 mr-16">
               {movieList.map((movie) => (
-                <div className="py-5 w-full">
+                <div className="w-full py-5">
                   <MovieSearchCard
                     key={movie.title}
                     poster_path={

@@ -1,4 +1,4 @@
-import * as ActionTypes from "@data/rootActionType";
+import * as ActionTypes from "@data/rootActionTypes";
 
 const initialState = {};
 
@@ -10,8 +10,6 @@ export default function user(state = initialState, action) {
       return action.user;
     case ActionTypes.SIGNUP_SUCCESS:
       return action.user;
-    case ActionTypes.RESET_AUTH:
-      return {};
     case ActionTypes.SIGNUP_SUCCESS:
       return { ...state, userData: action.payload };
     default:

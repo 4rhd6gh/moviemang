@@ -4,7 +4,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@component/Button";
 import Input from "@component/Input";
-import ToggleSwitch from "@page/common/ToggleSwitch";
+import ToggleSwitch from "@page/common/toggleSwitch";
 import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 import { CgMathPercent } from "react-icons/cg";
 
 export default function MovieCard(props) {

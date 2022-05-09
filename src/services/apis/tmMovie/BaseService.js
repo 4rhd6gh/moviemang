@@ -11,6 +11,7 @@ export const serviceConfig = {
   url: "",
   headers: "",
   page: 1,
+  query: "",
   body: {},
 };
 
@@ -27,7 +28,7 @@ tm_instance.interceptors.request.use();
 
 export async function axiosRequest() {
   if (this.serviceConfig.method === "GET") {
-    this.serviceConfig.url = `${this.serviceConfig.url}?api_key=${Constants.TM_API_KEY}&page=${this.serviceConfig.page}&language=ko-KR`;
+    this.serviceConfig.url = `${this.serviceConfig.url}?api_key=${Constants.TM_API_KEY}&page=${this.serviceConfig.page}&language=ko-KR&query=${this.serviceConfig.query}`;
   }
   const response = await tm_instance.request(serviceConfig);
   console.log("baseservice----------" + response);

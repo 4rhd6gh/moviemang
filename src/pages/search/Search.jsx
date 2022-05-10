@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Appbar from "@page/common/appbar/Appbar";
 import * as MovieService from "@api/tmMovie/movie";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useLocation } from "react-router-dom";
 
 export default function Search() {
-  const [showModal, setShowModal] = useState(false);
   const [movieList, setMovieList] = useState([]);
 
   const location = useLocation();
@@ -28,8 +26,7 @@ export default function Search() {
   }, [location.state.value]);
 
   return (
-    <div className="container ml-auto mr-auto pt-28 ">
-      <Appbar onOpenModal={setShowModal} />
+    <>
       <div className=" bg-[#020d18] ">
         <div className="flex justify-center ">
           <div>
@@ -58,6 +55,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

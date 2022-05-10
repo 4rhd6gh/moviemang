@@ -12,7 +12,7 @@ export default function Container({ children }) {
   });
   return (
     <div
-      className={`container  pb-[100px] relative ml-auto mr-auto md:pt-28 bg-transparent ${
+      className={`container pb-[100px] relative ml-auto mr-auto md:pt-28 bg-transparent ${
         scrollPosition > 200 ? "pt-28" : ""
       }`}
     >

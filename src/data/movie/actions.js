@@ -5,7 +5,12 @@ export const getPopularMovieList = () => async (dispatch) => {
   try {
     //dispatch({ type: ActionTypes.LOADING_START });
     console.log("redux getPopularMovieList");
-    const response = await apis.getPopularMovieList("GET", "/popular", {}, 1);
+    const response = await apis.getPopularMovieList(
+      "GET",
+      "/movie/popular",
+      {},
+      1
+    );
 
     console.log(response);
     dispatch({

@@ -13,6 +13,11 @@ export default function JoinModal(props) {
   const { open = false, onClose } = props;
   const [emailCheck, setEmailCheck] = useState(false);
   const [nickNameCheck, setnickNameCheck] = useState(false);
+  const onCloseModal = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(false);
+    }
+  };
   const JoinSchema = Yup.object().shape({
     nickName: Yup.string().required("닉네임을 입력하지 않았습니다."),
     email: Yup.string()
@@ -43,7 +48,10 @@ export default function JoinModal(props) {
     <>
       {open ? (
         <>
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none"
+            onClick={onCloseModal}
+          >
             <div className="relative w-auto max-w-3xl mx-auto my-6">
               <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">

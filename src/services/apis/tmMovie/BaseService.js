@@ -15,15 +15,6 @@ export const serviceConfig = {
   body: {},
 };
 
-const accessToken = "";
-const refreshToken = "";
-
-//tm api에서는 안씀
-export function setAccessToken(pAccessToken, pRefreshToken) {
-  accessToken = pAccessToken;
-  refreshToken = pRefreshToken;
-}
-
 tm_instance.interceptors.request.use();
 
 export async function axiosRequest() {
@@ -31,7 +22,6 @@ export async function axiosRequest() {
     this.serviceConfig.url = `${this.serviceConfig.url}?api_key=${Constants.TM_API_KEY}&page=${this.serviceConfig.page}&language=ko-KR&query=${this.serviceConfig.query}`;
   }
   const response = await tm_instance.request(serviceConfig);
-  console.log("baseservice----------" + response);
   return response.data;
 }
 

@@ -12,10 +12,7 @@ export default function MovieList() {
   const dispatch = useDispatch();
   const movieArray = useSelector(selector.movie.getPopularMovieList);
   async function getMovieList() {
-
-    console.log("getMovieList");
     dispatch(action.movie.getPopularMovieList());
-
   }
   useEffect(() => {
     getMovieList();

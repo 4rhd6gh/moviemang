@@ -8,6 +8,7 @@ import ToggleSwitch from "@page/common/toggleSwitch";
 import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import * as apis from "@api/movieMang/user";
 
 export default function JoinModal(props) {
   const { open = false, onClose } = props;
@@ -36,12 +37,30 @@ export default function JoinModal(props) {
     ),
   });
 
-  function onNickNameCheck() {
-    setnickNameCheck(true);
+  async function onNickNameCheck(nickName) {
+    const result = await apis.checkDupNickname({ nick: nickName });
+    if (result === "SUCCESS") {
+      setnickNameCheck(true);
+    } else {
+      //TODO alert modal 만들어서 에러 메세지 출력
+    }
   }
 
-  function onEmailCheck() {
-    setEmailCheck(true);
+  async function onEmailCheck(email) {
+    const result = await apis.checkDupEmail({ email: email });
+    if (result === "SUCCESS") {
+      setEmailCheck(true);
+    } else {
+      //TODO alert modal 만들어서 에러 메세지 출력
+    }
+  }
+
+  async function requestEmailCert() {
+    const result = await apis.requestEmailCert();
+    if (result === "SUCCESS") {
+    } else {
+      //TODO alert modal 만들어서 에러 메세지 출력
+    }
   }
 
   return (
@@ -77,7 +96,7 @@ export default function JoinModal(props) {
                     console.log(values);
                   }}
                 >
-                  {({ handleChange, handleBlur }) => (
+                  {({ values, handleChange, handleBlur }) => (
                     <Form>
                       <div className="relative flex-auto p-6">
                         <div className="flex ">
@@ -85,6 +104,7 @@ export default function JoinModal(props) {
                             name="nickName"
                             inputName="nickName"
                             type="text"
+                            value={values.nickName}
                             placeholder="닉네임"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
@@ -96,7 +116,7 @@ export default function JoinModal(props) {
                             type="button"
                             text="중복체크"
                             width={20}
-                            onClick={onNickNameCheck}
+                            onClick={() => onNickNameCheck(values.nickName)}
                             disabled={nickNameCheck ? true : false}
                           />
                         </div>
@@ -112,6 +132,7 @@ export default function JoinModal(props) {
                             name="email"
                             inputName="email"
                             type="email"
+                            value={values.email}
                             placeholder="Email"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
@@ -123,7 +144,7 @@ export default function JoinModal(props) {
                             type="button"
                             text="중복체크"
                             width={20}
-                            onClick={onEmailCheck}
+                            onClick={() => onEmailCheck(values.email)}
                             disabled={emailCheck ? true : false}
                           />
                         </div>
@@ -149,6 +170,7 @@ export default function JoinModal(props) {
                             variant="contained"
                             type="button"
                             text="인증"
+                            onClick={requestEmailCert}
                             width={20}
                           />
                         </div>

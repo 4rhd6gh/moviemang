@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Appbar from "@page/common/appbar/Appbar";
-import Spinner from "@page/common/spinner";
 import * as MovieService from "@api/tmMovie/movie";
+import Spinner from "@page/common/spinner";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useLocation } from "react-router-dom";
 
-export default function MovieList() {
-  const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true);
+export default function Search() {
   const [movieList, setMovieList] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const value = location.state === null ? "" : location.state.value;
 
@@ -33,8 +30,7 @@ export default function MovieList() {
   }, [value]);
 
   return (
-    <div className="container ml-auto mr-auto pt-28 ">
-      <Appbar onOpenModal={setShowModal} />
+    <>
       <div className=" bg-[#020d18] ">
         <div className="flex justify-center ">
           <div>
@@ -48,9 +44,9 @@ export default function MovieList() {
             <Spinner />
           ) : (
             <div className=" w-[70%]">
-              <div className="flex flex-wrap flex-col justify-between ml-16 mr-16">
+              <div className="flex flex-col flex-wrap justify-between ml-16 mr-16">
                 {movieList.map((movie) => (
-                  <div className="py-5 w-full">
+                  <div className="w-full py-5">
                     <MovieSearchCard
                       key={movie.title}
                       poster_path={
@@ -67,6 +63,6 @@ export default function MovieList() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

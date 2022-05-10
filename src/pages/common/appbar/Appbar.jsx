@@ -1,16 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "@page/common/appbar/SearchBar";
 import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import Button from "@component/Button";
+import JoinModal from "../modal/JoinModal";
+import LoginModal from "../modal/LoginModal";
 
 export default function Appbar(props) {
-  const { onOpenModal, scrollPosition } = props;
+  const { scrollPosition } = props;
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleJoinModalOpen = () => {
+    setShowJoinModal((prevState) => !prevState);
+  };
+
+  const handleLoginModalOpen = () => {
+    setShowLoginModal((prevState) => !prevState);
+  };
 
   return (
-    // 전체 container
-
     <header
       className={`z-10 flex items-center justify-center w-full pt-5 pb-5 text-white
         bg-transparent h-28 md:fixed md:top-0 md:bg-headerBackgroundColor ${
@@ -36,15 +46,18 @@ export default function Appbar(props) {
         </div>
         <SearchBar />
         <div className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
-          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
+          <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
             PLAYLISTS
-          </a>
-          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+          </span>
+          <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
             MOVIES
-          </a>
-          <a className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
+          </span>
+          <span
+            className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor"
+            onClick={handleLoginModalOpen}
+          >
             LOG IN
-          </a>
+          </span>
           <Button
             text="JOIN"
             size="small"
@@ -52,9 +65,7 @@ export default function Appbar(props) {
             color="text-white"
             backgroundColor="bg-themePink"
             borderRadius="rounded-2xl"
-            onClick={() => {
-              onOpenModal(true);
-            }}
+            onClick={handleJoinModalOpen}
           ></Button>
 
           {/* <BsFillPersonFill className="w-8 h-8" /> */}
@@ -63,6 +74,8 @@ export default function Appbar(props) {
           <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
         </div>
       </div>
+      <LoginModal open={showLoginModal} onClose={setShowLoginModal} />
+      <JoinModal open={showJoinModal} onClose={setShowJoinModal} />
     </header>
   );
 }

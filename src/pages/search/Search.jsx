@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
+
+import Spinner from "@page/common/spinner";
 import * as MovieService from "@api/tmMovie/movie";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useLocation } from "react-router-dom";
 
+
 export default function Search() {
+
+  const [loading, setLoading] = useState(true);
   const [movieList, setMovieList] = useState([]);
 
   const location = useLocation();
+  const value = location.state === null ? "" : location.state.value;
 
   async function getSearchMovieList() {
     const response = await MovieService.getSearchMovieList(
@@ -15,15 +21,17 @@ export default function Search() {
       "search/movie",
       {},
       1,
-      location.state.value
+      value
     );
     const movies = response.results;
     setMovieList(movies);
+    setLoading(false);
   }
 
   useEffect(() => {
+    setLoading(true);
     getSearchMovieList();
-  }, [location.state.value]);
+  }, [value]);
 
   return (
     <>
@@ -36,6 +44,9 @@ export default function Search() {
           </div>
         </div>
         <div className="flex justify-center w-full">
+        {loading ? (
+            <Spinner />
+          ) : (
           <div className=" w-[70%]">
             <div className="flex flex-col flex-wrap justify-between ml-16 mr-16">
               {movieList.map((movie) => (
@@ -51,8 +62,9 @@ export default function Search() {
                   />
                 </div>
               ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>

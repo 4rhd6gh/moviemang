@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";
-import LoginModal from "@page/common/modal/LoginModal";
-import JoinModal from "@page/common/modal/JoinModal";
-import Appbar from "../common/appbar/Appbar";
 
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
-  const [showLoginModal, setShowLoginModal] = React.useState(false);
-  const [showJoinModal, setShowJoinModal] = React.useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const updateScroll = () => {
-    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-  });
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+
   return (
-    <div
-      className={`container ml-auto mr-auto md:pt-28 ${
-        scrollPosition > 200 ? "pt-28" : ""
-      }`}
-    >
-      <div className="fixed backgroundImg"></div>
-      <div className="backgroundCover"></div>
-      <Appbar onOpenModal={setShowJoinModal} scrollPosition={scrollPosition} />
+    <>
       <div className="flex pl-6 text-2xl items-center w-[1250px] mr-auto ml-auto pt-6">
         <h1 className="pr-4 text-base">인기태그</h1>
         {Mock.popularTags.tags.map((tag, index) => {
@@ -110,11 +94,9 @@ export default function MainPage() {
         </div>
       </section>
       <div className="w-full h-20 mt-16"></div>
-      <footer className="w-full text-textHighlightColor h-36 ">
-        footer 영역
-      </footer>
+      {/* 
       <LoginModal open={showLoginModal} onClose={setShowLoginModal} />
-      <JoinModal open={showJoinModal} onClose={setShowJoinModal} />
-    </div>
+      <JoinModal open={showJoinModal} onClose={setShowJoinModal} /> */}
+    </>
   );
 }

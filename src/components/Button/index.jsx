@@ -43,7 +43,7 @@ export default function Button(props) {
 }
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(["contained", "outlined"]).isRequired,
+  variant: PropTypes.oneOf(["contained", "outlined"]),
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   width: PropTypes.number,

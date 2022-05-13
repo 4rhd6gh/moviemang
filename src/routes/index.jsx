@@ -1,7 +1,7 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import AuthLayout from "../Layouts/AuthLayout";
-import PublicLayout from "../Layouts/PublicLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import PublicLayout from "../layouts/PublicLayout";
 import MainPage from "../pages/main";
 import MovieList from "../pages/movieList/MovieList";
 import Search from "../pages/search/Search";

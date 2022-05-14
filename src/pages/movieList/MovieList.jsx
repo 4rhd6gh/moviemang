@@ -14,9 +14,12 @@ export default function MovieList() {
   const [isFetching, setIsFetching] = useInfiniteScroll(getMovieList);
 
   async function getMovieList() {
-    if (page == 0) {
-      dispatch(action.movie.getPopularMovieList(1));
+    console.log("getMovieList");
+    if (page === 0) {
+      console.log("getMovieList init");
+      dispatch(action.movie.getPopularMovieList());
     } else if (page < totalPages) {
+      console.log("getMovieList second");
       dispatch(action.movie.getPopularMovieList(page + 1));
       setIsFetching(false);
     } else {

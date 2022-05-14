@@ -11,6 +11,8 @@ export default function SearchBar() {
     setValue(e.currentTarget.value);
   };
   const handleClick = () => {
+    if (value === "") return;
+
     navigate("/search", {
       state: { value: value },
     });
@@ -18,6 +20,8 @@ export default function SearchBar() {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
+
+      if (value === "") return;
 
       navigate("/search", {
         state: { value: value },

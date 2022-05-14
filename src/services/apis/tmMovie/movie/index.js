@@ -29,6 +29,5 @@ export const getSearchMovieList = async (
   Service.serviceConfig.query = query;
 
   const response = await Service.axiosRequest();
-  console.log(response);
   return response;
 };

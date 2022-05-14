@@ -4,12 +4,24 @@ import * as Constants from "@constant";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
+import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
 
 export default function MovieList() {
   const dispatch = useDispatch();
   const movieArray = useSelector(selector.movie.getPopularMovieList);
+  const page = useSelector(selector.movie.getCurrentPage);
+  const totalPages = useSelector(selector.movie.getTotalPages);
+  const [isFetching, setIsFetching] = useInfiniteScroll(getMovieList);
+
   async function getMovieList() {
-    dispatch(action.movie.getPopularMovieList());
+    if (page == 0) {
+      dispatch(action.movie.getPopularMovieList(1));
+    } else if (page < totalPages) {
+      dispatch(action.movie.getPopularMovieList(page + 1));
+      setIsFetching(false);
+    } else {
+      return;
+    }
   }
   useEffect(() => {
     getMovieList();

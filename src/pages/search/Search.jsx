@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from "react";
-import * as MovieService from "@api/tmMovie/movie";
 import Spinner from "@page/common/spinner";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import * as action from "@data/rootActions";
+import * as selector from "@data/rootSelectors";
 
 export default function Search() {
-  const [movieList, setMovieList] = useState([]);
+  const dispatch = useDispatch();
+  const movieList = useSelector(selector.search.getSearchMovieList);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const value = location.state === null ? "" : location.state.value;
-
   async function getSearchMovieList() {
-    const response = await MovieService.getSearchMovieList(
-      "GET",
-      "search/movie",
-      {},
-      1,
-      value
-    );
-    const movies = response.results;
-    setMovieList(movies);
-    setLoading(false);
+    dispatch(action.search.getSearchMovieList(value));
   }
 
   useEffect(() => {
     setLoading(true);
     getSearchMovieList();
   }, [value]);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [movieList]);
 
   return (
     <>

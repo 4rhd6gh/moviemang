@@ -12,7 +12,7 @@ export default function Input(props) {
       placeholder={placeholder}
       onChange={handleChange}
       onBlur={handleBlur}
-      className="block w-64 p-2 mt-1 mr-2 text-lg bg-transparent border rounded-lg focus:outline-none"
+      className="block w-64 p-2 pl-4 mt-1 mr-2 text-lg text-black bg-transparent border rounded-lg focus:outline-none"
       disabled={disabled ? true : false}
     ></input>
   );

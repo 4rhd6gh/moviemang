@@ -1,6 +1,7 @@
 import React from "react";
+import { TailSpin } from "react-loader-spinner";
 
 const Spinner = (props) => {
-  return <p className="z-10  text-white">Spinner</p>;
+  return <TailSpin color="#dcf836"></TailSpin>;
 };
 export default Spinner;

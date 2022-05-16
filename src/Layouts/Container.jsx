@@ -18,7 +18,7 @@ export default function Container({ children }) {
     >
       <Appbar scrollPosition={scrollPosition} />
       {children}
-      <footer className="absolute bottom-0 w-full bg-black text-textHighlightColor h-36">
+      <footer className="fixed bottom-0 w-full bg-black text-textHighlightColor h-36">
         footer 영역
       </footer>
     </div>

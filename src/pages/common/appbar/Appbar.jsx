@@ -6,9 +6,11 @@ import { HiMenu as MenuIcon } from "react-icons/hi";
 import Button from "@component/Button";
 import JoinModal from "../modal/JoinModal";
 import LoginModal from "../modal/LoginModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
+  const navigate = useNavigate();
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -18,6 +20,10 @@ export default function Appbar(props) {
 
   const handleLoginModalOpen = () => {
     setShowLoginModal((prevState) => !prevState);
+  };
+
+  const moveMovieListPage = () => {
+    navigate("/movieList");
   };
 
   return (
@@ -49,7 +55,10 @@ export default function Appbar(props) {
           <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
             PLAYLISTS
           </span>
-          <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+          <span
+            className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor "
+            onClick={moveMovieListPage}
+          >
             MOVIES
           </span>
           <span

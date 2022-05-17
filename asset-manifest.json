@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/moviemang/static/css/main.7838266d.css",
+    "main.js": "/moviemang/static/js/main.d7b32b31.js",
+    "static/media/backgroundImg.PNG": "/moviemang/static/media/backgroundImg.b6e91f01bf1db7701969.PNG",
+    "index.html": "/moviemang/index.html",
+    "main.7838266d.css.map": "/moviemang/static/css/main.7838266d.css.map",
+    "main.d7b32b31.js.map": "/moviemang/static/js/main.d7b32b31.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7838266d.css",
+    "static/js/main.d7b32b31.js"
+  ]
+}

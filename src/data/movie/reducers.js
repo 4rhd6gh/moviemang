@@ -11,7 +11,7 @@ export default function movie(state = initialState, action) {
         total_pages: action.payload.total_pages,
       };
     case ActionTypes.POPULAR_MOVIE_LIST_FAILURE:
-      return action.user;
+
     default:
       return state;
   }

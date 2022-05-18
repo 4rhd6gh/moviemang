@@ -1,25 +1,30 @@
 import * as ActionTypes from "@data/rootActionTypes";
-import * as apis from "@service/apis/tmMovie/movie";
+import * as apis from "@service/apis/tmMovie";
 
 export const getPopularMovieList = (page) => async (dispatch) => {
   try {
-    //dispatch({ type: ActionTypes.LOADING_START });
-    console.log("redux getPopularMovieList");
-    const response = await apis.getPopularMovieList(
-      "GET",
+    const response = await apis.requestAxios(
+      "get",
       "/movie/popular",
-      {},
-      page
+      { page: 40000 },
+      {}
     );
-
     console.log(response);
-    dispatch({
-      type: ActionTypes.POPULAR_MOVIE_LIST_SUCCESS,
-      payload: response,
-    });
-
-    //await dispatch({ type: ActionTypes.LOADING_END });
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.POPULAR_MOVIE_LIST_SUCCESS,
+        payload: response.data,
+      });
+    } else {
+      dispatch({
+        type: ActionTypes.POPULAR_MOVIE_LIST_FAILURE,
+        payload: response,
+      });
+    }
   } catch (error) {
-    //dispatch({ type: ActionTypes.LOADING_END, payload: error });
+    dispatch({
+      type: ActionTypes.POPULAR_MOVIE_LIST_FAILURE,
+      payload: { message: "잘못된 요청입니다." },
+    });
   }
 };

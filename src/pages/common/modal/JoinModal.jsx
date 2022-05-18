@@ -8,7 +8,7 @@ import ToggleSwitch from "@page/common/toggleSwitch";
 import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import * as apis from "@api/movieMang/user";
+import * as apis from "@api/movieMang";
 
 export default function JoinModal(props) {
   const { open = false, onClose } = props;
@@ -38,7 +38,7 @@ export default function JoinModal(props) {
   });
 
   async function onNickNameCheck(nickName) {
-    const result = await apis.checkDupNickname({ nick: nickName });
+    const result = await apis.requestAxios({ nick: nickName });
     if (result === "SUCCESS") {
       setnickNameCheck(true);
     } else {
@@ -47,7 +47,7 @@ export default function JoinModal(props) {
   }
 
   async function onEmailCheck(email) {
-    const result = await apis.checkDupEmail({ email: email });
+    const result = await apis.requestAxios({ email: email });
     if (result === "SUCCESS") {
       setEmailCheck(true);
     } else {
@@ -56,7 +56,7 @@ export default function JoinModal(props) {
   }
 
   async function requestEmailCert() {
-    const result = await apis.requestEmailCert();
+    const result = await apis.requestAxios();
     if (result === "SUCCESS") {
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력

@@ -13,10 +13,9 @@ export default function LoginModal(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
+    username: Yup.string()
       .email("이메일 형태가 아닙니다.")
       .required("이메일을 입력하지 않았습니다."),
-
     password: Yup.string().required("패스워드를 입력하지 않았습니다."),
   });
 
@@ -52,11 +51,12 @@ export default function LoginModal(props) {
 
                 <Formik
                   initialValues={{
-                    email: "",
+                    username: "",
                     password: "",
                   }}
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
+                    console.log(values);
                     // same shape as initial values
                     dispatch(actions.user.login(values));
                   }}
@@ -67,8 +67,8 @@ export default function LoginModal(props) {
                         <div className="mb-3 ">
                           email
                           <Field
-                            name="email"
-                            inputName="email"
+                            name="username"
+                            inputName="username"
                             type="email"
                             placeholder="Email"
                             handleChange={handleChange}

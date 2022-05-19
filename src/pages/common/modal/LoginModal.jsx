@@ -13,10 +13,9 @@ export default function LoginModal(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
+    username: Yup.string()
       .email("이메일 형태가 아닙니다.")
       .required("이메일을 입력하지 않았습니다."),
-
     password: Yup.string().required("패스워드를 입력하지 않았습니다."),
   });
 
@@ -36,8 +35,10 @@ export default function LoginModal(props) {
           >
             <div className="relative w-auto max-w-3xl mx-auto my-6">
               <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
-                  <h3 className="text-3xl font-semibold">Login</h3>
+                <div className="flex items-center justify-center p-5 border-b border-solid rounded-t border-slate-200">
+                  <h3 className="text-3xl font-semibold text-center text-black ">
+                    LOGIN
+                  </h3>
                   <button
                     className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none opacity-5 focus:outline-none"
                     onClick={onCloseModal}
@@ -47,13 +48,15 @@ export default function LoginModal(props) {
                     </span>
                   </button>
                 </div>
+
                 <Formik
                   initialValues={{
-                    email: "",
+                    username: "",
                     password: "",
                   }}
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
+                    console.log(values);
                     // same shape as initial values
                     dispatch(actions.user.login(values));
                   }}
@@ -64,8 +67,8 @@ export default function LoginModal(props) {
                         <div className="mb-3 ">
                           email
                           <Field
-                            name="email"
-                            inputName="email"
+                            name="username"
+                            inputName="username"
                             type="email"
                             placeholder="Email"
                             handleChange={handleChange}
@@ -99,9 +102,10 @@ export default function LoginModal(props) {
                       <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
                         <Button
                           variant="contained"
-                          text="Login"
+                          text="로그인"
                           type="submit"
-                          width={48}
+                          width="w-full"
+                          backgroundColor="bg-themePink"
                         />
                       </div>
                     </Form>

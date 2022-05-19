@@ -8,7 +8,7 @@ import ToggleSwitch from "@page/common/toggleSwitch";
 import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import * as apis from "@api/movieMang/user";
+import * as apis from "@api/movieMang";
 
 export default function JoinModal(props) {
   const { open = false, onClose } = props;
@@ -38,7 +38,7 @@ export default function JoinModal(props) {
   });
 
   async function onNickNameCheck(nickName) {
-    const result = await apis.checkDupNickname({ nick: nickName });
+    const result = await apis.requestAxios({ nick: nickName });
     if (result === "SUCCESS") {
       setnickNameCheck(true);
     } else {
@@ -47,7 +47,7 @@ export default function JoinModal(props) {
   }
 
   async function onEmailCheck(email) {
-    const result = await apis.checkDupEmail({ email: email });
+    const result = await apis.requestAxios({ email: email });
     if (result === "SUCCESS") {
       setEmailCheck(true);
     } else {
@@ -56,7 +56,7 @@ export default function JoinModal(props) {
   }
 
   async function requestEmailCert() {
-    const result = await apis.requestEmailCert();
+    const result = await apis.requestAxios();
     if (result === "SUCCESS") {
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력
@@ -74,7 +74,7 @@ export default function JoinModal(props) {
             <div className="relative w-auto max-w-3xl mx-auto my-6">
               <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
-                  <h3 className="text-3xl font-semibold">Join</h3>
+                  <h3 className="text-3xl font-semibold text-black">JOIN</h3>
                   <button
                     className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none opacity-5 focus:outline-none"
                     onClick={() => onClose(false)}
@@ -115,7 +115,7 @@ export default function JoinModal(props) {
                             variant="outlined"
                             type="button"
                             text="중복체크"
-                            width={20}
+                            width="w-20"
                             onClick={() => onNickNameCheck(values.nickName)}
                             disabled={nickNameCheck ? true : false}
                           />
@@ -133,7 +133,7 @@ export default function JoinModal(props) {
                             inputName="email"
                             type="email"
                             value={values.email}
-                            placeholder="Email"
+                            placeholder="이메일을 입력해주세요"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             component={Input}
@@ -143,7 +143,7 @@ export default function JoinModal(props) {
                             variant="outlined"
                             type="button"
                             text="중복체크"
-                            width={20}
+                            width="w-20"
                             onClick={() => onEmailCheck(values.email)}
                             disabled={emailCheck ? true : false}
                           />
@@ -171,7 +171,8 @@ export default function JoinModal(props) {
                             type="button"
                             text="인증"
                             onClick={requestEmailCert}
-                            width={20}
+                            width="w-20"
+                            backgroundColor="bg-themePink"
                           />
                         </div>
                         <div className="mb-3 ">
@@ -187,7 +188,7 @@ export default function JoinModal(props) {
                             name="password"
                             inputName="password"
                             type="password"
-                            placeholder="Password"
+                            placeholder="비밀번호를 입력해주세요"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             component={Input}
@@ -203,7 +204,7 @@ export default function JoinModal(props) {
                             name="passwordConfirm"
                             inputName="passwordConfirm"
                             type="password"
-                            placeholder="Password comfirm"
+                            placeholder="비밀번호 확인"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             component={Input}
@@ -214,7 +215,7 @@ export default function JoinModal(props) {
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
-                        <div className="flex mt-3">
+                        <div className="flex mt-3 text-black">
                           메일 구독 서비스
                           <Tooltip tooltipText="메일 구독 서비스 설명">
                             <StaticIcon
@@ -230,9 +231,10 @@ export default function JoinModal(props) {
                       <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
                         <Button
                           variant="contained"
-                          text="Join"
+                          text="회원가입"
                           type="submit"
-                          width={60}
+                          width="w-full"
+                          backgroundColor="bg-themePink"
                         />
                       </div>
                     </Form>

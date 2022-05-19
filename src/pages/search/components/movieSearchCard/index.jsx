@@ -14,13 +14,7 @@ export default function MovieSearchCard(props) {
       />
       <div className="relative w-5/6 px-5 mx-5 border-l border-gray-500 border-solid">
         <div className="absolute top-0 right-0">
-          <Button
-            variant="contained"
-            text="+"
-            type="button"
-            width={10}
-            height={10}
-          />
+          <Button variant="contained" text="+" type="button" width="w-10" />
         </div>
         <h2 className="text-xl font-semibold text-white">{title}</h2>
         <p className="text-base text-gray-400">{release_date}</p>

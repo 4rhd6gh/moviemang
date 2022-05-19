@@ -69,15 +69,14 @@ export default function Appbar(props) {
           </span>
           <Button
             text="JOIN"
-            size="small"
             type="button"
             color="text-white"
+            width="w-[80px]"
+            height="h-[35px]"
             backgroundColor="bg-themePink"
             borderRadius="rounded-2xl"
             onClick={handleJoinModalOpen}
           ></Button>
-
-          {/* <BsFillPersonFill className="w-8 h-8" /> */}
         </div>
         <div className="flex ml-auto">
           <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />

@@ -4,5 +4,6 @@
     "titleBar.inactiveBackground": "#e45b11"
   },
   "explorer.compactFolders": false,
-  "prettier.printWidth": 80
+  "prettier.printWidth": 80,
+  "git.ignoreLimitWarning": true
 }

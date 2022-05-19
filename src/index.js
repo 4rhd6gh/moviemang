@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "@data/configureStore";
+import ErrorComponent from "@page/common/error/ErrorComponent";
 
 const { store } = configureStore();
 
@@ -13,6 +14,7 @@ root.render(
   <>
     <BrowserRouter>
       <Provider store={store}>
+        <ErrorComponent />
         <App />
       </Provider>
     </BrowserRouter>

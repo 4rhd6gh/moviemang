@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
+import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function Search() {
       <div className=" bg-[#020d18] ">
         <div className="flex justify-center ">
           <div>
-            <h1 className=" p-5 mb-8 font-[Dosis] font-bold text-white text-4xl">
+            <h1 className="p-5 mb-8 text-4xl font-bold text-white ">
               검색결과
             </h1>
           </div>

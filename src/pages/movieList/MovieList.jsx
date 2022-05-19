@@ -14,12 +14,9 @@ export default function MovieList() {
   const [isFetching, setIsFetching] = useInfiniteScroll(getMovieList);
 
   async function getMovieList() {
-    console.log("getMovieList");
     if (page === 0) {
-      console.log("getMovieList init");
       dispatch(action.movie.getPopularMovieList());
     } else if (page < totalPages) {
-      console.log("getMovieList second");
       dispatch(action.movie.getPopularMovieList(page + 1));
       setIsFetching(false);
     } else {
@@ -34,7 +31,7 @@ export default function MovieList() {
     <>
       <div className="flex justify-center">
         <div>
-          <h1 className=" p-10 mb-8 font-[Dosis] font-bold text-white text-4xl">
+          <h1 className="p-10 mb-8 text-4xl font-bold text-white ">
             Popular Movies
           </h1>
         </div>

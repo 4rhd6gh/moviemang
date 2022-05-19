@@ -1,9 +1,9 @@
 import * as ActionTypes from "@data/rootActionTypes";
-import * as apis from "@service/apis/tmMovie/movie";
+import * as apis from "@service/apis/tmMovie";
 
 export const getSearchMovieList = (value) => async (dispatch) => {
   try {
-    const response = await apis.getSearchMovieList(
+    const response = await apis.requestAxios(
       "GET",
       "search/movie",
       {},

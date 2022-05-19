@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Spinner from "@page/common/spinner";
+import React, { useEffect } from "react";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +9,6 @@ import * as selector from "@data/rootSelectors";
 export default function Search() {
   const dispatch = useDispatch();
   const movieList = useSelector(selector.search.getSearchMovieList);
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const value = location.state === null ? "" : location.state.value;
   async function getSearchMovieList() {
@@ -18,12 +16,12 @@ export default function Search() {
   }
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(action.common.startLoading);
     getSearchMovieList();
   }, [value]);
 
   useEffect(() => {
-    setLoading(false);
+    dispatch(action.common.endLoading);
   }, [movieList]);
 
   return (
@@ -37,27 +35,19 @@ export default function Search() {
           </div>
         </div>
         <div className="flex justify-center w-full">
-          {loading ? (
-            <Spinner />
-          ) : (
-            <div className=" w-[70%]">
-              <div className="flex flex-col flex-wrap justify-between ml-16 mr-16">
-                {movieList.map((movie) => (
-                  <div className="w-full py-5">
-                    <MovieSearchCard
-                      key={movie.title}
-                      poster_path={
-                        Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
-                      }
-                      title={movie.title}
-                      release_date={movie.release_date}
-                      overview={movie.overview}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className=" w-[70%]">
+            <ul className="flex flex-col flex-wrap justify-between ml-16 mr-16">
+              {movieList.map((movie, i) => (
+                <MovieSearchCard
+                  key={i + movie.title}
+                  poster_path={Constants.TM_MOVIE_IMAGE_URL + movie.poster_path}
+                  title={movie.title}
+                  release_date={movie.release_date}
+                  overview={movie.overview}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>

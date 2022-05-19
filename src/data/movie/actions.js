@@ -17,14 +17,16 @@ export const getPopularMovieList = (page) => async (dispatch) => {
       });
     } else {
       dispatch({
-        type: ActionTypes.POPULAR_MOVIE_LIST_FAILURE,
-        payload: response,
+        type: ActionTypes.HAS_ERROR,
+        payload: response.massege,
       });
     }
   } catch (error) {
     dispatch({
-      type: ActionTypes.POPULAR_MOVIE_LIST_FAILURE,
-      payload: { message: "잘못된 요청입니다." },
+      type: ActionTypes.HAS_ERROR,
+      payload: {
+        massege: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
+      },
     });
   }
 };

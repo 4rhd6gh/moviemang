@@ -7,6 +7,7 @@ const initialState = {
 };
 
 export default function common(state = initialState, action) {
+  console.log(action.payload);
   switch (action.type) {
     case ActionTypes.HAS_ERROR:
       return { ...state, error: true, errorMessage: action.payload };

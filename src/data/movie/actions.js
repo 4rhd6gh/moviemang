@@ -6,7 +6,7 @@ export const getPopularMovieList = (page) => async (dispatch) => {
     const response = await apis.requestAxios(
       "get",
       "/movie/popular",
-      { page: 40000 },
+      { page: page },
       {}
     );
     console.log(response);

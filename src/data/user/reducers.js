@@ -1,6 +1,11 @@
 import * as ActionTypes from "@data/rootActionTypes";
 
-const initialState = { hasError: false, errorMessage: null };
+const initialState = {
+  hasError: false,
+  errorMessage: null,
+  accessToken: null,
+  refreshToken: null,
+};
 
 export default function user(state = initialState, action) {
   switch (action.type) {

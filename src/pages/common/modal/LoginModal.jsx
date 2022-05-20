@@ -60,8 +60,7 @@ export default function LoginModal(props) {
                   }}
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
-                    // same shape as initial values
-                    dispatch(actions.user.login(values));
+                    dispatch(actions.user.login(values, onClose));
                   }}
                 >
                   {({ handleChange, handleBlur }) => (

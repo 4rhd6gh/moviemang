@@ -1,20 +1,19 @@
 import * as ActionTypes from "@data/rootActionTypes";
 import * as apis from "@service/apis/movieMang";
 
-export const login = (loginParam) => async (dispatch) => {
+export const login = (loginParam, callback) => async (dispatch) => {
   try {
-    //dispatch({ type: ActionTypes.LOADING_START });
-    console.log("redux login");
-
     const response = await apis.requestAxios("post", "/login", {}, loginParam);
 
     if (response.status === 200) {
-      dispatch({
+      await dispatch({
         type: ActionTypes.LOGIN_SUCCESS,
         payload: response.data,
       });
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+      await callback(false);
     } else {
-      console.log(response);
       dispatch({
         type: ActionTypes.LOGIN_FAILURE,
         payload: response.message,

@@ -16,10 +16,10 @@ export async function requestAxios(method = "get", url, params, body) {
   } catch (e) {
     let errorResponse;
     if (e.response) {
-      if (e.response.status === 422) {
-        errorResponse = { massege: "잘못된 요청입니다." };
+      if (e.response.status === 401) {
+        errorResponse = e.response.data;
       }
     }
-    console.log(e.response);
+    return errorResponse;
   }
 }

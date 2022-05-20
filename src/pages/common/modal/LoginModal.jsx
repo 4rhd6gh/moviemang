@@ -4,7 +4,7 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@component/Button";
 import Input from "@component/Input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as actions from "@data/rootActions";
 
@@ -12,6 +12,9 @@ export default function LoginModal(props) {
   const { open = false, onClose } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const hasError = useSelector((state) => state.user.hasError);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+
   const LoginSchema = Yup.object().shape({
     username: Yup.string()
       .email("이메일 형태가 아닙니다.")
@@ -21,6 +24,7 @@ export default function LoginModal(props) {
 
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
+      dispatch(actions.user.confirmError());
       onClose(false);
     }
   };
@@ -56,9 +60,7 @@ export default function LoginModal(props) {
                   }}
                   validationSchema={LoginSchema}
                   onSubmit={(values) => {
-                    console.log(values);
-                    // same shape as initial values
-                    dispatch(actions.user.login(values));
+                    dispatch(actions.user.login(values, onClose));
                   }}
                 >
                   {({ handleChange, handleBlur }) => (
@@ -99,6 +101,12 @@ export default function LoginModal(props) {
                           />
                         </div>
                       </div>
+                      {hasError ? (
+                        <div className="w-64 px-1 py-1 ml-4 text-xs text-red-500">
+                          {errorMessage}
+                        </div>
+                      ) : null}
+
                       <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
                         <Button
                           variant="contained"

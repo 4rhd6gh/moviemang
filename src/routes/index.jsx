@@ -4,6 +4,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import PublicLayout from "../Layouts/PublicLayout";
 import MainPage from "../pages/main";
 import MovieList from "../pages/movieList/MovieList";
+import MovieDetail from "@page/movieDetail";
 import Search from "../pages/search/Search";
 
 export default function CustomRoutes() {
@@ -14,6 +15,7 @@ export default function CustomRoutes() {
       { path: "/", element: <MainPage /> },
       { path: "/movielist", element: <MovieList /> },
       { path: "/search", element: <Search /> },
+      { path: "/moviedetail", element: <MovieDetail /> },
     ],
   };
 

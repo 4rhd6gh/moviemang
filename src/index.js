@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "@data/configureStore";
 import ErrorComponent from "@page/common/error/ErrorComponent";
+import Spinner from "@page/common/spinner";
 
 const { store } = configureStore();
 
@@ -14,6 +15,7 @@ root.render(
   <>
     <BrowserRouter>
       <Provider store={store}>
+        <Spinner />
         <ErrorComponent />
         <App />
       </Provider>

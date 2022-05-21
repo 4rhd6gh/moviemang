@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Button from "@component/Button";
 
@@ -6,7 +6,7 @@ export default function MovieSearchCard(props) {
   const { poster_path, title, overview, release_date } = props;
 
   return (
-    <div className="flex flex-row ">
+    <li className="flex flex-row w-full py-5 ">
       <img
         src={poster_path}
         alt={title}
@@ -14,13 +14,7 @@ export default function MovieSearchCard(props) {
       />
       <div className="relative w-5/6 px-5 mx-5 border-l border-gray-500 border-solid">
         <div className="absolute top-0 right-0">
-          <Button
-            variant="contained"
-            text="+"
-            type="button"
-            width={10}
-            height={10}
-          />
+          <Button variant="contained" text="+" type="button" width="w-10" />
         </div>
         <h2 className="text-xl font-semibold text-white">{title}</h2>
         <p className="text-base text-gray-400">{release_date}</p>
@@ -30,7 +24,7 @@ export default function MovieSearchCard(props) {
           </p>
         </div>
       </div>
-    </div>
+    </li>
   );
 }
 

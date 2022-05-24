@@ -15,7 +15,7 @@ export default function CustomRoutes() {
       { path: "/", element: <MainPage /> },
       { path: "/movielist", element: <MovieList /> },
       { path: "/search", element: <Search /> },
-      { path: "/moviedetail", element: <MovieDetail /> },
+      { path: "/moviedetail/:movieId", element: <MovieDetail /> },
     ],
   };
 

@@ -1,6 +1,11 @@
 import * as ActionTypes from "@data/rootActionTypes";
 
-const initialState = { popMovieList: [], page: 0, total_pages: 0 };
+const initialState = {
+  popMovieList: [],
+  page: 0,
+  total_pages: 0,
+  popMovieDetail: {},
+};
 
 export default function movie(state = initialState, action) {
   switch (action.type) {
@@ -9,6 +14,11 @@ export default function movie(state = initialState, action) {
         popMovieList: [...state.popMovieList, ...action.payload.results],
         page: action.payload.page,
         total_pages: action.payload.total_pages,
+      };
+    case ActionTypes.POPULAR_MOVIE_DETAIL_SUCCESS:
+      return {
+        ...state,
+        popMovieDetail: action.payload,
       };
     default:
       return state;

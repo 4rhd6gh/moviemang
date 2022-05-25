@@ -36,9 +36,25 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
     const response = await apis.requestAxios("get", "/movie/" + id, {}, {});
     console.log(response);
     if (response.status === 200) {
+      const response2 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/credits",
+        {},
+        {}
+      );
+      const response3 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/watch/providers",
+        {},
+        {}
+      );
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_DETAIL_SUCCESS,
-        payload: response.data,
+        payload: {
+          ...response.data,
+          ...response2.data,
+          KR: response3.data.results.KR,
+        },
       });
     } else {
       dispatch({

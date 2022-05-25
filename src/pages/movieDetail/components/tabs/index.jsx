@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function Tabs() {
+export default function Tabs(props) {
+  const { activeTab, onClick } = props;
+  const menuList = [
+    { href: "#overview", name: "Overview" },
+    { href: "#cast", name: "Cast" },
+    { href: "#media", name: "media" },
+    { href: "#reviews", name: "Reviews" },
+    { href: "#moviesrelated", name: "RELATED MOVIES" },
+  ];
+
   return (
-    <ul className="flex p-5">
-      <li className="p-2 ">
-        <a
-          className="border-b-2 border-solid border-[#dcf836] font-bold "
-          href="#overview"
-        >
-          OVERVIEW
-        </a>
-      </li>
-      <li className="p-2 ">
-        <a href="#cast">CAST&CREW</a>
-      </li>
-      <li className="p-2 ">
-        <a href="#media">MEDIA</a>
-      </li>
-      <li className="p-2 ">
-        <a href="#review">REVIEWS</a>
-      </li>
-      <li className="p-2 ">
-        <a href="#moviesrelated">RELATED MOVIES</a>
-      </li>
+    <ul className="flex">
+      {menuList.map((menu, index) => (
+        <li className="pr-10" key={index}>
+          <a
+            onClick={() => onClick(index)}
+            className={
+              activeTab === index
+                ? "border-b-4 border-solid border-[#dcf836] text-[#dcf836] uppercase font-bold pb-3"
+                : "font-bold text-[#abb7c4] uppercase " +
+                  `hover:border-b-4 border-solid border-[#dcf836] hover:text-[#dcf836] pb-3`
+            }
+            href={menu.href}
+          >
+            {menu.name}
+          </a>
+        </li>
+      ))}
     </ul>
   );
 }
+Tabs.propTypes = {
+  activeTab: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
+};

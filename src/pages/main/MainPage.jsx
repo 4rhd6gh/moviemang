@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
@@ -6,8 +6,6 @@ import * as Mock from "@data/mock";
 
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showJoinModal, setShowJoinModal] = useState(false);
 
   return (
     <>

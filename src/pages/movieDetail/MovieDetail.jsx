@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,16 +8,44 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import Tabs from "./components/tabs";
+import Overview from "./components/tabContents/Overview";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
-
+  const [activeTab, setActiveTab] = useState(0);
+  const onClickTab = useCallback(
+    (index) => {
+      setActiveTab(index);
+    },
+    [activeTab]
+  );
   const movieDetailInfo = useSelector(selector.movie.getMovieDetail);
+  let buyProviders = [];
+  let rentProviders = [];
+  let flatrateProviders = [];
+  const forProvider = movieDetailInfo?.KR;
+  if (forProvider) {
+    if (forProvider.buy) {
+      forProvider.buy.map((item) => {
+        buyProviders.push(item.logo_path);
+      });
+    }
+    if (forProvider.rent) {
+      forProvider.rent.map((item) => {
+        rentProviders.push(item.logo_path);
+      });
+    }
+    if (forProvider.flatrate) {
+      forProvider.flatrate.map((item) => {
+        flatrateProviders.push(item.logo_path);
+      });
+    }
+  }
+
   async function getMovieDetail() {
     dispatch(action.movie.getPopularMovieDetail(movieId));
   }
-  console.log(movieDetailInfo);
   useEffect(() => {
     getMovieDetail();
   }, []);
@@ -30,6 +58,46 @@ export default function MovieDetail() {
             alt={movieDetailInfo?.title}
             className=" object-cover h-[505px] w-[330px]"
           />
+          <div className="flex mt-4">
+            <div className="flex">
+              {buyProviders.map((item, index) => {
+                return (
+                  <div className="mr-3" key={index}>
+                    <img
+                      src={Constants.TM_MOVIE_IMAGE_URL + item}
+                      alt={""}
+                      className="object-cover h-[50px] w-[50px]"
+                    />
+                    <div className="text-xs text-center text-white">구매</div>
+                  </div>
+                );
+              })}
+              {rentProviders.map((item, index) => {
+                return (
+                  <div className="mr-3" key={index}>
+                    <img
+                      src={Constants.TM_MOVIE_IMAGE_URL + item}
+                      alt={""}
+                      className="object-cover h-[50px] w-[50px]"
+                    />
+                    <div className="text-xs text-center text-white">대여</div>
+                  </div>
+                );
+              })}
+              {flatrateProviders.map((item, index) => {
+                return (
+                  <div className="mr-3" key={index}>
+                    <img
+                      src={Constants.TM_MOVIE_IMAGE_URL + item}
+                      alt={""}
+                      className="object-cover h-[50px] w-[50px]"
+                    />
+                    <div className="text-xs text-center text-white">구독</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
         <div className="ml-20 ">
           <div className="flex">
@@ -41,6 +109,9 @@ export default function MovieDetail() {
                 ? movieDetailInfo?.release_date.split("-")[0]
                 : ""}
             </span>
+          </div>
+          <div className="text-lg italic text-gray-500">
+            {movieDetailInfo?.tagline}
           </div>
           <div className="flex mt-5">
             <div>
@@ -58,7 +129,17 @@ export default function MovieDetail() {
               />
             </div>
           </div>
-          <Tabs />
+          <div className="mt-16 mb-14">
+            <Tabs activeTab={activeTab} onClick={onClickTab} />
+          </div>
+          <div>
+            <Overview
+              overview={movieDetailInfo?.overview}
+              genres={movieDetailInfo?.genres}
+              crew={movieDetailInfo?.crew}
+              cast={movieDetailInfo?.cast}
+            />
+          </div>
         </div>
       </div>
     </>

@@ -36,7 +36,7 @@ export default function Button(props) {
   return (
     <button
       type={type}
-      className={`m-1 cursor-pointer ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
+      className={`my-2 cursor-pointer ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
       onClick={onClick}
     >
       {text}

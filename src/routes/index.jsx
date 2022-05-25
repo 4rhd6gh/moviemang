@@ -5,6 +5,7 @@ import PublicLayout from "../Layouts/PublicLayout";
 import MainPage from "../pages/main";
 import MovieList from "../pages/movieList/MovieList";
 import Search from "../pages/search/Search";
+import MyPage from "../pages/mypage/MyPage";
 
 export default function CustomRoutes() {
   const publicRoutes = {
@@ -20,7 +21,7 @@ export default function CustomRoutes() {
   const authRoutes = {
     path: "/",
     element: <AuthLayout />,
-    children: [],
+    children: [{ path: "/mypage", element: <MyPage /> }],
   };
   const routing = useRoutes([publicRoutes, authRoutes]);
 

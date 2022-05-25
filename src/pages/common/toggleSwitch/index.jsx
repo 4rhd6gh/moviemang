@@ -7,8 +7,8 @@ export default function ToggleSwitch(props) {
   return (
     <div
       className={
-        "md:w-14 md:h-7 w-12 h-6 mx-2 flex items-center rounded-full p-1 cursor-pointer " +
-        (toggle ? "bg-gray-300/50" : "bg-blue-300/50 ")
+        " w-12 h-6 inline-block relative m-0 items-center rounded-full  cursor-pointer " +
+        (toggle ? "bg-gray-300/50" : "bg-themePink/50 ")
       }
       onClick={() => {
         setToggle(!toggle);
@@ -16,8 +16,8 @@ export default function ToggleSwitch(props) {
     >
       <div
         className={
-          "bg-white md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md " +
-          (toggle ? "bg-white" : "bg-blue-400 transform translate-x-5")
+          "bg-white md:h-6 h-5 w-5 m-0 rounded-full shadow-md absolute top-0.5 left-1 " +
+          (toggle ? "bg-white" : "bg-themePink transform translate-x-5")
         }
       ></div>
     </div>

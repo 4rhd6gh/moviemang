@@ -9,6 +9,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import Tabs from "./components/tabs";
 import Overview from "./components/tabContents/Overview";
+import Reviews from "./components/tabContents/Reviews";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
@@ -133,12 +134,17 @@ export default function MovieDetail() {
             <Tabs activeTab={activeTab} onClick={onClickTab} />
           </div>
           <div>
-            <Overview
-              overview={movieDetailInfo?.overview}
-              genres={movieDetailInfo?.genres}
-              crew={movieDetailInfo?.crew}
-              cast={movieDetailInfo?.cast}
-            />
+            {activeTab === 0 ? (
+              <Overview
+                overview={movieDetailInfo?.overview}
+                genres={movieDetailInfo?.genres}
+                crew={movieDetailInfo?.crew}
+                cast={movieDetailInfo?.cast}
+                recommand={movieDetailInfo?.recommend}
+              />
+            ) : (
+              <Reviews />
+            )}
           </div>
         </div>
       </div>

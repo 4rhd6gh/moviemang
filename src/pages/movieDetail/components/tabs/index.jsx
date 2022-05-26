@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 export default function Tabs(props) {
   const { activeTab, onClick } = props;
   const menuList = [
     { href: "#overview", name: "Overview" },
-    { href: "#cast", name: "Cast" },
-    { href: "#media", name: "media" },
     { href: "#reviews", name: "Reviews" },
-    { href: "#moviesrelated", name: "RELATED MOVIES" },
   ];
 
   return (

@@ -9,7 +9,6 @@ export const getPopularMovieList = (page) => async (dispatch) => {
       { page: page },
       {}
     );
-    console.log(response);
     if (response.status === 200) {
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_LIST_SUCCESS,
@@ -34,7 +33,7 @@ export const getPopularMovieList = (page) => async (dispatch) => {
 export const getPopularMovieDetail = (id) => async (dispatch) => {
   try {
     const response = await apis.requestAxios("get", "/movie/" + id, {}, {});
-    console.log(response);
+    console.log(id);
     if (response.status === 200) {
       const response2 = await apis.requestAxios(
         "get",
@@ -48,12 +47,19 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
         {},
         {}
       );
+      const response4 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/recommendations",
+        {},
+        {}
+      );
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_DETAIL_SUCCESS,
         payload: {
           ...response.data,
           ...response2.data,
           KR: response3.data.results.KR,
+          recommend: response4.data.results,
         },
       });
     } else {

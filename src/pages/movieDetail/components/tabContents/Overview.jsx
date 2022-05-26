@@ -4,7 +4,7 @@ import Tag from "@component/Tag";
 import * as Constants from "@constant";
 
 export default function Overview(props) {
-  const { overview, genres = [], crew = [], cast = [] } = props;
+  const { overview, genres = [], crew = [], cast = [], recommand = [] } = props;
   const castList = cast.length > 10 ? cast.slice(0, 9) : cast;
 
   return (
@@ -25,29 +25,52 @@ export default function Overview(props) {
           {crew.find((item) => item.job === "Director")?.name}
         </div>
       </div>
-      <div className="w-[700px] ">
+      <div className="w-[700px]">
         <div className="mt-10 text-white">CAST</div>
-        <div className="block max-w-full">
-          <ol className="relative pb-3 overflow-auto overflow-x-scroll overflow-y-hidden list-none list-inside flex-nowrap">
+        <div className="overflow-x-auto overflow-y-hidden whitespace-nowrap">
+          <ul className="pb-3">
             {castList.map((item, index) => {
               return (
                 <li
                   key={index}
-                  className="mt-5 mb-5 ml-3 mr-2 overflow-hidden rounded-lg"
+                  className="inline-block p-4 m-0 overflow-hidden rounded-lg "
                 >
                   <img
                     src={Constants.TM_MOVIE_IMAGE_URL + item.profile_path}
                     alt={""}
                     className="object-cover h-[175px] w-[138px]"
                   />
-
-                  <div className="text-xs text-center text-white">
+                  <div className="mt-3 text-sm text-center text-white">
                     {item.name}
                   </div>
                 </li>
               );
             })}
-          </ol>
+          </ul>
+        </div>
+      </div>
+      <div className="w-[700px]">
+        <div className="mt-10 text-white">RELATED MOVIES</div>
+        <div className="overflow-x-auto overflow-y-hidden whitespace-nowrap">
+          <ul className="pb-3">
+            {recommand.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  className="inline-block p-4 m-0 overflow-hidden rounded-lg "
+                >
+                  <img
+                    src={Constants.TM_MOVIE_IMAGE_URL + item.backdrop_path}
+                    alt={""}
+                    className="object-cover h-[141px] w-[250px]"
+                  />
+                  <div className="mt-3 text-sm text-center text-white">
+                    {item.title}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </div>
@@ -58,4 +81,5 @@ Overview.propTypes = {
   genres: PropTypes.array,
   crew: PropTypes.array,
   cast: PropTypes.array,
+  recommand: PropTypes.array,
 };

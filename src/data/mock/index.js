@@ -66,20 +66,21 @@ export const playList = {
   ],
 };
 
-/*
-"/qcOFxYpBvU8LwaMyKdjCoP7y7we.jpg"
-"/rqyVJKWCZCWwYK5eDVYyo0jauN6.jpg"
-"/ejXBuNLvK4kZ7YcqeKqUWnCxdJq.jpg"
-"/A7tmTT5cqcmJ2wUgZHvmombf2oA.jpg"
-"/zzXFM4FKDG7l1ufrAkwQYv2xvnh.jpg"
-"/pMXOlasWr1IzHGH8HWw1ZTXs6rQ.jpg"
-"/19rA9FjhwI4VEfaCXV7648XUInR.jpg"
-"/aNtAP8ZzUMdnCPoqYgVOcgI0Eh4.jpg"
-"/rqyVJKWCZCWwYK5eDVYyo0jauN6.jpg"
-"/r97txZRmBb75SGsIAWqmplWJnO3.jpg"
-"/xe8dVB2QiCxLWFV77V4dpZcOvYB.jpg"
-"/m2FNRngyJMyxLatBMJR8pbeG2v.jpg"
-
-
-
- */
+export const ReviewDatas = {
+  reviews: [
+    {
+      name: "jjinho28",
+      title: "마블 액션의 진수를 느낄 수 있는 영화",
+      date: "2022-05-01",
+      comment:
+        "This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.",
+    },
+    {
+      name: "abcdefg",
+      title: "히어로 영화의 획을 긋다",
+      date: "2022-05-01",
+      comment:
+        "I can't right much... it's just so forgettable...Okay, from what I remember, I remember just sitting down on my seat and waiting for the movie to begin. 5 minutes into the movie, boring scene of Tony Stark just talking to his 'dead' friends saying it's his fault. 10 minutes in: Boring scene of Ultron and Jarvis having robot space battles(I dunno:/). 15 minutes in: I leave the theatre.2nd attempt at watching it: I fall asleep. What woke me up is the next movie on Netflix when the movie was over.",
+    },
+  ],
+};

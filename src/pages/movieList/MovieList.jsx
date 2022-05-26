@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import MovieCard from "./components/movieCard";
 import * as Constants from "@constant";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
@@ -8,6 +9,7 @@ import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
 
 export default function MovieList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const movieArray = useSelector(selector.movie.getPopularMovieList);
   const page = useSelector(selector.movie.getCurrentPage);
   const totalPages = useSelector(selector.movie.getTotalPages);
@@ -46,6 +48,7 @@ export default function MovieList() {
                   title={movie.title}
                   release_date={movie.release_date}
                   vote_average={movie.vote_average}
+                  onClick={() => navigate(`/movieDetail/${movie.id}`)}
                 />
               </div>
             ))}

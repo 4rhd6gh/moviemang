@@ -9,11 +9,58 @@ export const getPopularMovieList = (page) => async (dispatch) => {
       { page: page },
       {}
     );
-    console.log(response);
     if (response.status === 200) {
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_LIST_SUCCESS,
         payload: response.data,
+      });
+    } else {
+      dispatch({
+        type: ActionTypes.HAS_ERROR,
+        payload: response.massege,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.HAS_ERROR,
+      payload: {
+        massege: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
+      },
+    });
+  }
+};
+
+export const getPopularMovieDetail = (id) => async (dispatch) => {
+  try {
+    const response = await apis.requestAxios("get", "/movie/" + id, {}, {});
+    console.log(id);
+    if (response.status === 200) {
+      const response2 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/credits",
+        {},
+        {}
+      );
+      const response3 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/watch/providers",
+        {},
+        {}
+      );
+      const response4 = await apis.requestAxios(
+        "get",
+        "/movie/" + id + "/recommendations",
+        {},
+        {}
+      );
+      dispatch({
+        type: ActionTypes.POPULAR_MOVIE_DETAIL_SUCCESS,
+        payload: {
+          ...response.data,
+          ...response2.data,
+          KR: response3.data.results.KR,
+          recommend: response4.data.results,
+        },
       });
     } else {
       dispatch({

@@ -1,22 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@component/Button";
+import StaticIcon from "@component/Icons/StaticIcon";
+import { IoMdAddCircle } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieSearchCard(props) {
-  const { poster_path, title, overview, release_date } = props;
-
+  const { movieId, poster_path, title, overview, release_date } = props;
+  const navigate = useNavigate();
   return (
     <li className="flex flex-row w-full py-5 ">
       <img
+        onClick={() => {
+          navigate(`/movieDetail/${movieId}`);
+        }}
         src={poster_path}
         alt={title}
-        className="w-1/6 object-cover h-[130px] w-[90px]"
+        className="w-1/6 object-cover h-[130px] w-[90px] cursor-pointer"
       />
       <div className="relative w-5/6 px-5 mx-5 border-l border-gray-500 border-solid">
-        <div className="absolute top-0 right-0">
-          <Button variant="contained" text="+" type="button" width="w-10" />
+        <div className="flex">
+          <h2
+            onClick={() => {
+              navigate(`/movieDetail/${movieId}`);
+            }}
+            className="text-xl font-semibold text-white cursor-pointer"
+          >
+            {title}
+          </h2>
+          <div className="ml-4">
+            <StaticIcon
+              icon={IoMdAddCircle}
+              size="medium"
+              color="text-[#dd003f]"
+            />
+          </div>
         </div>
-        <h2 className="text-xl font-semibold text-white">{title}</h2>
         <p className="text-base text-gray-400">{release_date}</p>
         <div className="">
           <p className="mt-5 text-white">
@@ -29,6 +47,7 @@ export default function MovieSearchCard(props) {
 }
 
 MovieSearchCard.propTypes = {
+  movieId: PropTypes.number.isRequired,
   poster_path: PropTypes.string,
   title: PropTypes.string.isRequired,
   overview: PropTypes.string,

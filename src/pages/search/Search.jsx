@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
+import NoImage from "@res/img/noimg.png";
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -51,7 +52,11 @@ export default function Search() {
             {movieList.map((movie, i) => (
               <MovieSearchCard
                 key={i + movie.title}
-                poster_path={Constants.TM_MOVIE_IMAGE_URL + movie.poster_path}
+                poster_path={
+                  movie.poster_path === null
+                    ? NoImage
+                    : Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
+                }
                 title={movie.title}
                 release_date={movie.release_date}
                 overview={movie.overview}

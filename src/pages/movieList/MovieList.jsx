@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
+import NoImage from "@res/img/noimg.png";
 
 export default function MovieList() {
   const dispatch = useDispatch();
@@ -44,7 +45,11 @@ export default function MovieList() {
             {movieArray.map((movie, index) => (
               <div className="pt-5 pr-14" key={index}>
                 <MovieCard
-                  poster_path={Constants.TM_MOVIE_IMAGE_URL + movie.poster_path}
+                  poster_path={
+                    movie.poster_path === null
+                      ? NoImage
+                      : Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
+                  }
                   title={movie.title}
                   release_date={movie.release_date}
                   vote_average={movie.vote_average}

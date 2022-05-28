@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Input from "@component/Input";
 import Button from "@component/Button";
-import SNB from "./SNB";
+import SNB from "../SNB";
 import ToggleSwitch from "@page/common/toggleSwitch";
+import Chart from "./chart";
+import PlayListCard from "@page/common/playListCard";
+import { data } from "../data";
 
 export default function MyPage() {
   const [nickname, setNickName] = useState("");
@@ -14,13 +16,13 @@ export default function MyPage() {
   }
 
   return (
-    <div className="w-[1170px] mx-auto">
+    <div className="flex w-[1170px] mx-auto">
       <SNB />
-      <div className="inline-block p-10 max-w-xl  w-full 	">
+      <div className=" p-10 max-w-xl w-full">
         <div className="flex">
-          <div className=" w-40 h-40 bg-gray-500 rounded">
+          <div className="w-52 h-52 bg-gray-500 rounded">
             <img
-              className="block object-cover w-40 h-40 "
+              className="block object-cover w-52 h-52 "
               src={""}
               alt="profile"
             />
@@ -52,12 +54,39 @@ export default function MyPage() {
               backgroundColor="bg-themePink"
               borderRadius="rounded"
             ></Button>
-            <div className="flex	">
+            <div className="flex">
               <ToggleSwitch />
               <p className="inline-block ml-2 text-textMainColor">
                 메일 서비스 구독 신청
               </p>
             </div>
+          </div>
+        </div>
+        <div className="my-10">
+          <Chart />
+        </div>
+        <div>
+          <h1 className="text-xl font-bold  text-textMainColor">
+            나의 플레이리스트
+          </h1>
+          <div className="float-right mb-4 text-xs text-textMainColor">
+            <NavLink to={"playlist"}>전체보기</NavLink>
+          </div>
+          <div className="flex w-full justify-between items-center">
+            {data.data.playlist.map((item, index) => {
+              return (
+                <div key={index} className="">
+                  <PlayListCard
+                    title={item.title}
+                    id={item.id}
+                    imageArray={[item.representative_image_path]}
+                    likeCount={item.like_count}
+                    movieCount={item.movie_count}
+                    tagArray={item.tags}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

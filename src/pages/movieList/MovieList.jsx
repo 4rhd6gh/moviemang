@@ -19,7 +19,7 @@ export default function MovieList() {
   async function getMovieList() {
     if (page === 0) {
       dispatch(action.movie.getPopularMovieList());
-    } else if (page < totalPages) {
+    } else if (page <= totalPages) {
       dispatch(action.movie.getPopularMovieList(page + 1));
       setIsFetching(false);
     } else {

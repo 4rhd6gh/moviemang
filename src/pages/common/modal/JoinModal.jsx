@@ -9,11 +9,14 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import * as apis from "@api/movieMang";
+import Timer from "../timer";
 
 export default function JoinModal(props) {
   const { open = false, onClose } = props;
   const [emailCheck, setEmailCheck] = useState(false);
   const [nickNameCheck, setnickNameCheck] = useState(false);
+  const [isEmailAuthTriggered, setIsEmailAuthTriggered] = useState(false);
+
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       onClose(false);
@@ -56,11 +59,13 @@ export default function JoinModal(props) {
   }
 
   async function requestEmailCert() {
+    setIsEmailAuthTriggered(true);
     const result = await apis.requestAxios();
     if (result === "SUCCESS") {
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력
     }
+    // TODO isEmailAuthTriggered 관련 로직 실행 필요
   }
 
   return (
@@ -156,7 +161,7 @@ export default function JoinModal(props) {
                           />
                         </div>
 
-                        <div className="flex">
+                        <div className="relative flex">
                           <Field
                             name="number"
                             inputName="number"
@@ -166,14 +171,27 @@ export default function JoinModal(props) {
                             handleBlur={handleBlur}
                             component={Input}
                           />
-                          <Button
-                            variant="contained"
-                            type="button"
-                            text="인증"
-                            onClick={requestEmailCert}
-                            width="w-20"
-                            backgroundColor="bg-themePink"
-                          />
+                          {isEmailAuthTriggered ? (
+                            <Button
+                              variant="contained"
+                              type="button"
+                              text="확인"
+                              onClick={requestEmailCert}
+                              width="w-20"
+                              backgroundColor="bg-themePink"
+                            />
+                          ) : (
+                            <Button
+                              variant="contained"
+                              type="button"
+                              text="인증"
+                              onClick={requestEmailCert}
+                              width="w-20"
+                              backgroundColor="bg-themePink"
+                            />
+                          )}
+
+                          {isEmailAuthTriggered && <Timer min={3} />}
                         </div>
                         <div className="mb-3 ">
                           <ErrorMessage
@@ -183,7 +201,7 @@ export default function JoinModal(props) {
                           />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="flex mb-3">
                           <Field
                             name="password"
                             inputName="password"

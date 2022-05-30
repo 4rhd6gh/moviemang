@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -9,6 +9,7 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import Tooltip from "@component/Tooltip";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import * as apis from "@api/movieMang";
+import { toast, ToastContainer } from "react-toastify";
 import Timer from "../timer";
 
 export default function JoinModal(props) {
@@ -16,14 +17,19 @@ export default function JoinModal(props) {
   const [emailCheck, setEmailCheck] = useState(false);
   const [nickNameCheck, setnickNameCheck] = useState(false);
   const [isEmailAuthTriggered, setIsEmailAuthTriggered] = useState(false);
-
+  const toastRef = useRef(null);
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
+      setnickNameCheck(false);
+      setIsEmailAuthTriggered(false);
+      setEmailCheck(false);
       onClose(false);
     }
   };
   const JoinSchema = Yup.object().shape({
-    nickName: Yup.string().required("닉네임을 입력하지 않았습니다."),
+    nickName: Yup.string()
+      .required("닉네임을 입력하지 않았습니다.")
+      .min(4, "4자 이상 입력해주세요."),
     email: Yup.string()
       .email("이메일 형태가 아닙니다.")
       .required("이메일을 입력하지 않았습니다."),
@@ -40,27 +46,60 @@ export default function JoinModal(props) {
     ),
   });
 
+  const notify = (msg) =>
+    toast(`🚫  ${msg}`, {
+      position: "bottom-center",
+      onOpen: () => setTimeout(() => (toastRef.current.innerHTML = null), 2000),
+    });
+
   async function onNickNameCheck(nickName) {
-    const result = await apis.requestAxios({ nick: nickName });
-    if (result === "SUCCESS") {
+    const result = await apis.requestAxios(
+      "post",
+      "/member/nickcheck/",
+      {},
+      { nickname: nickName }
+    );
+    if (result.data.result === "SUCCESS") {
       setnickNameCheck(true);
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력
+      setnickNameCheck(false);
+      notify(result.data.message);
     }
   }
 
   async function onEmailCheck(email) {
-    const result = await apis.requestAxios({ email: email });
-    if (result === "SUCCESS") {
+    const result = await apis.requestAxios(
+      "post",
+      "/member/emailcheck/",
+      {},
+      { email: email }
+    );
+    if (result.data.result === "SUCCESS") {
       setEmailCheck(true);
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력
+      setnickNameCheck(false);
+      notify(result.data.message);
     }
   }
 
-  async function requestEmailCert() {
+  async function requestEmailCert(email) {
+    if (!nickNameCheck) {
+      notify("닉네임 중복체크를 해주세요.");
+      return;
+    }
+    if (!emailCheck) {
+      notify("이메일 중복체크를 해주세요.");
+      return;
+    }
     setIsEmailAuthTriggered(true);
-    const result = await apis.requestAxios();
+    const result = await apis.requestAxios(
+      "post",
+      "/member/email/",
+      {},
+      { member_email: email }
+    );
     if (result === "SUCCESS") {
     } else {
       //TODO alert modal 만들어서 에러 메세지 출력
@@ -68,10 +107,28 @@ export default function JoinModal(props) {
     // TODO isEmailAuthTriggered 관련 로직 실행 필요
   }
 
+  async function confirmEmailCert(confirmNumber, email) {
+    setIsEmailAuthTriggered(true);
+    console.log(new Date().toISOString());
+    const result = await apis.requestAxios(
+      "post",
+      "/member/email/certification/",
+      {},
+      {
+        member_email: email,
+        member_certification_msg: confirmNumber,
+        clicked_time: new Date().toISOString(),
+      }
+    );
+    if (result === "SUCCESS") {
+    } else {
+    }
+  }
+
   return (
-    <>
+    <div>
       {open ? (
-        <>
+        <div>
           <div
             className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none"
             onClick={onCloseModal}
@@ -94,6 +151,7 @@ export default function JoinModal(props) {
                     nickName: "",
                     email: "",
                     password: "",
+                    number: "",
                   }}
                   validationSchema={JoinSchema}
                   onSubmit={(values) => {
@@ -122,14 +180,22 @@ export default function JoinModal(props) {
                             text="중복체크"
                             width="w-20"
                             onClick={() => onNickNameCheck(values.nickName)}
-                            disabled={nickNameCheck ? true : false}
+                            disabled={
+                              nickNameCheck || values.nickName.length < 4
+                                ? true
+                                : false
+                            }
                           />
                         </div>
-                        <div className="mb-3">
+                        <div className="h-3 mb-3">
                           <ErrorMessage
                             name="nickName"
                             component="div"
-                            className="py-1 text-xs text-red-500"
+                            render={(msg) => (
+                              <div className="text-xs italic text-red-500">
+                                {msg}
+                              </div>
+                            )}
                           />
                         </div>
                         <div className="flex">
@@ -153,7 +219,7 @@ export default function JoinModal(props) {
                             disabled={emailCheck ? true : false}
                           />
                         </div>
-                        <div className="mb-3">
+                        <div className="h-3 mb-3">
                           <ErrorMessage
                             name="email"
                             component="div"
@@ -165,6 +231,7 @@ export default function JoinModal(props) {
                           <Field
                             name="number"
                             inputName="number"
+                            value={values.number}
                             type="text"
                             placeholder="인증번호"
                             handleChange={handleChange}
@@ -176,7 +243,9 @@ export default function JoinModal(props) {
                               variant="contained"
                               type="button"
                               text="확인"
-                              onClick={requestEmailCert}
+                              onClick={() =>
+                                confirmEmailCert(values.number, values.email)
+                              }
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
@@ -185,7 +254,7 @@ export default function JoinModal(props) {
                               variant="contained"
                               type="button"
                               text="인증"
-                              onClick={requestEmailCert}
+                              onClick={() => requestEmailCert(values.email)}
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
@@ -193,7 +262,7 @@ export default function JoinModal(props) {
 
                           {isEmailAuthTriggered && <Timer min={3} />}
                         </div>
-                        <div className="mb-3 ">
+                        <div className="h-3 mb-3">
                           <ErrorMessage
                             name="number"
                             component="div"
@@ -211,10 +280,12 @@ export default function JoinModal(props) {
                             handleBlur={handleBlur}
                             component={Input}
                           />
+                        </div>
+                        <div className="h-3 mb-3">
                           <ErrorMessage
                             name="password"
                             component="div"
-                            className="py-1 text-xs text-red-500"
+                            className="py-1 text-xs text-red-500 "
                           />
                         </div>
                         <div className="mb-3">
@@ -230,7 +301,7 @@ export default function JoinModal(props) {
                           <ErrorMessage
                             name="passwordConfirm"
                             component="div"
-                            className="py-1 text-xs text-red-500"
+                            className="h-3 py-1 text-xs text-red-500"
                           />
                         </div>
                         <div className="flex mt-3 text-black">
@@ -246,6 +317,12 @@ export default function JoinModal(props) {
                         </div>
                       </div>
 
+                      <div className="h-10">
+                        <ToastContainer
+                          className="ml-10 text-lg font-bold text-red-500 "
+                          ref={toastRef}
+                        />
+                      </div>
                       <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
                         <Button
                           variant="contained"
@@ -261,10 +338,9 @@ export default function JoinModal(props) {
               </div>
             </div>
           </div>
-          <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
-        </>
+        </div>
       ) : null}
-    </>
+    </div>
   );
 }
 

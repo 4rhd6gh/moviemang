@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -20,6 +20,7 @@ export default function JoinModal(props) {
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       onClose(false);
+      setIsEmailAuthTriggered(false);
     }
   };
   const JoinSchema = Yup.object().shape({
@@ -144,14 +145,26 @@ export default function JoinModal(props) {
                             component={Input}
                             disabled={emailCheck}
                           />
-                          <Button
-                            variant="outlined"
-                            type="button"
-                            text="중복체크"
-                            width="w-20"
-                            onClick={() => onEmailCheck(values.email)}
-                            disabled={emailCheck ? true : false}
-                          />
+                          {emailCheck ? (
+                            <Button
+                              variant="contained"
+                              type="button"
+                              text="인증"
+                              width="w-20"
+                              onClick={requestEmailCert}
+                              backgroundColor="bg-themePink"
+                              disabled={isEmailAuthTriggered}
+                            />
+                          ) : (
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              text="중복체크"
+                              width="w-20"
+                              onClick={() => onEmailCheck(values.email)}
+                              disabled={emailCheck ? true : false}
+                            />
+                          )}
                         </div>
                         <div className="mb-3">
                           <ErrorMessage
@@ -161,17 +174,17 @@ export default function JoinModal(props) {
                           />
                         </div>
 
-                        <div className="relative flex">
-                          <Field
-                            name="number"
-                            inputName="number"
-                            type="text"
-                            placeholder="인증번호"
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            component={Input}
-                          />
-                          {isEmailAuthTriggered ? (
+                        {isEmailAuthTriggered && (
+                          <div className="relative flex">
+                            <Field
+                              name="number"
+                              inputName="number"
+                              type="text"
+                              placeholder="인증번호"
+                              handleChange={handleChange}
+                              handleBlur={handleBlur}
+                              component={Input}
+                            />
                             <Button
                               variant="contained"
                               type="button"
@@ -180,19 +193,9 @@ export default function JoinModal(props) {
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
-                          ) : (
-                            <Button
-                              variant="contained"
-                              type="button"
-                              text="인증"
-                              onClick={requestEmailCert}
-                              width="w-20"
-                              backgroundColor="bg-themePink"
-                            />
-                          )}
-
-                          {isEmailAuthTriggered && <Timer min={3} />}
-                        </div>
+                            {isEmailAuthTriggered && <Timer min={3} />}
+                          </div>
+                        )}
                         <div className="mb-3 ">
                           <ErrorMessage
                             name="number"
@@ -200,7 +203,6 @@ export default function JoinModal(props) {
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
-
                         <div className="flex mb-3">
                           <Field
                             name="password"

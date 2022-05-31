@@ -10,6 +10,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import Tabs from "./components/tabs";
 import Overview from "./components/tabContents/Overview";
 import Reviews from "./components/tabContents/Reviews";
+import NoImage from "@res/img/noimg.png";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
@@ -55,7 +56,11 @@ export default function MovieDetail() {
       <div className="flex pt-20 pl-20 text-2xl w-[1250px] mr-auto ml-auto">
         <div>
           <img
-            src={Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path}
+            src={
+              movieDetailInfo?.poster_path === null
+                ? NoImage
+                : Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path
+            }
             alt={movieDetailInfo?.title}
             className=" object-cover h-[505px] w-[330px]"
           />

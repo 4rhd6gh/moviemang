@@ -6,37 +6,35 @@ import { useLocation } from "react-router-dom";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
+import NoImage from "@res/img/noimg.png";
 
 export default function Search() {
   const dispatch = useDispatch();
   const movieList = useSelector(selector.search.getSearchMovieList);
-  const page = useSelector(selector.search.getCurrentPage);
-  const totalPages = useSelector(selector.search.getTotalPages);
+  const currentPage = useSelector(selector.search.getCurrentPage);
+  const currentTotalPages = useSelector(selector.search.getTotalPages);
   const [isFetching, setIsFetching] = useInfiniteScroll(getSearchMovieList);
 
   const location = useLocation();
   const value = location.state === null ? "" : location.state.value;
 
-  async function getSearchMovieList(page, totalPages) {
-    console.log("search", page, totalPages);
-    if (page <= totalPages) {
-      dispatch(action.search.getSearchMovieList(value, page + 1));
-      //무한스크롤
+  async function getSearchMovieList() {
+    if (currentPage === 0) {
+      dispatch(action.search.getSearchMovieList(value, 1));
+    } else if (currentPage < currentTotalPages) {
+      dispatch(action.search.getSearchMovieList(value, currentPage + 1));
+      setIsFetching(false);
     } else return;
   }
 
   useEffect(() => {
     dispatch(action.common.startLoading);
-    getSearchMovieList(0, 0);
+    getSearchMovieList();
   }, [value]);
 
   useEffect(() => {
     dispatch(action.common.endLoading);
   }, [movieList]);
-
-  useEffect(() => {
-    console.log(totalPages);
-  });
 
   return (
     <>
@@ -51,7 +49,12 @@ export default function Search() {
             {movieList.map((movie, i) => (
               <MovieSearchCard
                 key={i + movie.title}
-                poster_path={Constants.TM_MOVIE_IMAGE_URL + movie.poster_path}
+                poster_path={
+                  movie.poster_path === null
+                    ? NoImage
+                    : Constants.TM_MOVIE_IMAGE_URL + movie.poster_path
+                }
+                movieId={movie.id}
                 title={movie.title}
                 release_date={movie.release_date}
                 overview={movie.overview}

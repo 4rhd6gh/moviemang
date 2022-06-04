@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,12 +16,9 @@ export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
   const [activeTab, setActiveTab] = useState(0);
-  const onClickTab = useCallback(
-    (index) => {
-      setActiveTab(index);
-    },
-    [activeTab]
-  );
+  const onClickTab = (index) => {
+    setActiveTab(index);
+  };
   const movieDetailInfo = useSelector(selector.movie.getMovieDetail);
   let buyProviders = [];
   let rentProviders = [];
@@ -29,19 +26,15 @@ export default function MovieDetail() {
   const forProvider = movieDetailInfo?.KR;
   if (forProvider) {
     if (forProvider.buy) {
-      forProvider.buy.map((item) => {
-        buyProviders.push(item.logo_path);
-      });
+      forProvider.buy.map((item) => buyProviders.push(item.logo_path));
     }
     if (forProvider.rent) {
-      forProvider.rent.map((item) => {
-        rentProviders.push(item.logo_path);
-      });
+      forProvider.rent.map((item) => rentProviders.push(item.logo_path));
     }
     if (forProvider.flatrate) {
-      forProvider.flatrate.map((item) => {
-        flatrateProviders.push(item.logo_path);
-      });
+      forProvider.flatrate.map((item) =>
+        flatrateProviders.push(item.logo_path)
+      );
     }
   }
 
@@ -50,12 +43,13 @@ export default function MovieDetail() {
   }
   useEffect(() => {
     getMovieDetail();
-  }, []);
+  });
   return (
     <>
       <div className="flex pt-20 pl-20 text-2xl w-[1250px] mr-auto ml-auto">
         <div>
           <img
+            loading="lazy"
             src={
               movieDetailInfo?.poster_path === null
                 ? NoImage
@@ -72,6 +66,7 @@ export default function MovieDetail() {
                     <img
                       src={Constants.TM_MOVIE_IMAGE_URL + item}
                       alt={""}
+                      loading="lazy"
                       className="object-cover h-[50px] w-[50px]"
                     />
                     <div className="text-xs text-center text-white">구매</div>
@@ -84,6 +79,7 @@ export default function MovieDetail() {
                     <img
                       src={Constants.TM_MOVIE_IMAGE_URL + item}
                       alt={""}
+                      loading="lazy"
                       className="object-cover h-[50px] w-[50px]"
                     />
                     <div className="text-xs text-center text-white">대여</div>
@@ -96,6 +92,7 @@ export default function MovieDetail() {
                     <img
                       src={Constants.TM_MOVIE_IMAGE_URL + item}
                       alt={""}
+                      loading="lazy"
                       className="object-cover h-[50px] w-[50px]"
                     />
                     <div className="text-xs text-center text-white">구독</div>

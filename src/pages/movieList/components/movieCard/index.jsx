@@ -33,7 +33,7 @@ export default function MovieCard(props) {
 
   useEffect(() => {
     drawCanvas();
-  }, []);
+  });
 
   return (
     <div
@@ -43,6 +43,7 @@ export default function MovieCard(props) {
       <div className="image w-[159px] h-[300px]">
         <div className="wrapper">
           <img
+            loading="lazy"
             src={poster_path}
             alt={title}
             className=" object-cover h-[220px] w-[159px]"

@@ -6,7 +6,7 @@ import { HiMenu as MenuIcon } from "react-icons/hi";
 import Button from "@component/Button";
 import JoinModal from "../modal/JoinModal";
 import LoginModal from "../modal/LoginModal";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
@@ -20,10 +20,6 @@ export default function Appbar(props) {
 
   const handleLoginModalOpen = () => {
     setShowLoginModal((prevState) => !prevState);
-  };
-
-  const moveMovieListPage = () => {
-    navigate("/movieList");
   };
 
   return (
@@ -52,15 +48,26 @@ export default function Appbar(props) {
         </div>
         <SearchBar />
         <div className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
-          <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
-            PLAYLISTS
-          </span>
-          <span
-            className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor "
-            onClick={moveMovieListPage}
+          <NavLink
+            to="myplaylists"
+            className={({ isActive }) =>
+              isActive ? "text-textHighlightColor" : ""
+            }
           >
-            MOVIES
-          </span>
+            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
+              PLAYLISTS
+            </span>
+          </NavLink>
+          <NavLink
+            to="movielist"
+            className={({ isActive }) =>
+              isActive ? "text-textHighlightColor" : ""
+            }
+          >
+            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+              MOVIES
+            </span>
+          </NavLink>
           <span
             className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor"
             onClick={handleLoginModalOpen}

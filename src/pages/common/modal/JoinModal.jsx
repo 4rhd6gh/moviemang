@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -17,15 +17,23 @@ export default function JoinModal(props) {
   const [emailCheck, setEmailCheck] = useState(false);
   const [nickNameCheck, setnickNameCheck] = useState(false);
   const [isEmailAuthTriggered, setIsEmailAuthTriggered] = useState(false);
+  const [emailAuthCounter, setEmailAuthCounter] = useState(0);
+  const [emailAuthText, setEmailAuthText] = useState("인증");
+
   const toastRef = useRef(null);
+
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       setnickNameCheck(false);
       setIsEmailAuthTriggered(false);
       setEmailCheck(false);
       onClose(false);
+      setIsEmailAuthTriggered(false);
+      setEmailAuthText("인증");
+      setEmailAuthCounter(0);
     }
   };
+
   const JoinSchema = Yup.object().shape({
     nickName: Yup.string()
       .required("닉네임을 입력하지 않았습니다.")
@@ -93,7 +101,9 @@ export default function JoinModal(props) {
       notify("이메일 중복체크를 해주세요.");
       return;
     }
+    setEmailAuthCounter((prev) => prev + 1);
     setIsEmailAuthTriggered(true);
+
     const result = await apis.requestAxios(
       "post",
       "/member/email/",
@@ -124,6 +134,12 @@ export default function JoinModal(props) {
     } else {
     }
   }
+
+  useEffect(() => {
+    if (emailAuthCounter >= 1) {
+      setEmailAuthText("재인증");
+    }
+  }, [emailAuthCounter]);
 
   return (
     <div>
@@ -210,14 +226,25 @@ export default function JoinModal(props) {
                             component={Input}
                             disabled={emailCheck}
                           />
-                          <Button
-                            variant="outlined"
-                            type="button"
-                            text="중복체크"
-                            width="w-20"
-                            onClick={() => onEmailCheck(values.email)}
-                            disabled={emailCheck ? true : false}
-                          />
+                          {emailCheck ? (
+                            <Button
+                              variant="contained"
+                              type="button"
+                              text={emailAuthText}
+                              width="w-20"
+                              onClick={requestEmailCert}
+                              backgroundColor="bg-themePink"
+                            />
+                          ) : (
+                            <Button
+                              variant="outlined"
+                              type="button"
+                              text="중복체크"
+                              width="w-20"
+                              onClick={() => onEmailCheck(values.email)}
+                              disabled={emailCheck ? true : false}
+                            />
+                          )}
                         </div>
                         <div className="h-3 mb-3">
                           <ErrorMessage
@@ -226,50 +253,35 @@ export default function JoinModal(props) {
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
-
-                        <div className="relative flex">
-                          <Field
-                            name="number"
-                            inputName="number"
-                            value={values.number}
-                            type="text"
-                            placeholder="인증번호"
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            component={Input}
-                          />
-                          {isEmailAuthTriggered ? (
+                        {isEmailAuthTriggered && (
+                          <div className="relative flex">
+                            <Field
+                              name="number"
+                              inputName="number"
+                              type="text"
+                              placeholder="인증번호"
+                              handleChange={handleChange}
+                              handleBlur={handleBlur}
+                              component={Input}
+                            />
                             <Button
                               variant="contained"
                               type="button"
                               text="확인"
-                              onClick={() =>
-                                confirmEmailCert(values.number, values.email)
-                              }
+                              onClick={requestEmailCert}
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
-                          ) : (
-                            <Button
-                              variant="contained"
-                              type="button"
-                              text="인증"
-                              onClick={() => requestEmailCert(values.email)}
-                              width="w-20"
-                              backgroundColor="bg-themePink"
-                            />
-                          )}
-
-                          {isEmailAuthTriggered && <Timer min={3} />}
-                        </div>
-                        <div className="h-3 mb-3">
+                            {isEmailAuthTriggered && <Timer min={3} />}
+                          </div>
+                        )}
+                        <div className="mb-3 ">
                           <ErrorMessage
                             name="number"
                             component="div"
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
-
                         <div className="flex mb-3">
                           <Field
                             name="password"

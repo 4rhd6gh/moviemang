@@ -1,5 +1,5 @@
-import React from "react";
 import { useRoutes } from "react-router-dom";
+
 import AuthLayout from "../Layouts/AuthLayout";
 import PublicLayout from "../Layouts/PublicLayout";
 import MainPage from "../pages/main";
@@ -9,6 +9,7 @@ import Search from "../pages/search/Search";
 import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
+import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
 
 export default function CustomRoutes() {
   const publicRoutes = {
@@ -19,6 +20,7 @@ export default function CustomRoutes() {
       { path: "/movielist", element: <MovieList /> },
       { path: "/search", element: <Search /> },
       { path: "/moviedetail/:movieId", element: <MovieDetail /> },
+      { path: "/playlistdetail", element: <PlayListDetail /> },
     ],
   };
 

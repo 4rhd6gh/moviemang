@@ -93,7 +93,6 @@ export default function JoinModal(props) {
   }
 
   async function requestEmailCert(email) {
-    setEmailAuthCounter((prev) => prev + 1);
     if (!nickNameCheck) {
       notify("닉네임 중복체크를 해주세요.");
       return;
@@ -102,6 +101,7 @@ export default function JoinModal(props) {
       notify("이메일 중복체크를 해주세요.");
       return;
     }
+    setEmailAuthCounter((prev) => prev + 1);
     setIsEmailAuthTriggered(true);
 
     const result = await apis.requestAxios(

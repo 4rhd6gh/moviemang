@@ -22,6 +22,7 @@ function ImageOneLine(props) {
         return (
           <img
             key={index}
+            loading="lazy"
             className={`object-cover h-full inline-block ${width}`}
             src={image}
             alt="movies"
@@ -82,7 +83,10 @@ export default function PlayListCard(props) {
     imageArray.slice(0, 3);
   }
   return (
-    <div className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2">
+    <div
+      className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2"
+      onClick={onClick}
+    >
       <div className="h-[246px] w-full bg-white rounded-lg tablet:h-[200px] md:h-[150px]">
         {imgLen < 6 ? (
           <ImageOneLine images={imageArray} len={imgLen} />

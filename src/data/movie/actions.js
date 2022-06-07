@@ -1,8 +1,10 @@
 import * as ActionTypes from "@data/rootActionTypes";
+import * as action from "@data/rootActions";
 import * as apis from "@service/apis/tmMovie";
 
 export const getPopularMovieList = (page) => async (dispatch) => {
   try {
+    dispatch(action.common.startLoading);
     const response = await apis.requestAxios(
       "get",
       "/movie/popular",
@@ -10,17 +12,20 @@ export const getPopularMovieList = (page) => async (dispatch) => {
       {}
     );
     if (response.status === 200) {
+      dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_LIST_SUCCESS,
         payload: response.data,
       });
     } else {
+      dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.HAS_ERROR,
         payload: response.massege,
       });
     }
   } catch (error) {
+    dispatch(action.common.endLoading);
     dispatch({
       type: ActionTypes.HAS_ERROR,
       payload: {
@@ -32,6 +37,7 @@ export const getPopularMovieList = (page) => async (dispatch) => {
 
 export const getPopularMovieDetail = (id) => async (dispatch) => {
   try {
+    dispatch(action.common.startLoading);
     const response = await apis.requestAxios("get", "/movie/" + id, {}, {});
     console.log(id);
     if (response.status === 200) {
@@ -53,6 +59,7 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
         {},
         {}
       );
+      dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.POPULAR_MOVIE_DETAIL_SUCCESS,
         payload: {
@@ -63,12 +70,14 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
         },
       });
     } else {
+      dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.HAS_ERROR,
         payload: response.massege,
       });
     }
   } catch (error) {
+    dispatch(action.common.endLoading);
     dispatch({
       type: ActionTypes.HAS_ERROR,
       payload: {

@@ -2,11 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Tabs(props) {
-  const { activeTab, onClick } = props;
-  const menuList = [
-    { href: "#overview", name: "Overview" },
-    { href: "#reviews", name: "Reviews" },
-  ];
+  const { activeTab, onClick, menuList = [] } = props;
 
   return (
     <ul className="flex">
@@ -32,4 +28,5 @@ export default function Tabs(props) {
 Tabs.propTypes = {
   activeTab: PropTypes.number,
   onClick: PropTypes.func.isRequired,
+  menuList: PropTypes.array.isRequired,
 };

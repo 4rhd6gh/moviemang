@@ -7,7 +7,7 @@ import * as Constants from "@constant";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
-import Tabs from "./components/tabs";
+import Tabs from "@component/Tabs";
 import Overview from "./components/tabContents/Overview";
 import Reviews from "./components/tabContents/Reviews";
 import NoImage from "@res/img/noimg.png";
@@ -43,7 +43,7 @@ export default function MovieDetail() {
   }
   useEffect(() => {
     getMovieDetail();
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       <div className="flex pt-20 pl-20 text-2xl w-[1250px] mr-auto ml-auto">
@@ -133,7 +133,14 @@ export default function MovieDetail() {
             </div>
           </div>
           <div className="mt-16 mb-14">
-            <Tabs activeTab={activeTab} onClick={onClickTab} />
+            <Tabs
+              activeTab={activeTab}
+              onClick={onClickTab}
+              menuList={[
+                { href: "#overview", name: "overview" },
+                { href: "#reviews", name: "reviews" },
+              ]}
+            />
           </div>
           <div>
             {activeTab === 0 ? (

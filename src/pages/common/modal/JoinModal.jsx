@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -17,7 +17,11 @@ export default function JoinModal(props) {
   const [emailCheck, setEmailCheck] = useState(false);
   const [nickNameCheck, setnickNameCheck] = useState(false);
   const [isEmailAuthTriggered, setIsEmailAuthTriggered] = useState(false);
+  const [emailAuthCounter, setEmailAuthCounter] = useState(0);
+  const [emailAuthText, setEmailAuthText] = useState("인증");
+
   const toastRef = useRef(null);
+
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       setnickNameCheck(false);
@@ -25,8 +29,11 @@ export default function JoinModal(props) {
       setEmailCheck(false);
       onClose(false);
       setIsEmailAuthTriggered(false);
+      setEmailAuthText("인증");
+      setEmailAuthCounter(0);
     }
   };
+
   const JoinSchema = Yup.object().shape({
     nickName: Yup.string()
       .required("닉네임을 입력하지 않았습니다.")
@@ -86,6 +93,7 @@ export default function JoinModal(props) {
   }
 
   async function requestEmailCert(email) {
+    setEmailAuthCounter((prev) => prev + 1);
     if (!nickNameCheck) {
       notify("닉네임 중복체크를 해주세요.");
       return;
@@ -95,6 +103,7 @@ export default function JoinModal(props) {
       return;
     }
     setIsEmailAuthTriggered(true);
+
     const result = await apis.requestAxios(
       "post",
       "/member/email/",
@@ -125,6 +134,12 @@ export default function JoinModal(props) {
     } else {
     }
   }
+
+  useEffect(() => {
+    if (emailAuthCounter >= 1) {
+      setEmailAuthText("재인증");
+    }
+  }, [emailAuthCounter]);
 
   return (
     <div>
@@ -215,11 +230,10 @@ export default function JoinModal(props) {
                             <Button
                               variant="contained"
                               type="button"
-                              text="인증"
+                              text={emailAuthText}
                               width="w-20"
                               onClick={requestEmailCert}
                               backgroundColor="bg-themePink"
-                              disabled={isEmailAuthTriggered}
                             />
                           ) : (
                             <Button
@@ -261,7 +275,12 @@ export default function JoinModal(props) {
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
-                            {isEmailAuthTriggered && <Timer min={3} />}
+                            {isEmailAuthTriggered && (
+                              <Timer
+                                min={3}
+                                emailAuthCounter={emailAuthCounter}
+                              />
+                            )}
                           </div>
                         )}
                         <div className="mb-3 ">

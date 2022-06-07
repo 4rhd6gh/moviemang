@@ -6,9 +6,6 @@ import MainPage from "../pages/main";
 import MovieList from "../pages/movieList/MovieList";
 import MovieDetail from "@page/movieDetail";
 import Search from "../pages/search/Search";
-import MyPage from "../pages/mypage/MyPage";
-import MyPlayLists from "../pages/myPlayLists";
-import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
 import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
@@ -30,8 +27,6 @@ export default function CustomRoutes() {
     path: "/",
     element: <AuthLayout />,
     children: [
-      { path: "/mypage", element: <MyPage /> },
-      { path: "myplaylists", element: <MyPlayLists /> },
       { path: "/member", element: <MyInfo /> },
       { path: "/member/playlist", element: <MyPlayList /> },
       { path: "/member/review", element: <MyReview /> },

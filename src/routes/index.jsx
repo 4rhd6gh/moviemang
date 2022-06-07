@@ -9,6 +9,7 @@ import Search from "../pages/search/Search";
 import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
+import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
 
 export default function CustomRoutes() {
   const publicRoutes = {

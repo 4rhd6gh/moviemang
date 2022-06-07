@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { useState, useRef, useEffect } from "react";
-=======
-import React, { useState, useRef } from "react";
->>>>>>> 36c04f12d75e73441827ca353a5fe9a941166b9a
 import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -257,10 +253,6 @@ export default function JoinModal(props) {
                             className="py-1 text-xs text-red-500"
                           />
                         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 36c04f12d75e73441827ca353a5fe9a941166b9a
                         {isEmailAuthTriggered && (
                           <div className="relative flex">
                             <Field
@@ -280,16 +272,7 @@ export default function JoinModal(props) {
                               width="w-20"
                               backgroundColor="bg-themePink"
                             />
-<<<<<<< HEAD
-                            {isEmailAuthTriggered && (
-                              <Timer
-                                min={3}
-                                emailAuthCounter={emailAuthCounter}
-                              />
-                            )}
-=======
                             {isEmailAuthTriggered && <Timer min={3} />}
->>>>>>> 36c04f12d75e73441827ca353a5fe9a941166b9a
                           </div>
                         )}
                         <div className="mb-3 ">

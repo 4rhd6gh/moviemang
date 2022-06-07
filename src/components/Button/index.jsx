@@ -38,7 +38,7 @@ export default function Button(props) {
       disabled={disabled}
       type={type}
       className={`my-2 cursor-pointer ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
-      onClick={onClick}
+      onClick={disabled ? null : onclick}
     >
       {text}
     </button>

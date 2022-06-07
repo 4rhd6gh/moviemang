@@ -17,7 +17,9 @@ export default function MyPage() {
 
   return (
     <div className="flex w-[1170px] mx-auto">
-      <SNB />
+      <div className="w-[20%]">
+        <SNB />
+      </div>
       <div className=" p-10 max-w-xl w-full">
         <div className="flex">
           <div className="w-52 h-52 bg-gray-500 rounded">

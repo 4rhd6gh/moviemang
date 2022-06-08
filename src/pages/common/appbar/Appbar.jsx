@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import SearchBar from "@page/common/appbar/SearchBar";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
+import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
 import JoinModal from "../modal/JoinModal";
 import LoginModal from "../modal/LoginModal";
-import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
-  const navigate = useNavigate();
+
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 

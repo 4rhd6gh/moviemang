@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import PropTypes from "prop-types";
+
 import Button from "@component/Button";
 import Input from "@component/Input";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as actions from "@data/rootActions";
 
 export default function LoginModal(props) {
   const { open = false, onClose } = props;
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
   const hasError = useSelector((state) => state.user.hasError);
   const errorMessage = useSelector((state) => state.user.errorMessage);
 

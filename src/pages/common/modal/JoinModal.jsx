@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import PropTypes from "prop-types";
+
 import Button from "@component/Button";
 import Input from "@component/Input";
 import ToggleSwitch from "@page/common/toggleSwitch";

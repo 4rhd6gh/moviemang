@@ -19,6 +19,7 @@ export default function StaticIcon(props) {
 
   return (
     <StaticIcon
+      onClick={onClick}
       className={`${iconSize} ${color} hover:opacity-80 cursor-pointer`}
     ></StaticIcon>
   );

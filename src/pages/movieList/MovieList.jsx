@@ -7,6 +7,8 @@ import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
 import NoImage from "@res/img/noimg.png";
+import StaticIcon from "@component/Icons/StaticIcon";
+import { BsArrowUpCircleFill } from "react-icons/bs";
 
 export default function MovieList() {
   const dispatch = useDispatch();
@@ -15,6 +17,9 @@ export default function MovieList() {
   const page = useSelector(selector.movie.getCurrentPage);
   const totalPages = useSelector(selector.movie.getTotalPages);
   const [isFetching, setIsFetching] = useInfiniteScroll(getMovieList);
+  const toTheTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   async function getMovieList() {
     if (page === 0) {
@@ -59,6 +64,14 @@ export default function MovieList() {
             ))}
           </div>
         </div>
+      </div>
+      <div className="fixed bottom-3 right-96">
+        <StaticIcon
+          icon={BsArrowUpCircleFill}
+          size="large"
+          color="text-[#dcf836]"
+          onClick={toTheTop}
+        />
       </div>
     </>
   );

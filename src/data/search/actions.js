@@ -2,15 +2,11 @@ import * as ActionTypes from "@data/rootActionTypes";
 import * as apis from "@service/apis/tmMovie";
 
 export const getSearchMovieList = (value, page) => async (dispatch) => {
-  console.log("action", page);
-
   try {
-    const response = await apis.requestAxios(
-      "get",
-      "/search/movie",
-      { page: page, query: value },
-      {}
-    );
+    const response = await apis.requestAxios("get", "/search/movie", {
+      page: page,
+      query: value,
+    });
     console.log(response);
     if (response.status === 200) {
       dispatch({

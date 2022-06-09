@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,13 +13,14 @@ export default function Search() {
   const movieList = useSelector(selector.search.getSearchMovieList);
   const currentPage = useSelector(selector.search.getCurrentPage);
   const currentTotalPages = useSelector(selector.search.getTotalPages);
+  const [isNewSearch, setIsNewSearch] = useState(false);
   const [isFetching, setIsFetching] = useInfiniteScroll(getSearchMovieList);
 
   const location = useLocation();
   const value = location.state === null ? "" : location.state.value;
 
   async function getSearchMovieList() {
-    if (currentPage === 0) {
+    if (currentPage === 0 || isNewSearch) {
       dispatch(action.search.getSearchMovieList(value, 1));
     } else if (currentPage < currentTotalPages) {
       dispatch(action.search.getSearchMovieList(value, currentPage + 1));
@@ -29,6 +30,7 @@ export default function Search() {
 
   useEffect(() => {
     dispatch(action.common.startLoading);
+    setIsNewSearch(true);
     getSearchMovieList();
   }, [value]);
 

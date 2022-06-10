@@ -21,7 +21,7 @@ export const getPopularMovieList = (page) => async (dispatch) => {
       dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.HAS_ERROR,
-        payload: response.massege,
+        payload: response.message,
       });
     }
   } catch (error) {
@@ -29,7 +29,7 @@ export const getPopularMovieList = (page) => async (dispatch) => {
     dispatch({
       type: ActionTypes.HAS_ERROR,
       payload: {
-        massege: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
+        message: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
       },
     });
   }
@@ -73,7 +73,7 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
       dispatch(action.common.endLoading);
       dispatch({
         type: ActionTypes.HAS_ERROR,
-        payload: response.massege,
+        payload: response.message,
       });
     }
   } catch (error) {
@@ -81,7 +81,7 @@ export const getPopularMovieDetail = (id) => async (dispatch) => {
     dispatch({
       type: ActionTypes.HAS_ERROR,
       payload: {
-        massege: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
+        message: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
       },
     });
   }

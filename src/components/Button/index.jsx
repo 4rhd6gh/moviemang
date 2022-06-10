@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 export default function Button(props) {
@@ -38,7 +37,7 @@ export default function Button(props) {
       disabled={disabled}
       type={type}
       className={`my-2 cursor-pointer ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
-      onClick={onClick}
+      onClick={disabled ? null : onClick}
     >
       {text}
     </button>

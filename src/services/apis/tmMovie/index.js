@@ -23,18 +23,18 @@ export async function requestAxios(method = "get", url, params, body) {
     let errorResponse;
     if (e.response) {
       if (e.response.status === 422) {
-        errorResponse = { massege: "더 이상 검색 결과가 없습니다." };
+        errorResponse = { message: "더 이상 검색 결과가 없습니다." };
       } else if (e.response.status === 404) {
         errorResponse = {
-          massege: "잘못된 요청입니다.",
+          message: "잘못된 요청입니다.",
         };
       } else if (e.response.status === 401) {
         errorResponse = {
-          massege: "조회 권한이 없습니다.",
+          message: "조회 권한이 없습니다.",
         };
       } else {
         errorResponse = {
-          massege: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
+          message: "서버에 문제가 발생했습니다. 잠시 뒤 다시 시도해 주세요.",
         };
       }
     }

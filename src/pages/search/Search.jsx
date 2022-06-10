@@ -22,6 +22,7 @@ export default function Search() {
   async function getSearchMovieList() {
     if (currentPage === 0 || isNewSearch) {
       dispatch(action.search.getSearchMovieList(value, 1));
+      setIsNewSearch(false);
     } else if (currentPage < currentTotalPages) {
       dispatch(action.search.getSearchMovieList(value, currentPage + 1));
       setIsFetching(false);

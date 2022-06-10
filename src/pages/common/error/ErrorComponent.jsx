@@ -17,7 +17,7 @@ export default function ErrorComponent() {
       {hasError ? (
         <>
           <div
-            className="fixed inset-0 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none z-60 focus:outline-none"
+            className="fixed inset-0 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none z-90 focus:outline-none"
             onClick={onCloseModal}
           >
             <div className="relative w-auto max-w-3xl mx-auto my-6">

@@ -1,7 +1,7 @@
 import * as ActionTypes from "@data/rootActionTypes";
 import * as apis from "@service/apis/movieMang";
 
-export const login = (loginParam, callback) => async (dispatch) => {
+export const login = (loginParam) => async (dispatch) => {
   try {
     const response = await apis.requestAxios("post", "/login", {}, loginParam);
 
@@ -12,7 +12,6 @@ export const login = (loginParam, callback) => async (dispatch) => {
       });
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
-      await callback(false);
     } else {
       dispatch({
         type: ActionTypes.LOGIN_FAILURE,

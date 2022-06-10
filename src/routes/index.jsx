@@ -10,6 +10,8 @@ import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
 import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
+import Login from "@page/auth/Login";
+import Join from "@page/auth/Join";
 
 export default function CustomRoutes() {
   const publicRoutes = {
@@ -21,6 +23,8 @@ export default function CustomRoutes() {
       { path: "/search", element: <Search /> },
       { path: "/moviedetail/:movieId", element: <MovieDetail /> },
       { path: "/playlistdetail", element: <PlayListDetail /> },
+      { path: "/login", element: <Login /> },
+      { path: "/join", element: <Join /> },
     ],
   };
 

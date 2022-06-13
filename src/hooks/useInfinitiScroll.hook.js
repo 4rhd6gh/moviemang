@@ -14,11 +14,11 @@ const useInfiniteScroll = (callback) => {
     callback(() => {
       console.log("Fetch more....");
     });
-  }, [isFetching]);
+  }, [callback, isFetching]);
 
   function handleScroll() {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
+      Math.ceil(window.innerHeight + document.documentElement.scrollTop) !==
       document.documentElement.offsetHeight
     )
       return;

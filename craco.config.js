@@ -14,7 +14,7 @@ module.exports = {
       "@constant": path.resolve(__dirname, "src/constants"),
       "@api": path.resolve(__dirname, "src/services/apis"),
       "@service": path.resolve(__dirname, "src/services"),
-      "@data": path.resolve(__dirname, "src/data/"),
+      "@assets": path.resolve(__dirname, "src/assets/"),
       "@hook": path.resolve(__dirname, "src/hooks/"),
       "@res": path.resolve(__dirname, "src/res/"),
     },

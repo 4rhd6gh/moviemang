@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import Button from "@component/Button";
 import * as actions from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
+import { kakaoLoginImage, naverLoginImage } from "@assets/index";
+import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from "../../constants/index";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -80,7 +82,7 @@ export default function Login() {
             <div className="py-1 ml-10 mr-10 text-xs text-red-500">
               {getError ? errorMessage : null}
             </div>
-            <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
+            <div className="flex flex-col items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
               <Button
                 variant="contained"
                 text="로그인"
@@ -88,6 +90,14 @@ export default function Login() {
                 width="w-full"
                 backgroundColor="bg-themePink"
               />
+              <div className="flex justify-between w-full">
+                <a href={KAKAO_AUTH_URL}>
+                  <img src={kakaoLoginImage} width="160px" alt="kakaoLogin" />
+                </a>
+                <a href={NAVER_AUTH_URL}>
+                  <img src={naverLoginImage} width="160px" alt="naverLogin" />
+                </a>
+              </div>
             </div>
           </Form>
         </Formik>

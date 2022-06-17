@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik, Field, ErrorMessage } from "formik";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 import * as Yup from "yup";
 import Button from "@component/Button";
 import * as actions from "@data/rootActions";
@@ -19,6 +21,21 @@ export default function Login() {
       .email("이메일 형태가 아닙니다.")
       .required("이메일을 입력하지 않았습니다."),
     password: Yup.string().required("패스워드를 입력하지 않았습니다."),
+  });
+
+  // 구글 로그인 구현하는 로직입니다. 테스트하실 때 사용해주세요. post url에 백엔드 쪽으로 요청 보내도록 url 세팅해주시면 됩니다.
+  // 구글 서버에 요청 보내는 건 라이브러리에서 해주고, 구글 서버와 통신 성공 했을 때 돌려받은 값을 code 에 담아서 백엔드에 보내는 형태입니다.
+  const googleLogin = useGoogleLogin({
+    onSuccess: async ({ code }) => {
+      console.log(`backend서버에 전달되는 값(credentials): ${code}`);
+      const tokens = await axios.post("여기에 백엔드 url 넣어주시면 됩니다", {
+        // http://localhost:3001/auth/google backend that will exchange the code
+        code,
+      });
+
+      console.log(tokens.data);
+    },
+    flow: "auth-code",
   });
 
   useEffect(() => {
@@ -85,10 +102,11 @@ export default function Login() {
             <div className="flex flex-col items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
               <Button
                 variant="contained"
-                text="로그인"
-                type="submit"
+                text="구글로 로그인"
+                type="button"
                 width="w-full"
                 backgroundColor="bg-themePink"
+                onClick={googleLogin}
               />
               <div className="flex justify-between w-full">
                 <a href={KAKAO_AUTH_URL}>

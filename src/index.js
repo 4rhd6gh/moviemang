@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -12,12 +13,14 @@ const { store } = configureStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    <BrowserRouter>
-      <Provider store={store}>
-        <Spinner />
-        <ErrorComponent />
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId="396499209310-e9dkj697kobuqsnhsicgjkoj2ogt6n63.apps.googleusercontent.com">
+      <BrowserRouter>
+        <Provider store={store}>
+          <Spinner />
+          <ErrorComponent />
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </>
 );

@@ -2,17 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Input(props) {
-  const { inputName, type, placeholder, handleChange, handleBlur, disabled } =
-    props;
+  const {
+    inputName,
+    type,
+    value,
+    width = "w-20",
+    padding = "p-2",
+    margin = "",
+    placeholder,
+    border,
+    borderRadius,
+    textColor,
+    backgroundColor,
+    onChange,
+    handleBlur,
+    disabled,
+  } = props;
 
   return (
     <input
       name={inputName}
       type={type}
+      value={value}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={onChange}
       onBlur={handleBlur}
-      className="block w-64 p-2 pl-4 mt-1 mr-2 text-lg text-black bg-transparent border rounded-lg focus:outline-none"
+      className={` ${width} ${border} ${padding} ${margin} ${borderRadius} ${textColor} ${backgroundColor}  focus:outline-none`}
       disabled={disabled ? true : false}
     ></input>
   );
@@ -21,8 +36,16 @@ export default function Input(props) {
 Input.propTypes = {
   inputName: PropTypes.string,
   type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  width: PropTypes.string,
+  padding: PropTypes.string,
+  margin: PropTypes.string,
+  border: PropTypes.string,
+  borderRadius: PropTypes.string,
+  textColor: PropTypes.string,
+  backgroundColor: PropTypes.string,
   placeholder: PropTypes.string,
-  handleChange: PropTypes.func,
+  onChange: PropTypes.func,
   handleBlur: PropTypes.func,
   disabled: PropTypes.bool,
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@component/Button";
+import Input from "@component/Input";
 import SNB from "../SNB";
 import ToggleSwitch from "@page/common/toggleSwitch";
 import Chart from "./chart";
@@ -30,12 +31,17 @@ export default function MyPage() {
             />
           </div>
           <div className="mx-5 my-2">
-            <input
+            <Input
               type="text"
-              name="nickname"
-              placeholder="닉네임"
               value={nickname}
-              className="w-36 h-10 px-5 pr-10 mr-3 text-sm rounded text-textMainColor bg-searchBarBackgroundColor focus:outline-none"
+              placeholder="닉네임"
+              width="w-36"
+              padding="px-5 py-2"
+              margin="mr-3"
+              borderRadius="rounded"
+              border="border-solid border border-slate-400"
+              textColor="text-textMainColor"
+              backgroundColor="bg-searchBarBackgroundColor"
               onChange={handleChange}
             />
             <Button

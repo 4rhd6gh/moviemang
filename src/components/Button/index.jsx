@@ -5,8 +5,10 @@ export default function Button(props) {
     variant,
     text,
     type,
+    form,
     width = "w-20",
     height = "h-10",
+    margin = "my-2",
     backgroundColor,
     borderRadius,
     disabled = false,
@@ -36,7 +38,8 @@ export default function Button(props) {
     <button
       disabled={disabled}
       type={type}
-      className={`my-2 cursor-pointer ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
+      form={form}
+      className={` cursor-pointer ${margin} ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
       onClick={disabled ? null : onClick}
     >
       {text}
@@ -48,8 +51,10 @@ Button.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined"]),
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  form: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
+  margin: PropTypes.string,
   disabled: PropTypes.bool,
   focus: PropTypes.bool,
   onClick: PropTypes.func,

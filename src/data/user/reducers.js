@@ -10,7 +10,7 @@ const initialState = {
 export default function user(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.LOGIN_SUCCESS:
-      return { ...state, userData: action.payload };
+      return { hasError: false, userData: action.payload, errorMessage: null };
     case ActionTypes.LOGIN_FAILURE:
       return { hasError: true, errorMessage: action.payload };
     case ActionTypes.LOGIN_FAILURE_CLEAR:

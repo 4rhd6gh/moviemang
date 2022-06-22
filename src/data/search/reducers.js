@@ -1,5 +1,5 @@
 import * as ActionTypes from "@data/rootActionTypes";
-
+import _ from "lodash";
 const initialState = { searchMovieList: [], page: 0, total_pages: 0 };
 
 export default function search(state = initialState, action) {
@@ -9,7 +9,10 @@ export default function search(state = initialState, action) {
         searchMovieList:
           action.payload.page === 1
             ? action.payload.results
-            : [...state.searchMovieList, ...action.payload.results],
+            : _.uniq(
+                [...state.searchMovieList, ...action.payload.results],
+                "id"
+              ),
         page: action.payload.page,
         total_pages: action.payload.total_pages,
       };

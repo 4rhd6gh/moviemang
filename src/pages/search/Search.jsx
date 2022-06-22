@@ -20,8 +20,9 @@ export default function Search() {
   const value = location.state === null ? "" : location.state.value;
 
   async function getSearchMovieList() {
-    if (currentPage === 0 || isNewSearch) {
+    if (isNewSearch) {
       dispatch(action.search.getSearchMovieList(value, 1));
+      setIsNewSearch(false);
     } else if (currentPage < currentTotalPages) {
       dispatch(action.search.getSearchMovieList(value, currentPage + 1));
       setIsFetching(false);
@@ -29,9 +30,15 @@ export default function Search() {
   }
 
   useEffect(() => {
+    if (isNewSearch) {
+      window.scrollTo(0, 0);
+      getSearchMovieList();
+    }
+  }, [isNewSearch]);
+
+  useEffect(() => {
     dispatch(action.common.startLoading);
     setIsNewSearch(true);
-    getSearchMovieList();
   }, [value]);
 
   useEffect(() => {

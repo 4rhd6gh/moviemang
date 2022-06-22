@@ -1,28 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
-import JoinModal from "../modal/JoinModal";
-import LoginModal from "../modal/LoginModal";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
-
-  const [showJoinModal, setShowJoinModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const handleJoinModalOpen = () => {
-    setShowJoinModal((prevState) => !prevState);
-  };
-
-  const handleLoginModalOpen = () => {
-    setShowLoginModal((prevState) => !prevState);
-  };
-
+  const navigate = useNavigate();
   return (
     <header
       className={`z-10 flex items-center justify-center w-full pt-5 pb-5 text-white
@@ -69,12 +55,17 @@ export default function Appbar(props) {
               MOVIES
             </span>
           </NavLink>
-          <span
-            className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor"
-            onClick={handleLoginModalOpen}
+
+          <NavLink
+            to="login"
+            className={({ isActive }) =>
+              isActive ? "text-textHighlightColor" : ""
+            }
           >
-            LOG IN
-          </span>
+            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+              LOG IN
+            </span>
+          </NavLink>
           <Button
             text="JOIN"
             type="button"
@@ -83,15 +74,13 @@ export default function Appbar(props) {
             height="h-[35px]"
             backgroundColor="bg-themePink"
             borderRadius="rounded-2xl"
-            onClick={handleJoinModalOpen}
+            onClick={() => navigate("/join")}
           ></Button>
         </div>
         <div className="flex ml-auto">
           <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
         </div>
       </div>
-      <LoginModal open={showLoginModal} onClose={setShowLoginModal} />
-      <JoinModal open={showJoinModal} onClose={setShowJoinModal} />
     </header>
   );
 }

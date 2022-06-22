@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
@@ -6,6 +6,11 @@ import * as Mock from "@data/mock";
 
 export default function MainPage() {
   // TODO movielist_container 공통 스타일로 빼기
+
+  useEffect(() => {
+    //메인 페이지로 왔을때 맨 위로 이동
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

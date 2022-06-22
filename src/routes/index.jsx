@@ -10,6 +10,11 @@ import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
 import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
+import Login from "@page/auth/Login";
+import Join from "@page/auth/Join";
+import Nickname from "@page/auth/Nickname";
+import Kakao from "@page/auth/Kakao";
+import Naver from "@page/auth/Naver";
 
 export default function CustomRoutes() {
   const publicRoutes = {
@@ -21,11 +26,17 @@ export default function CustomRoutes() {
       { path: "/search", element: <Search /> },
       { path: "/moviedetail/:movieId", element: <MovieDetail /> },
       { path: "/playlistdetail", element: <PlayListDetail /> },
+      { path: "/login", element: <Login /> },
+      { path: "/join", element: <Join /> },
+      { path: "/nickname", element: <Nickname /> },
+      { path: "/oauth/kakao", element: <Kakao /> },
+      { path: "/oauth/naver", element: <Naver /> },
     ],
   };
 
   const authRoutes = {
     path: "/",
+
     element: <AuthLayout />,
     children: [
       { path: "/member", element: <MyInfo /> },

@@ -10,6 +10,7 @@ import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
 import MyReview from "../pages/mypage/MyReview";
 import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
+import CreatePlayList from "../pages/mypage/MyPlayList/CreatePlayList";
 import Login from "@page/auth/Login";
 import Join from "@page/auth/Join";
 import Nickname from "@page/auth/Nickname";
@@ -42,6 +43,7 @@ export default function CustomRoutes() {
       { path: "/member", element: <MyInfo /> },
       { path: "/member/playlist", element: <MyPlayList /> },
       { path: "/member/review", element: <MyReview /> },
+      { path: "/member/playlist/create", element: <CreatePlayList /> },
     ],
   };
   const routing = useRoutes([publicRoutes, authRoutes]);

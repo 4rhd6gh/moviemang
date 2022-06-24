@@ -1,16 +1,37 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import * as selector from "@data/rootSelectors";
+import * as action from "@data/rootActions";
+
 import Button from "@component/Button";
 import Input from "@component/Input";
 
 export default function NicknameModal() {
   const [nickname, setNickname] = useState("");
 
+  const dispatch = useDispatch();
+
+  const userData = useSelector(selector.user.getUser);
+
+  const { accessToken, loginType, userSub, refreshToken } = userData;
+
+  console.log(accessToken, loginType, userSub, refreshToken);
+
   const handleChangeInput = (e) => {
     setNickname(e.currentTarget.value);
   };
 
-  const handleClickButton = (e) => {
-    console.log(nickname);
+  const handleClickButton = async () => {
+    await dispatch(
+      action.user.createNickName({
+        nickname,
+        userSub,
+        accessToken,
+        refreshToken,
+        loginType,
+      })
+    );
   };
 
   return (
@@ -35,7 +56,7 @@ export default function NicknameModal() {
           />
         </div>
 
-        <div className="flex flex-col items-center justify-center py-2 px-6 border-t border-solid rounded-b border-slate-200 ">
+        <div className="flex flex-col items-center justify-center px-6 py-2 border-t border-solid rounded-b border-slate-200 ">
           <Button
             variant="contained"
             text="확인"

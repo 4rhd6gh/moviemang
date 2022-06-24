@@ -28,9 +28,6 @@ export default function CustomRoutes() {
       { path: "/playlistdetail", element: <PlayListDetail /> },
       { path: "/login", element: <Login /> },
       { path: "/join", element: <Join /> },
-      { path: "/nickname", element: <Nickname /> },
-      { path: "/oauth/kakao", element: <Kakao /> },
-      { path: "/oauth/naver", element: <Naver /> },
     ],
   };
 
@@ -42,6 +39,9 @@ export default function CustomRoutes() {
       { path: "/member", element: <MyInfo /> },
       { path: "/member/playlist", element: <MyPlayList /> },
       { path: "/member/review", element: <MyReview /> },
+      { path: "/oauth/kakao", element: <Kakao /> },
+      { path: "/oauth/naver", element: <Naver /> },
+      { path: "/nickname", element: <Nickname /> },
     ],
   };
   const routing = useRoutes([publicRoutes, authRoutes]);

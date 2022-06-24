@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import * as action from "@data/rootActions";
-import * as selector from "@data/rootSelectors";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import * as Constants from "@constant";
-import StaticIcon from "@component/Icons/StaticIcon";
-import { AiOutlineHeart } from "react-icons/ai";
-import { IoMdAddCircle } from "react-icons/io";
+import * as action from "@data/rootActions";
+import * as selector from "@data/rootSelectors";
+
 import Tabs from "@component/Tabs";
 import Overview from "./components/tabContents/Overview";
 import Reviews from "./components/tabContents/Reviews";
+import StaticIcon from "@component/Icons/StaticIcon";
+
+import { AiOutlineHeart } from "react-icons/ai";
+import { IoMdAddCircle } from "react-icons/io";
 import NoImage from "@res/img/noimg.png";
 
 export default function MovieDetail() {
@@ -23,6 +26,7 @@ export default function MovieDetail() {
   let buyProviders = [];
   let rentProviders = [];
   let flatrateProviders = [];
+
   const forProvider = movieDetailInfo?.KR;
   if (forProvider) {
     if (forProvider.buy) {

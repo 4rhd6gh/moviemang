@@ -1,25 +1,35 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import {
-  kakaoLoginImage,
-  naverLoginImage,
-  googleLoginImage,
-} from "@assets/index";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import * as selector from "@data/rootSelectors";
+import { kakaoLoginImage, naverLoginImage } from "@assets/index";
 import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from "../../constants/index";
 
-export default function JoinModal() {
-  const googleLogin = useGoogleLogin({
-    onSuccess: async ({ code }) => {
-      console.log(`backend서버에 전달되는 값(credentials): ${code}`);
-      const tokens = await axios.post("http://35.203.6.209:8000/auth/login", {
-        // http://localhost:3001/auth/google backend that will exchange the code
-        code,
-      });
+import GoogleLogin from "./Google";
 
-      console.log(tokens.data);
-    },
-    flow: "auth-code",
-  });
+export default function JoinModal() {
+  const navigate = useNavigate();
+
+  const userData = useSelector(selector.user.getUser);
+
+  useEffect(() => {
+    console.log(userData);
+    if (userData?.message === "닉네임을 설정해 주세요.") {
+      navigate("/nickname");
+    }
+
+    // TODO 회원가입 이렇게 처리하는게 맞을지
+
+    if (
+      userData?.message === "로그인 성공" ||
+      userData?.message === "회원가입 성공"
+    ) {
+      navigate("/");
+    }
+
+    // TODO 로그인 필요할 때 로그인 페이지로 라우팅
+  }, [navigate, userData]);
 
   return (
     <div className="max-w-3xl mx-auto my-6 mt-28 w-96">
@@ -31,10 +41,7 @@ export default function JoinModal() {
         </div>
 
         <div className="flex flex-col items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
-          <div onClick={googleLogin} className="py-2 cursor-pointer">
-            <img src={googleLoginImage} width="245px" alt="googleLogin" />
-          </div>
-
+          <GoogleLogin />
           <a href={KAKAO_AUTH_URL} className="py-2">
             <img src={kakaoLoginImage} width="240px" alt="kakaoLogin" />
           </a>

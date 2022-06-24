@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
@@ -11,6 +12,8 @@ export default function MainPage() {
     //메인 페이지로 왔을때 맨 위로 이동
     window.scrollTo(0, 0);
   }, []);
+
+  console.log(localStorage.getItem("token"));
 
   return (
     <>

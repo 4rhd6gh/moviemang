@@ -1,13 +1,28 @@
-import React from "react";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import * as action from "@data/rootActions";
 
 const Kakao = () => {
   // 인가코드
   let code = new URL(window.location.href).searchParams.get("code");
 
-  useEffect(() => console.log(code), []);
+  const dispatch = useDispatch();
 
-  return <p className="text-white text-center">kakao 로그인 완료</p>;
+  const sendAuthRequest = async () => {
+    console.log(code);
+    const response = await dispatch(
+      action.user.snsLogin({
+        code,
+        loginType: "kakao",
+      })
+    );
+
+    return response?.data;
+  };
+
+  sendAuthRequest();
+
+  return <p className="text-center text-white">kakao 로그인 완료 </p>;
 };
 
 export default Kakao;

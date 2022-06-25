@@ -34,7 +34,6 @@ export default function CustomRoutes() {
 
   const authRoutes = {
     path: "/",
-
     element: <AuthLayout />,
     children: [
       { path: "/member", element: <MyInfo /> },
@@ -43,6 +42,7 @@ export default function CustomRoutes() {
       { path: "/oauth/kakao", element: <Kakao /> },
       { path: "/oauth/naver", element: <Naver /> },
       { path: "/member/playlist/create", element: <CreatePlayList /> },
+      { path: "/nickname", element: <Nickname /> },
     ],
   };
   const routing = useRoutes([publicRoutes, authRoutes]);

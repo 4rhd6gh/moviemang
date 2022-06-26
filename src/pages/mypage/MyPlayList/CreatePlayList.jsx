@@ -1,4 +1,7 @@
 import React, {useState} from "react";
+import { useDispatch } from "react-redux";
+import * as action from "@data/rootActions";
+
 import { useNavigate } from "react-router-dom";
 import Input from "@component/Input";
 import Button from "@component/Button";
@@ -7,6 +10,7 @@ export default function CreatePlayList () {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleTitleChange = (e) => {
     setTitle(e.currentTarget.value);
@@ -16,11 +20,19 @@ export default function CreatePlayList () {
     setContents(e.currentTarget.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    console.log(title, contents);
+    const response = await dispatch(
+      action.playlist.createPlaylist({
+        playlistTitle: title,
+        playlistDesc: contents,
+      })
+    );
 
-    navigate("/member/playlist",);
+    if(response === 200)
+      navigate("/member/playlist",);
+
   }
 
   return(

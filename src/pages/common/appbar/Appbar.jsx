@@ -59,7 +59,7 @@ export default function Appbar(props) {
         <nav className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
           {accessToken && (
             <NavLink
-              to="myplaylists"
+              to="playlistdetail"
               className={({ isActive }) =>
                 isActive ? "text-textHighlightColor" : ""
               }

@@ -14,7 +14,7 @@ export default function Login() {
   useEffect(() => {
     //남아 있는 에러메시지 날리기
     dispatch(actions.user.confirmError());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="max-w-3xl mx-auto my-6 mt-28 w-96">

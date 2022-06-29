@@ -1,12 +1,12 @@
 import axios from "axios";
 import * as Constants from "@constant";
 
-export async function requestAxios(method = "get", url, params, body, ) {
+export async function requestAxios(method = "get", url, params, body) {
   let response;
 
-  const accessToken  = localStorage.getItem("token");
+  const accessToken = localStorage.getItem("Is");
 
-  const header = {Authorization: "Bearer " + accessToken}
+  const header = { Authorization: "Bearer " + accessToken };
 
   try {
     response = await axios({
@@ -14,7 +14,7 @@ export async function requestAxios(method = "get", url, params, body, ) {
       headers: header,
       url: Constants.MOVIE_MANG_URL + url,
       params: params,
-      data: body      
+      data: body,
     });
     console.log(response);
     return response;

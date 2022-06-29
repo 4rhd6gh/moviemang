@@ -11,10 +11,9 @@ import GoogleLogin from "./Google";
 export default function JoinModal() {
   const navigate = useNavigate();
 
-  const userData = useSelector(selector.user.getUser);
+  const userData = useSelector(selector.user.getUserData);
 
   useEffect(() => {
-    console.log(userData);
     if (userData?.message === "닉네임을 설정해 주세요.") {
       navigate("/nickname");
     }

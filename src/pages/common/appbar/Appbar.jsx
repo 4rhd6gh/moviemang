@@ -24,6 +24,10 @@ export default function Appbar(props) {
     dispatch(actions.user.logout());
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <header
       className={`z-10 flex items-center justify-center w-full pt-5 pb-5 text-white
@@ -36,7 +40,10 @@ export default function Appbar(props) {
       {/* 로고 및 검색바 부분 */}
       <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[600px] md:pr-0 md:pl-0 mobile:w-full mobile:pr-10 mobile:pl-10 mobile:min-w-[437px] ">
         {/* 로고 */}
-        <div className="relative flex items-center">
+        <div
+          className="relative flex items-center cursor-pointer hover:"
+          onClick={handleLogoClick}
+        >
           <div className="text-[70px] font-bold logo text-themePink flex items-center ">
             M
             <span className="mt-2 ml-[2px] text-4xl tracking-wider text-white">

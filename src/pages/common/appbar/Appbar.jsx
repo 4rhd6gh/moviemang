@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import * as selector from "@data/rootSelectors";
+import * as actions from "@data/rootActions";
 
 import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
@@ -12,11 +12,16 @@ export default function Appbar(props) {
   const { scrollPosition } = props;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const accessToken = localStorage.getItem("token");
+  const accessToken = localStorage.getItem("Is");
 
   const handleOnJoinClick = () => {
     navigate("/join");
+  };
+
+  const logout = () => {
+    dispatch(actions.user.logout());
   };
 
   return (
@@ -63,7 +68,7 @@ export default function Appbar(props) {
               isActive ? "text-textHighlightColor" : ""
             }
           >
-            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+            <span className="ml-4 mr-10 cursor-pointer tablet:ml-2 tablet:mr-6 hover:text-textHighlightColor ">
               MOVIES
             </span>
           </NavLink>
@@ -77,7 +82,7 @@ export default function Appbar(props) {
               height="h-[35px]"
               backgroundColor="bg-themePink"
               borderRadius="rounded-2xl"
-              onClick={() => navigate("/join")}
+              onClick={logout}
             ></Button>
           ) : (
             <>
@@ -87,7 +92,7 @@ export default function Appbar(props) {
                   isActive ? "text-textHighlightColor" : ""
                 }
               >
-                <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+                <span className="ml-4 mr-10 cursor-pointer tablet:ml-2 tablet:mr-6 hover:text-textHighlightColor ">
                   LOG IN
                 </span>
               </NavLink>

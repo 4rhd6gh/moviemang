@@ -9,7 +9,6 @@ const Kakao = () => {
   const dispatch = useDispatch();
 
   const sendAuthRequest = async () => {
-    console.log(code);
     const response = await dispatch(
       action.user.snsLogin({
         code,

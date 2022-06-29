@@ -10,7 +10,7 @@ import DefaultBackgroundImg from "./DefaultBackgroundImg";
 export default function AuthLayout() {
   const navigate = useNavigate();
 
-  const userData = useSelector(selector.user.getUser);
+  const userData = useSelector(selector.user.getUserData);
 
   useEffect(() => {
     console.log(userData);

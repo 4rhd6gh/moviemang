@@ -1,9 +1,9 @@
 import * as ActionTypes from "@data/rootActionTypes";
 
 const initialState = {
+  userData: {},
   hasError: false,
   errorMessage: null,
-  authMessage: "",
 };
 
 export default function user(state = initialState, action) {
@@ -12,11 +12,13 @@ export default function user(state = initialState, action) {
       return {
         hasError: false,
         errorMessage: null,
-        authMessage: action.payload.message,
+        userData: action.payload,
       };
     case ActionTypes.LOGIN_FAILURE:
       return { hasError: true, errorMessage: action.payload };
     case ActionTypes.LOGIN_FAILURE_CLEAR:
+      return { hasError: false, errorMessage: null };
+    case ActionTypes.LOGOUT_SUCCESS:
       return { hasError: false, errorMessage: null };
     default:
       return state;

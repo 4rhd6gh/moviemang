@@ -24,8 +24,7 @@ export const snsLogin = (loginParams) => async (dispatch) => {
       });
 
       if (response.data.message === "로그인 성공") {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("Is", response.data.token);
         localStorage.setItem("nickname", response.data.nickname);
       }
     } else {
@@ -65,7 +64,6 @@ export const createNickName = (createNickNameParams) => async (dispatch) => {
       });
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem("nickname", response.data.nickname);
     } else {
       dispatch(actions.common.endLoading);
@@ -77,6 +75,15 @@ export const createNickName = (createNickNameParams) => async (dispatch) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: ActionTypes.LOGOUT_SUCCESS,
+  });
+
+  localStorage.removeItem("Is");
+  localStorage.removeItem("nickname");
 };
 
 export const confirmError = () => async (dispatch) => {

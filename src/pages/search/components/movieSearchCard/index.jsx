@@ -27,13 +27,6 @@ export default function MovieSearchCard(props) {
           >
             {title}
           </h2>
-          <div className="ml-4">
-            <StaticIcon
-              icon={IoMdAddCircle}
-              size="medium"
-              color="text-[#dd003f]"
-            />
-          </div>
         </div>
         <p className="text-base text-gray-400">{release_date}</p>
         <div className="">

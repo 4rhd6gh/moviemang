@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import * as Constants from "@constant";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
-
 import Tabs from "@component/Tabs";
 import Overview from "./components/tabContents/Overview";
 import Reviews from "./components/tabContents/Reviews";
 import StaticIcon from "@component/Icons/StaticIcon";
-
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import NoImage from "@res/img/noimg.png";
+import Modal from "@page/common/modal";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
   const [activeTab, setActiveTab] = useState(0);
+  const [open, setOpen] = useState(false);
   const onClickTab = (index) => {
     setActiveTab(index);
   };
@@ -133,6 +132,7 @@ export default function MovieDetail() {
                 icon={IoMdAddCircle}
                 size="medium"
                 color="text-[#dd003f]"
+                onClick={() => setOpen(true)}
               />
             </div>
           </div>
@@ -161,6 +161,7 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={setOpen} movieInfo={{ dfsd: "df" }} />
     </>
   );
 }

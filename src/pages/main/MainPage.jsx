@@ -6,14 +6,9 @@ import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";
 
 export default function MainPage() {
-  // TODO movielist_container 공통 스타일로 빼기
-
   useEffect(() => {
-    //메인 페이지로 왔을때 맨 위로 이동
     window.scrollTo(0, 0);
   }, []);
-
-  console.log(localStorage.getItem("token"));
 
   return (
     <>
@@ -100,9 +95,6 @@ export default function MainPage() {
         </div>
       </section>
       <div className="w-full h-20 mt-16"></div>
-      {/* 
-      <LoginModal open={showLoginModal} onClose={setShowLoginModal} />
-      <JoinModal open={showJoinModal} onClose={setShowJoinModal} /> */}
     </>
   );
 }

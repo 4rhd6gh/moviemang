@@ -1,14 +1,24 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
+import { useSelector } from "react-redux";
+
+import * as selector from "@data/rootSelectors";
+
 import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
+
   const navigate = useNavigate();
+
+  const accessToken = localStorage.getItem("token");
+
+  const handleOnJoinClick = () => {
+    navigate("/join");
+  };
+
   return (
     <header
       className={`z-10 flex items-center justify-center w-full pt-5 pb-5 text-white
@@ -34,17 +44,19 @@ export default function Appbar(props) {
           </div>
         </div>
         <SearchBar />
-        <div className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
-          <NavLink
-            to="myplaylists"
-            className={({ isActive }) =>
-              isActive ? "text-textHighlightColor" : ""
-            }
-          >
-            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
-              PLAYLISTS
-            </span>
-          </NavLink>
+        <nav className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
+          {accessToken && (
+            <NavLink
+              to="myplaylists"
+              className={({ isActive }) =>
+                isActive ? "text-textHighlightColor" : ""
+              }
+            >
+              <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
+                PLAYLISTS
+              </span>
+            </NavLink>
+          )}
           <NavLink
             to="movielist"
             className={({ isActive }) =>
@@ -56,27 +68,42 @@ export default function Appbar(props) {
             </span>
           </NavLink>
 
-          <NavLink
-            to="login"
-            className={({ isActive }) =>
-              isActive ? "text-textHighlightColor" : ""
-            }
-          >
-            <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
-              LOG IN
-            </span>
-          </NavLink>
-          <Button
-            text="JOIN"
-            type="button"
-            color="text-white"
-            width="w-[80px]"
-            height="h-[35px]"
-            backgroundColor="bg-themePink"
-            borderRadius="rounded-2xl"
-            onClick={() => navigate("/join")}
-          ></Button>
-        </div>
+          {accessToken ? (
+            <Button
+              text="LOGOUT"
+              type="button"
+              color="text-white"
+              width="w-[80px]"
+              height="h-[35px]"
+              backgroundColor="bg-themePink"
+              borderRadius="rounded-2xl"
+              onClick={() => navigate("/join")}
+            ></Button>
+          ) : (
+            <>
+              <NavLink
+                to="login"
+                className={({ isActive }) =>
+                  isActive ? "text-textHighlightColor" : ""
+                }
+              >
+                <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor ">
+                  LOG IN
+                </span>
+              </NavLink>
+              <Button
+                text="JOIN"
+                type="button"
+                color="text-white"
+                width="w-[80px]"
+                height="h-[35px]"
+                backgroundColor="bg-themePink"
+                borderRadius="rounded-2xl"
+                onClick={handleOnJoinClick}
+              ></Button>
+            </>
+          )}
+        </nav>
         <div className="flex ml-auto">
           <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
         </div>

@@ -16,6 +16,12 @@ export default function PublicLayout() {
     if (userData?.message === "닉네임을 설정해 주세요.") {
       navigate("/nickname");
     }
+    if (
+      userData?.message === "로그인 성공" ||
+      userData?.message === "회원가입 성공"
+    ) {
+      navigate("/");
+    }
   }, [navigate, userData]);
 
   return (

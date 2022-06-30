@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Button from "@component/Button";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 import * as apis from "@service/apis/movieMang";
 
 export default function Modal(props) {
   const { open, movieInfo, onClose, crew = [] } = props;
   const [arrPlaylist, setArrPlaylist] = useState([]);
-  const navigate = useNavigate();
   async function createPlMovies(playlistId) {
     const mvDirector = crew.find((item) => item.job === "Director")?.name;
     try {
@@ -35,7 +33,6 @@ export default function Modal(props) {
       onClose(false);
     }
   };
-  const accessToken = localStorage.getItem("token");
   async function getPlayList() {
     let response;
     try {

@@ -5,7 +5,7 @@ import { MdLocalMovies } from "react-icons/md";
 import Button from "@component/Button";
 
 export default function EventBar(props) {
-  const { eventType, eventName, onClick } = props;
+  const { eventType, eventName } = props;
 
   return (
     <div className="bg-eventBarBackgroundColor ">
@@ -41,5 +41,5 @@ export default function EventBar(props) {
 EventBar.propTypes = {
   eventType: PropTypes.string,
   eventName: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };

@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 

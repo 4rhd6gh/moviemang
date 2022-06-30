@@ -161,7 +161,15 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={setOpen} movieInfo={{ dfsd: "df" }} />
+      <Modal
+        open={open}
+        onClose={setOpen}
+        movieInfo={{
+          mvTitle: movieDetailInfo?.title,
+          mvPosterPath: movieDetailInfo?.poster_path,
+        }}
+        crew={movieDetailInfo?.crew}
+      />
     </>
   );
 }

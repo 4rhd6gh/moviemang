@@ -2,12 +2,34 @@ import React, { useEffect, useState } from "react";
 import Button from "@component/Button";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import * as apis from "@service/apis/movieMang";
 
 export default function Modal(props) {
-  const { open, moiveInfo, onClose } = props;
+  const { open, movieInfo, onClose, crew = [] } = props;
   const [arrPlaylist, setArrPlaylist] = useState([]);
   const navigate = useNavigate();
+  async function createPlMovies(playlistId) {
+    const mvDirector = crew.find((item) => item.job === "Director")?.name;
+    try {
+      const response = await apis.requestAxios(
+        "post",
+        `/myplaylist/movie`,
+        {},
+        {
+          playlistId,
+          mvTitle: movieInfo.mvTitle,
+          mvPosterPath: movieInfo.mvPosterPath,
+          mvDirector,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        return response.status;
+      } else {
+        return response.status;
+      }
+    } catch (err) {}
+  }
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       onClose(false);
@@ -17,14 +39,7 @@ export default function Modal(props) {
   async function getPlayList() {
     let response;
     try {
-      response = await axios.get(
-        "http://35.203.6.209:8000/myplaylist/playlist",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      response = await apis.requestAxios("get", "/myplaylist/playlist");
     } catch (err) {
       console.log(err);
     }
@@ -49,16 +64,22 @@ export default function Modal(props) {
                     <h1 className="text-2xl font-semibold text-gray-900 ">
                       PlayList
                     </h1>
+                    <div className="text-xs italic text-gray-900">
+                      영화를 담을 플레이리스트를 선택하세요.
+                    </div>
                     <ol className="mt-4 ">
                       {arrPlaylist.map((item) => {
                         return (
-                          <li
-                            key={item.playlistId}
-                            onClick={() => {}}
-                            className="px-4 py-2 text-sm font-bold leading-5 text-black cursor-pointer hover:text-[#4280bf]"
-                          >
-                            {item.playlistTitle}
-                          </li>
+                          <>
+                            <li
+                              key={item.playlistId}
+                              onClick={() => createPlMovies(item.playlistId)}
+                              className="px-4 py-2 text-sm font-bold leading-5 text-black cursor-pointer hover:italic hover:text-gray-900"
+                            >
+                              {item.playlistTitle}
+                            </li>
+                            <div className="border-b-2 border-black border-solid"></div>
+                          </>
                         );
                       })}
                     </ol>

@@ -24,7 +24,7 @@ export default function CustomRoutes() {
     children: [
       { path: "/", element: <MainPage /> },
       { path: "/movielist", element: <MovieList /> },
-      { path: "/search", element: <Search /> },
+      { path: "/search/:searchKeyword", element: <Search /> },
       { path: "/moviedetail/:movieId", element: <MovieDetail /> },
       { path: "/playlistdetail", element: <PlayListDetail /> },
       { path: "/login", element: <Login /> },

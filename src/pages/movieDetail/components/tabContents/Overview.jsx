@@ -37,7 +37,11 @@ export default function Overview(props) {
                   className="inline-block p-4 m-0 overflow-hidden rounded-lg "
                 >
                   <img
-                    src={Constants.TM_MOVIE_IMAGE_URL + item.profile_path}
+                    src={
+                      item.profile_path === null
+                        ? NoImage
+                        : Constants.TM_MOVIE_IMAGE_URL + item.profile_path
+                    }
                     alt={""}
                     className="object-cover h-[175px] w-[138px]"
                   />

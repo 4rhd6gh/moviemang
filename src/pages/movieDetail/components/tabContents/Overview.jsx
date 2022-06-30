@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tag from "@component/Tag";
 import * as Constants from "@constant";
+import NoImage from "@res/img/noimg.png";
 
 export default function Overview(props) {
   const { overview, genres = [], crew = [], cast = [], recommand = [] } = props;
@@ -60,7 +61,12 @@ export default function Overview(props) {
                   className="inline-block p-4 m-0 overflow-hidden rounded-lg "
                 >
                   <img
-                    src={Constants.TM_MOVIE_IMAGE_URL + item.backdrop_path}
+                    src={
+                      item.backdrop_path === null
+                        ? NoImage
+                        : Constants.TM_MOVIE_IMAGE_URL + item.backdrop_path
+                    }
+                    onError={console.log("err")}
                     alt={""}
                     className="object-cover h-[141px] w-[250px]"
                   />

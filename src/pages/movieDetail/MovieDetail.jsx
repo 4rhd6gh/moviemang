@@ -12,12 +12,14 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import NoImage from "@res/img/noimg.png";
 import Modal from "@page/common/modal";
+import Alert from "@page/common/alert";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
   const [activeTab, setActiveTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   const onClickTab = (index) => {
     setActiveTab(index);
   };
@@ -170,6 +172,7 @@ export default function MovieDetail() {
         }}
         crew={movieDetailInfo?.crew}
       />
+      <Alert open={alertOpen} onClose={setAlertOpen} />
     </>
   );
 }

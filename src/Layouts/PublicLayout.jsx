@@ -8,7 +8,7 @@ import Container from "./Container";
 import DefaultBackgroundImg from "./DefaultBackgroundImg";
 
 export default function PublicLayout() {
-  const userData = useSelector(selector.user.getUser);
+  const userData = useSelector(selector.user.getUserData);
 
   const navigate = useNavigate();
 

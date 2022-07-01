@@ -2,7 +2,7 @@ import * as ActionTypes from "@data/rootActionTypes";
 import * as apis from "@service/apis/movieMang";
 import * as actions from "@data/rootActions";
 
-export const snsLogin = (loginParams, navigate) => async (dispatch) => {
+export const snsLogin = (loginParams) => async (dispatch) => {
   try {
     dispatch(actions.common.startLoading);
 
@@ -24,8 +24,8 @@ export const snsLogin = (loginParams, navigate) => async (dispatch) => {
       });
 
       if (response.data.message === "로그인 성공") {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("Is", response.data.token);
+        localStorage.setItem("nickname", response.data.nickname);
       }
     } else {
       dispatch(actions.common.endLoading);
@@ -36,10 +36,8 @@ export const snsLogin = (loginParams, navigate) => async (dispatch) => {
     }
 
     return response.data;
-
-    //await dispatch({ type: ActionTypes.LOADING_END });
   } catch (error) {
-    //dispatch({ type: ActionTypes.LOADING_END, payload: error });
+    console.log(error);
   }
 };
 
@@ -54,7 +52,6 @@ export const createNickName = (createNickNameParams) => async (dispatch) => {
       {},
       createNickNameParams
     );
-    //----- 코드가 멈춰있음
 
     console.log(response);
 
@@ -67,7 +64,7 @@ export const createNickName = (createNickNameParams) => async (dispatch) => {
       });
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
+      localStorage.setItem("nickname", response.data.nickname);
     } else {
       dispatch(actions.common.endLoading);
       dispatch({
@@ -75,7 +72,18 @@ export const createNickName = (createNickNameParams) => async (dispatch) => {
         payload: response.message,
       });
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: ActionTypes.LOGOUT_SUCCESS,
+  });
+
+  localStorage.removeItem("Is");
+  localStorage.removeItem("nickname");
 };
 
 export const confirmError = () => async (dispatch) => {
@@ -83,5 +91,3 @@ export const confirmError = () => async (dispatch) => {
     type: ActionTypes.LOGIN_FAILURE_CLEAR,
   });
 };
-
-export const signup = (newUserParam) => async (dispatch) => {};

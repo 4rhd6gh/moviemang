@@ -12,7 +12,7 @@ export default function NicknameModal() {
 
   const dispatch = useDispatch();
 
-  const userData = useSelector(selector.user.getUser);
+  const userData = useSelector(selector.user.getUserData);
 
   const { accessToken, loginType, userSub, refreshToken } = userData;
 

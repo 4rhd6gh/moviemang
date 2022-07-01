@@ -33,7 +33,6 @@ export default function Modal(props) {
       onClose(false);
     }
   };
-  const accessToken = localStorage.getItem("token");
   async function getPlayList() {
     let response;
     try {

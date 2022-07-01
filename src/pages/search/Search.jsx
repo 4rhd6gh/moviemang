@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
@@ -14,9 +15,8 @@ export default function Search() {
   const currentPage = useSelector(selector.search.getCurrentPage);
   const currentTotalPages = useSelector(selector.search.getTotalPages);
   const [isNewSearch, setIsNewSearch] = useState(false);
-  const [isFetching, setIsFetching] = useInfiniteScroll(getSearchMovieList);
+  const [setIsFetching] = useInfiniteScroll(getSearchMovieList);
 
-  const location = useLocation();
   const { searchKeyword } = useParams();
 
   async function getSearchMovieList() {

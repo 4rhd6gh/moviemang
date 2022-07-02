@@ -21,6 +21,7 @@ export default function Appbar(props) {
 
   const logout = () => {
     dispatch(actions.user.logout());
+    navigate("/");
   };
 
   const handleLogoClick = () => {

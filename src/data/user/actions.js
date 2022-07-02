@@ -1,8 +1,11 @@
 import * as ActionTypes from "@data/rootActionTypes";
 import * as apis from "@service/apis/movieMang";
 import * as actions from "@data/rootActions";
+import { useNavigate } from "react-router-dom";
 
 export const snsLogin = (loginParams) => async (dispatch) => {
+  const navigate = useNavigate();
+
   try {
     dispatch(actions.common.startLoading);
 
@@ -27,6 +30,8 @@ export const snsLogin = (loginParams) => async (dispatch) => {
         localStorage.setItem("Is", response.data.token);
         localStorage.setItem("nickname", response.data.nickname);
       }
+
+      navigate("/");
     } else {
       dispatch(actions.common.endLoading);
       dispatch({

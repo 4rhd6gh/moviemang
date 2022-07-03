@@ -20,13 +20,11 @@ export default function Modal(props) {
           mvDirector,
         }
       );
-      console.log(response);
-      if (response.status === 200) {
-        return response.status;
-      } else {
-        return response.status;
-      }
-    } catch (err) {}
+      console.log("response", response);
+      callback(response.data.message);
+    } catch (err) {
+      console.log("err", err);
+    }
   }
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {

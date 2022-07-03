@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Constants from "@constant";
@@ -20,6 +20,7 @@ export default function MovieDetail() {
   const [activeTab, setActiveTab] = useState(0);
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const onClickTab = (index) => {
     setActiveTab(index);
   };
@@ -27,6 +28,12 @@ export default function MovieDetail() {
   let buyProviders = [];
   let rentProviders = [];
   let flatrateProviders = [];
+
+  const addMovieCallback = useCallback((message) => {
+    setOpen(false);
+    setAlertMessage(message);
+    setAlertOpen(true);
+  }, []);
 
   const forProvider = movieDetailInfo?.KR;
   if (forProvider) {
@@ -55,7 +62,7 @@ export default function MovieDetail() {
         <div>
           <img
             loading="lazy"
-            src={
+            data-src={
               movieDetailInfo?.poster_path === null
                 ? NoImage
                 : Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path
@@ -171,8 +178,9 @@ export default function MovieDetail() {
           mvPosterPath: movieDetailInfo?.poster_path,
         }}
         crew={movieDetailInfo?.crew}
+        callback={addMovieCallback}
       />
-      <Alert open={alertOpen} onClose={setAlertOpen} />
+      <Alert open={alertOpen} onClose={setAlertOpen} message={alertMessage} />
     </>
   );
 }

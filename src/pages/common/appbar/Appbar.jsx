@@ -21,6 +21,7 @@ export default function Appbar(props) {
 
   const logout = () => {
     dispatch(actions.user.logout());
+    navigate("/");
   };
 
   const handleLogoClick = () => {
@@ -58,7 +59,7 @@ export default function Appbar(props) {
         <nav className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
           {accessToken && (
             <NavLink
-              to="playlistdetail"
+              to="/member/playlist"
               className={({ isActive }) =>
                 isActive ? "text-textHighlightColor" : ""
               }

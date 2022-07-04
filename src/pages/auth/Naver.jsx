@@ -1,23 +1,26 @@
 import { useDispatch } from "react-redux";
 
 import * as action from "@data/rootActions";
+import { useNavigate } from "react-router-dom";
 
 const Naver = () => {
   // 인가코드
   let code = new URL(window.location.href).searchParams.get("code");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const sendAuthRequest = async () => {
     console.log(code);
-    const response = await dispatch(
-      action.user.snsLogin({
-        code,
-        loginType: "naver",
-      })
+    await dispatch(
+      action.user.snsLogin(
+        {
+          code,
+          loginType: "naver",
+        },
+        navigate
+      )
     );
-
-    return response?.data;
   };
 
   sendAuthRequest();

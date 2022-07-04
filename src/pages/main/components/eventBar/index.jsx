@@ -41,5 +41,5 @@ export default function EventBar(props) {
 EventBar.propTypes = {
   eventType: PropTypes.string,
   eventName: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  // onClick: PropTypes.func.isRequired,
 };

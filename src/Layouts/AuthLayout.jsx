@@ -14,20 +14,10 @@ export default function AuthLayout() {
 
   useEffect(() => {
     console.log(userData);
+
     if (userData?.message === "닉네임을 설정해 주세요.") {
       navigate("/nickname");
     }
-
-    // TODO 회원가입 이렇게 처리하는게 맞을지
-
-    if (
-      userData?.message === "로그인 성공" ||
-      userData?.message === "회원가입 성공"
-    ) {
-      navigate("/");
-    }
-
-    // TODO 로그인 필요할 때 로그인 페이지로 라우팅
   }, [navigate, userData]);
 
   return (

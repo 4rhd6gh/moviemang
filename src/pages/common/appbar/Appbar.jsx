@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { BsFillPersonFill as ProfileIcon } from "react-icons/bs";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 
@@ -21,7 +20,7 @@ export default function Appbar(props) {
   };
 
   const logout = () => {
-    dispatch(actions.user.logout());
+    dispatch(actions.user.logout(navigate));
   };
 
   const handleLogoClick = () => {
@@ -81,16 +80,18 @@ export default function Appbar(props) {
           </NavLink>
 
           {accessToken ? (
-            <Button
-              text="LOGOUT"
-              type="button"
-              color="text-white"
-              width="w-[80px]"
-              height="h-[35px]"
-              backgroundColor="bg-themePink"
-              borderRadius="rounded-2xl"
-              onClick={logout}
-            ></Button>
+            <>
+              <Button
+                text="LOGOUT"
+                type="button"
+                color="text-white"
+                width="w-[80px]"
+                height="h-[35px]"
+                backgroundColor="bg-themePink"
+                borderRadius="rounded-2xl"
+                onClick={logout}
+              ></Button>
+            </>
           ) : (
             <>
               <NavLink
@@ -103,6 +104,7 @@ export default function Appbar(props) {
                   LOG IN
                 </span>
               </NavLink>
+
               <Button
                 text="JOIN"
                 type="button"

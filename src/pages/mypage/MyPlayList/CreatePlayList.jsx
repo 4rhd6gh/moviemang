@@ -55,7 +55,7 @@ export default function CreatePlayList() {
           text={`#${tag.tagName}`}
           value={`#${tag.tagName}`}
           size="small"
-          margin="m-auto"
+          margin="m-0"
           color={
             clickedTags.includes(tag.tagName)
               ? "text-[#dcf836]"
@@ -109,7 +109,9 @@ export default function CreatePlayList() {
               required
               className="w-full p-3 mb-3 bg-[#233A50] rounded-lg h-40 resize-none"
             />
-            <div className="flex flex-row flex-wrap p-3">{Tags()}</div>
+            <div className="flex flex-row flex-wrap p-3 justify-center">
+              {Tags()}
+            </div>
             <div className="flex flex-row-reverse">
               <Button
                 variant="contained"

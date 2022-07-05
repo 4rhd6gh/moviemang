@@ -1,20 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import * as selector from "@data/rootSelectors";
 import Button from "@component/Button";
 import Input from "@component/Input";
 import SNB from "../SNB";
 import Chart from "./chart";
 import PlayListCard from "@page/common/playListCard";
-import { data } from "../data";
 import * as Mock from "@data/mock";
 
 export default function MyPage() {
   const [nickname, setNickName] = useState("");
   const userData = useSelector(selector.user.getUserData);
 
-  console.log(userData);
+  function loginType() {
+    let sns = userData.loginType;
+    if (sns === "kakao") {
+      return (
+        <div className="w-[94px] py-2 px-3 mt-2 rounded bg-[#FEE500]">
+          Kakao 계정
+        </div>
+      );
+    } else if (sns === "naver") {
+      return (
+        <div className="w-[91px] py-2 px-3 mt-2 rounded text-white bg-[#18CE5F]">
+          Naver 계정
+        </div>
+      );
+    } else {
+      return (
+        <div className="w-[98px] py-2 px-3 mt-2 rounded text-white bg-[#4285F4]">
+          Google 계정
+        </div>
+      );
+    }
+  }
+
   function handleChange(e) {
     setNickName(e.currentTarget.value);
   }
@@ -56,6 +77,7 @@ export default function MyPage() {
               backgroundColor="bg-themePink"
               borderRadius="rounded"
             ></Button>
+            {loginType()}
           </div>
         </div>
         <div className="my-10">

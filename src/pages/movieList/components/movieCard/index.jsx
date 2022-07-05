@@ -37,7 +37,7 @@ export default function MovieCard(props) {
 
   return (
     <div
-      className="relative overflow-hidden border-solid rounded-lg border-1"
+      className="relative overflow-hidden border-solid rounded-lg border-1 cursor-pointer"
       onClick={onClick}
     >
       <div className="image w-[159px] h-[300px]">

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as action from "@data/rootActions";
-import * as Mock from "@data/mock";
+import * as apis from "@service/apis/movieMang";
 
 import { useNavigate } from "react-router-dom";
 import Input from "@component/Input";
@@ -10,6 +10,7 @@ import Button from "@component/Button";
 export default function CreatePlayList() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [tags, setTags] = useState([]);
   const [clickedTags, setClickedTags] = useState([]);
 
   const navigate = useNavigate();
@@ -31,18 +32,32 @@ export default function CreatePlayList() {
     else setClickedTags([...clickedTags, tag]);
   };
 
+  async function getTags() {
+    let response;
+    try {
+      response = await apis.requestAxios("get", "/myplaylist/tag");
+      setTags(response.data.tags);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
   const Tags = () => {
-    return Mock.tags.tags.map((tag, index) => {
+    return tags.map((tag, index) => {
       return (
         <Button
           key={index}
           type="button"
-          text={`#${tag}`}
-          value={`#${tag}`}
+          text={`#${tag.tagName}`}
+          value={`#${tag.tagName}`}
           size="small"
-          margin="m-auto"
+          margin="m-0"
           color={
-            clickedTags.includes(tag)
+            clickedTags.includes(tag.tagName)
               ? "text-[#dcf836]"
               : "text-textMainColor hover:text-[#dcf836]"
           }
@@ -94,7 +109,9 @@ export default function CreatePlayList() {
               required
               className="w-full p-3 mb-3 bg-[#233A50] rounded-lg h-40 resize-none"
             />
-            <div className="flex flex-row flex-wrap p-3">{Tags()}</div>
+            <div className="flex flex-row flex-wrap p-3 justify-center">
+              {Tags()}
+            </div>
             <div className="flex flex-row-reverse">
               <Button
                 variant="contained"

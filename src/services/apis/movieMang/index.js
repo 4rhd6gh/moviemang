@@ -16,7 +16,7 @@ export async function requestAxios(method = "get", url, params, body) {
       params: params,
       data: body,
     });
-    console.log(response);
+
     return response;
   } catch (e) {
     let errorResponse;

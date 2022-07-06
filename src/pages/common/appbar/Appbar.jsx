@@ -6,6 +6,7 @@ import * as actions from "@data/rootActions";
 
 import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
+import ProfileIcon from "./ProfileIcon/ProfileIcon";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
@@ -64,7 +65,7 @@ export default function Appbar(props) {
               }
             >
               <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
-                PLAYLISTS
+                MY PLAYLISTS
               </span>
             </NavLink>
           )}
@@ -81,16 +82,7 @@ export default function Appbar(props) {
 
           {accessToken ? (
             <>
-              <Button
-                text="LOGOUT"
-                type="button"
-                color="text-white"
-                width="w-[80px]"
-                height="h-[35px]"
-                backgroundColor="bg-themePink"
-                borderRadius="rounded-2xl"
-                onClick={logout}
-              ></Button>
+              <ProfileIcon />
             </>
           ) : (
             <>

@@ -17,6 +17,7 @@ export default function Input(props) {
     onChange,
     handleBlur,
     disabled,
+    required,
   } = props;
 
   return (
@@ -29,6 +30,7 @@ export default function Input(props) {
       onBlur={handleBlur}
       className={` ${width} ${border} ${padding} ${margin} ${borderRadius} ${textColor} ${backgroundColor} text-sm focus:outline-none`}
       disabled={disabled ? true : false}
+      required={required ? true : false}
     ></input>
   );
 }
@@ -48,4 +50,5 @@ Input.propTypes = {
   onChange: PropTypes.func,
   handleBlur: PropTypes.func,
   disabled: PropTypes.bool,
+  required: PropTypes.bool,
 };

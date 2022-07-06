@@ -12,6 +12,7 @@ export default function CreatePlayList() {
   const [contents, setContents] = useState("");
   const [tags, setTags] = useState([]);
   const [clickedTags, setClickedTags] = useState([]);
+  const [warningText, setWarningText] = useState("transparent");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function CreatePlayList() {
 
   const handleClickTag = (e) => {
     let tag = e.currentTarget.value.slice(1);
-    console.log(tag);
+
     if (clickedTags.includes(tag))
       setClickedTags(clickedTags.filter((clicked) => clicked !== tag));
     else setClickedTags([...clickedTags, tag]);
@@ -70,15 +71,18 @@ export default function CreatePlayList() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (clickedTags.length === 0) setWarningText("[#dcf836]");
+    else {
+      const response = await dispatch(
+        action.playlist.createPlaylist({
+          playlistTitle: title,
+          playlistDesc: contents,
+          tags: clickedTags,
+        })
+      );
 
-    const response = await dispatch(
-      action.playlist.createPlaylist({
-        playlistTitle: title,
-        playlistDesc: contents,
-      })
-    );
-
-    if (response === 200) navigate("/member/playlist");
+      if (response === 200) navigate("/member/playlist");
+    }
   };
 
   const handleButtonOnclick = () => {
@@ -101,6 +105,7 @@ export default function CreatePlayList() {
               backgroundColor="bg-[#233A50]"
               borderRadius="rounded-lg"
               onChange={handleTitleChange}
+              required={true}
             />
             <textarea
               row={10}
@@ -112,7 +117,13 @@ export default function CreatePlayList() {
             <div className="flex flex-row flex-wrap p-3 justify-center">
               {Tags()}
             </div>
-            <div className="flex flex-row-reverse">
+            <p
+              className={`text-${warningText} mt-2 text-sm flex flex-row-reverse`}
+            >
+              하나 이상의 태그를 선택해 주세요
+            </p>
+
+            <div className="flex flex-row-reverse mt-3">
               <Button
                 variant="contained"
                 form="playlistForm"

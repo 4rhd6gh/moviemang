@@ -20,7 +20,7 @@ export default function AuthLayout() {
     }
     // TODO 접근 못하는 페이지인 경우 보여줄 페이지?
     if (!userToken) {
-      navigate("/");
+      navigate("/login");
     }
   }, [navigate, userData, userToken]);
 

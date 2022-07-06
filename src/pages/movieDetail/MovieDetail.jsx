@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Constants from "@constant";
@@ -12,12 +12,15 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import NoImage from "@res/img/noimg.png";
 import Modal from "@page/common/modal";
+import Alert from "@page/common/alert";
 
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
   const [activeTab, setActiveTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const onClickTab = (index) => {
     setActiveTab(index);
   };
@@ -25,6 +28,12 @@ export default function MovieDetail() {
   let buyProviders = [];
   let rentProviders = [];
   let flatrateProviders = [];
+
+  const addMovieCallback = useCallback((message) => {
+    setOpen(false);
+    setAlertMessage(message);
+    setAlertOpen(true);
+  }, []);
 
   const forProvider = movieDetailInfo?.KR;
   if (forProvider) {
@@ -53,7 +62,7 @@ export default function MovieDetail() {
         <div>
           <img
             loading="lazy"
-            src={
+            data-src={
               movieDetailInfo?.poster_path === null
                 ? NoImage
                 : Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path
@@ -161,7 +170,17 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={setOpen} movieInfo={{ dfsd: "df" }} />
+      <Modal
+        open={open}
+        onClose={setOpen}
+        movieInfo={{
+          mvTitle: movieDetailInfo?.title,
+          mvPosterPath: movieDetailInfo?.poster_path,
+        }}
+        crew={movieDetailInfo?.crew}
+        callback={addMovieCallback}
+      />
+      <Alert open={alertOpen} onClose={setAlertOpen} message={alertMessage} />
     </>
   );
 }

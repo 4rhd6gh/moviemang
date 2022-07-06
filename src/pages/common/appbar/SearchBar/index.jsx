@@ -16,9 +16,7 @@ export default function SearchBar() {
   const handleFormSubmit = (e) => {
     if (value === "") return;
 
-    navigate("/search", {
-      state: { value: value },
-    });
+    navigate("/search/" + value);
   };
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import MovieCard from "./components/movieCard";
 import * as Constants from "@constant";
@@ -16,7 +17,7 @@ export default function MovieList() {
   const movieArray = useSelector(selector.movie.getPopularMovieList);
   const page = useSelector(selector.movie.getCurrentPage);
   const totalPages = useSelector(selector.movie.getTotalPages);
-  const [isFetching, setIsFetching] = useInfiniteScroll(getMovieList);
+  const [setIsFetching] = useInfiniteScroll(getMovieList);
   const toTheTop = () => {
     window.scrollTo(0, 0);
   };

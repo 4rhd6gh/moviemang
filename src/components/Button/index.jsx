@@ -6,17 +6,19 @@ export default function Button(props) {
     text,
     type,
     form,
+    value = "",
     width = "w-20",
     height = "h-10",
     margin = "my-2",
     backgroundColor,
-    borderRadius,
+    borderRadius = "",
+    color,
     disabled = false,
     focus = false,
     onClick,
   } = props;
 
-  let buttonType;
+  let buttonType = "";
   if (variant === "contained") {
     buttonType = disabled
       ? "bg-gray-600 text-gray-300 cursor-not-allowed"
@@ -39,7 +41,8 @@ export default function Button(props) {
       disabled={disabled}
       type={type}
       form={form}
-      className={` cursor-pointer ${margin} ${borderRadius} ${width} ${height} ${buttonType} ${buttonFocus} ${backgroundColor} `}
+      value={value}
+      className={` cursor-pointer ${margin} ${borderRadius} ${width} ${height} ${color} ${buttonType} ${buttonFocus} ${backgroundColor} `}
       onClick={disabled ? null : onClick}
     >
       {text}
@@ -50,6 +53,7 @@ export default function Button(props) {
 Button.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined"]),
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  value: PropTypes.string,
   type: PropTypes.string.isRequired,
   form: PropTypes.string,
   width: PropTypes.string,

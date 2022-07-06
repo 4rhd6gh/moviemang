@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as action from "@data/rootActions";
+import * as apis from "@service/apis/movieMang";
 
 import { useNavigate } from "react-router-dom";
 import Input from "@component/Input";
@@ -9,6 +10,9 @@ import Button from "@component/Button";
 export default function CreatePlayList() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [tags, setTags] = useState([]);
+  const [clickedTags, setClickedTags] = useState([]);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,6 +22,50 @@ export default function CreatePlayList() {
 
   const handleContentsChange = (e) => {
     setContents(e.currentTarget.value);
+  };
+
+  const handleClickTag = (e) => {
+    let tag = e.currentTarget.value.slice(1);
+    console.log(tag);
+    if (clickedTags.includes(tag))
+      setClickedTags(clickedTags.filter((clicked) => clicked !== tag));
+    else setClickedTags([...clickedTags, tag]);
+  };
+
+  async function getTags() {
+    let response;
+    try {
+      response = await apis.requestAxios("get", "/myplaylist/tag");
+      setTags(response.data.tags);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
+  const Tags = () => {
+    return tags.map((tag, index) => {
+      return (
+        <Button
+          key={index}
+          type="button"
+          text={`#${tag.tagName}`}
+          value={`#${tag.tagName}`}
+          size="small"
+          margin="m-0"
+          color={
+            clickedTags.includes(tag.tagName)
+              ? "text-[#dcf836]"
+              : "text-textMainColor hover:text-[#dcf836]"
+          }
+          backgroundColor="bg-transparent"
+          onClick={handleClickTag}
+        />
+      );
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -61,6 +109,9 @@ export default function CreatePlayList() {
               required
               className="w-full p-3 mb-3 bg-[#233A50] rounded-lg h-40 resize-none"
             />
+            <div className="flex flex-row flex-wrap p-3 justify-center">
+              {Tags()}
+            </div>
             <div className="flex flex-row-reverse">
               <Button
                 variant="contained"

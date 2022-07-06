@@ -1,12 +1,10 @@
 import thunk from "redux-thunk";
 import { applyMiddleware, compose, createStore } from "redux";
-import { createRootReducer } from "@data/rootReducer";
-
-const rootReducer = createRootReducer();
+import persistReducer from "@data/rootReducer";
 
 export default function configureStore() {
   const store = createStore(
-    rootReducer,
+    persistReducer,
     compose(
       applyMiddleware(thunk),
       window.__REDUX_DEVTOOLS_EXTENSION__

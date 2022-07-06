@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import MovieSearchCard from "./components/movieSearchCard";
 import * as Constants from "@constant";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as action from "@data/rootActions";
 import * as selector from "@data/rootSelectors";
 import useInfiniteScroll from "@hook/useInfinitiScroll.hook";
@@ -14,17 +15,18 @@ export default function Search() {
   const currentPage = useSelector(selector.search.getCurrentPage);
   const currentTotalPages = useSelector(selector.search.getTotalPages);
   const [isNewSearch, setIsNewSearch] = useState(false);
-  const [isFetching, setIsFetching] = useInfiniteScroll(getSearchMovieList);
+  const [setIsFetching] = useInfiniteScroll(getSearchMovieList);
 
-  const location = useLocation();
-  const value = location.state === null ? "" : location.state.value;
+  const { searchKeyword } = useParams();
 
   async function getSearchMovieList() {
     if (isNewSearch) {
-      dispatch(action.search.getSearchMovieList(value, 1));
+      dispatch(action.search.getSearchMovieList(searchKeyword, 1));
       setIsNewSearch(false);
     } else if (currentPage < currentTotalPages) {
-      dispatch(action.search.getSearchMovieList(value, currentPage + 1));
+      dispatch(
+        action.search.getSearchMovieList(searchKeyword, currentPage + 1)
+      );
       setIsFetching(false);
     } else return;
   }
@@ -39,7 +41,7 @@ export default function Search() {
   useEffect(() => {
     dispatch(action.common.startLoading);
     setIsNewSearch(true);
-  }, [value]);
+  }, [searchKeyword]);
 
   useEffect(() => {
     dispatch(action.common.endLoading);

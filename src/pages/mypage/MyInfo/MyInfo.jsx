@@ -1,16 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import * as selector from "@data/rootSelectors";
 import Button from "@component/Button";
 import Input from "@component/Input";
 import SNB from "../SNB";
-import ToggleSwitch from "@page/common/toggleSwitch";
 import Chart from "./chart";
 import PlayListCard from "@page/common/playListCard";
-import { data } from "../data";
+import * as Mock from "@data/mock";
 
 export default function MyPage() {
   const [nickname, setNickName] = useState("");
+  const userData = useSelector(selector.user.getUserData);
+
+  function loginType() {
+    let sns = userData.loginType;
+    if (sns === "kakao") {
+      return (
+        <div className="w-[94px] py-2 px-3 mt-2 rounded bg-[#FEE500]">
+          Kakao 계정
+        </div>
+      );
+    } else if (sns === "naver") {
+      return (
+        <div className="w-[91px] py-2 px-3 mt-2 rounded text-white bg-[#18CE5F]">
+          Naver 계정
+        </div>
+      );
+    } else {
+      return (
+        <div className="w-[98px] py-2 px-3 mt-2 rounded text-white bg-[#4285F4]">
+          Google 계정
+        </div>
+      );
+    }
+  }
 
   function handleChange(e) {
     setNickName(e.currentTarget.value);
@@ -53,21 +77,7 @@ export default function MyPage() {
               backgroundColor="bg-themePink"
               borderRadius="rounded"
             ></Button>
-            <Button
-              text="비밀번호 변경"
-              type="button"
-              color="text-white"
-              width="w-[150px]"
-              height="h-[38px]"
-              backgroundColor="bg-themePink"
-              borderRadius="rounded"
-            ></Button>
-            <div className="flex">
-              <ToggleSwitch />
-              <p className="inline-block ml-2 text-textMainColor">
-                메일 서비스 구독 신청
-              </p>
-            </div>
+            {loginType()}
           </div>
         </div>
         <div className="my-10">
@@ -81,16 +91,16 @@ export default function MyPage() {
             <NavLink to={"playlist"}>전체보기</NavLink>
           </div>
           <div className="flex w-full justify-between items-center">
-            {data.data.playlist.map((item, index) => {
+            {Mock.playList.playList.slice(0, 2).map((movie, index) => {
               return (
-                <div key={index} className="">
+                <div key={index}>
                   <PlayListCard
-                    title={item.title}
-                    id={item.id}
-                    imageArray={[item.representative_image_path]}
-                    likeCount={item.like_count}
-                    movieCount={item.movie_count}
-                    tagArray={item.tags}
+                    title={movie.title}
+                    id={movie.id}
+                    imageArray={movie.image}
+                    likeCount={movie.likeCount}
+                    movieCount={movie.movieCount}
+                    tagArray={movie.tagArray}
                   />
                 </div>
               );

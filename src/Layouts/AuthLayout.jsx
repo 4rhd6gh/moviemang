@@ -12,13 +12,21 @@ export default function AuthLayout() {
 
   const userData = useSelector(selector.user.getUserData);
 
-  useEffect(() => {
-    console.log(userData);
+  const userToken = localStorage.getItem("Is");
 
+  useEffect(() => {
     if (userData?.message === "닉네임을 설정해 주세요.") {
       navigate("/nickname");
     }
-  }, [navigate, userData]);
+    // TODO 접근 못하는 페이지인 경우 보여줄 페이지?
+    if (!userToken) {
+      navigate("/");
+    }
+  }, [navigate, userData, userToken]);
+
+  if (!userToken) {
+    return null;
+  }
 
   return (
     <>

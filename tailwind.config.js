@@ -13,6 +13,7 @@ module.exports = {
         searchBarBackgroundColor: "#233a50",
         themePink: "#dd003f",
         movieCardBackgroundColor: "#020d18",
+        profileDropDownBackgroundColor: "#06121e",
       },
     },
     screens: {

@@ -1,27 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiMenu as MenuIcon } from "react-icons/hi";
-import { useDispatch } from "react-redux";
-
-import * as actions from "@data/rootActions";
 
 import SearchBar from "@page/common/appbar/SearchBar";
 import Button from "@component/Button";
+import ProfileIcon from "./ProfileIcon/ProfileIcon";
 
 export default function Appbar(props) {
   const { scrollPosition } = props;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const accessToken = localStorage.getItem("Is");
 
   const handleOnJoinClick = () => {
     navigate("/join");
-  };
-
-  const logout = () => {
-    dispatch(actions.user.logout());
-    navigate("/");
   };
 
   const handleLogoClick = () => {
@@ -65,7 +57,7 @@ export default function Appbar(props) {
               }
             >
               <span className="ml-4 mr-4 cursor-pointer tablet:ml-2 tablet:mr-2 hover:text-textHighlightColor">
-                PLAYLISTS
+                MY PLAYLISTS
               </span>
             </NavLink>
           )}
@@ -81,16 +73,9 @@ export default function Appbar(props) {
           </NavLink>
 
           {accessToken ? (
-            <Button
-              text="LOGOUT"
-              type="button"
-              color="text-white"
-              width="w-[80px]"
-              height="h-[35px]"
-              backgroundColor="bg-themePink"
-              borderRadius="rounded-2xl"
-              onClick={logout}
-            ></Button>
+            <>
+              <ProfileIcon />
+            </>
           ) : (
             <>
               <NavLink
@@ -103,6 +88,7 @@ export default function Appbar(props) {
                   LOG IN
                 </span>
               </NavLink>
+
               <Button
                 text="JOIN"
                 type="button"

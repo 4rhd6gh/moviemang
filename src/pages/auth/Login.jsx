@@ -17,7 +17,7 @@ export default function Login() {
   }, [dispatch]);
 
   return (
-    <div className="max-w-3xl mx-auto my-6 mt-28 w-96">
+    <div className="max-w-3xl mx-auto m y-6 mt-28 w-96">
       <div className="flex flex-col bg-white border-0 rounded-lg shadow-lg outline-none ">
         <div className="flex flex-col items-center justify-center p-5 border-b border-solid rounded-t border-slate-200">
           <h3 className="text-3xl font-semibold text-center text-black ">

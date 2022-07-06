@@ -12,16 +12,21 @@ export default function AuthLayout() {
 
   const userData = useSelector(selector.user.getUserData);
 
+  const userToken = localStorage.getItem("Is");
+
   useEffect(() => {
-    console.log(userData);
     if (userData?.message === "닉네임을 설정해 주세요.") {
       navigate("/nickname");
     }
+    // TODO 접근 못하는 페이지인 경우 보여줄 페이지?
+    if (!userToken) {
+      navigate("/login");
+    }
+  }, [navigate, userData, userToken]);
 
-    // TODO 회원가입 이렇게 처리하는게 맞을지
-
-    // TODO 로그인 필요할 때 로그인 페이지로 라우팅
-  }, [navigate, userData]);
+  if (!userToken) {
+    return null;
+  }
 
   return (
     <>

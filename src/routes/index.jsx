@@ -8,7 +8,6 @@ import MovieDetail from "@page/movieDetail";
 import Search from "../pages/search/Search";
 import MyInfo from "../pages/mypage/MyInfo";
 import MyPlayList from "../pages/mypage/MyPlayList";
-import MyReview from "../pages/mypage/MyReview";
 import PlayListDetail from "../pages/myPlayLists/PlayListDetail";
 import CreatePlayList from "../pages/mypage/MyPlayList/CreatePlayList";
 import Login from "@page/auth/Login";
@@ -29,6 +28,8 @@ export default function CustomRoutes() {
       { path: "/playlistdetail", element: <PlayListDetail /> },
       { path: "/login", element: <Login /> },
       { path: "/join", element: <Join /> },
+      { path: "/oauth/kakao", element: <Kakao /> },
+      { path: "/oauth/naver", element: <Naver /> },
     ],
   };
 
@@ -38,9 +39,6 @@ export default function CustomRoutes() {
     children: [
       { path: "/member", element: <MyInfo /> },
       { path: "/member/playlist", element: <MyPlayList /> },
-      { path: "/member/review", element: <MyReview /> },
-      { path: "/oauth/kakao", element: <Kakao /> },
-      { path: "/oauth/naver", element: <Naver /> },
       { path: "/member/playlist/create", element: <CreatePlayList /> },
       { path: "/nickname", element: <Nickname /> },
     ],

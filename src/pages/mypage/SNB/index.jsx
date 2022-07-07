@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
 export default function SNB() {
   return (
@@ -21,14 +20,6 @@ export default function SNB() {
           style={({ isActive }) => (isActive ? { color: "#dcf836" } : {})}
         >
           플레이리스트
-        </NavLink>
-        <NavLink
-          to={"/member/review"}
-          end
-          className="hover:text-textHighlightColor pb-3"
-          style={({ isActive }) => (isActive ? { color: "#dcf836" } : {})}
-        >
-          리뷰
         </NavLink>
       </div>
     </nav>

@@ -8,6 +8,7 @@ import SNB from "../SNB";
 import Chart from "./chart";
 import PlayListCard from "@page/common/playListCard";
 import * as Mock from "@data/mock";
+import { BsPersonFill as PersonIcon } from "react-icons/bs";
 
 export default function MyPage() {
   const userData = useSelector(selector.user.getUserData);
@@ -50,14 +51,10 @@ export default function MyPage() {
       <div className="w-[20%]">
         <SNB />
       </div>
-      <div className=" p-10 max-w-xl w-full">
+      <div className=" p-10 max-w-2xl w-full">
         <div className="flex">
-          <div className="w-52 h-52 bg-gray-500 rounded">
-            <img
-              className="block object-cover w-52 h-52 "
-              src={""}
-              alt="profile"
-            />
+          <div className="w-52 h-52 bg-gray-400 rounded">
+            <PersonIcon className="w-52 h-52" fill="#d1d5db" />
           </div>
           <div className="mx-5 my-2">
             <Input

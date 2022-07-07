@@ -10,8 +10,8 @@ import PlayListCard from "@page/common/playListCard";
 import * as Mock from "@data/mock";
 
 export default function MyPage() {
-  const [nickname, setNickName] = useState("");
   const userData = useSelector(selector.user.getUserData);
+  const [nickname, setNickName] = useState(userData.nickname);
 
   function loginType() {
     let sns = userData.loginType;
@@ -38,6 +38,11 @@ export default function MyPage() {
 
   function handleChange(e) {
     setNickName(e.currentTarget.value);
+  }
+
+  function handleButtonClick() {
+    console.log(nickname);
+    //nickname 변경 api
   }
 
   return (
@@ -76,6 +81,7 @@ export default function MyPage() {
               height="h-[38px]"
               backgroundColor="bg-themePink"
               borderRadius="rounded"
+              onClick={handleButtonClick}
             ></Button>
             {loginType()}
           </div>

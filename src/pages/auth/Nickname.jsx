@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import * as selector from "@data/rootSelectors";
 import * as action from "@data/rootActions";
@@ -11,12 +12,11 @@ export default function NicknameModal() {
   const [nickname, setNickname] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userData = useSelector(selector.user.getUserData);
 
   const { accessToken, loginType, userSub, refreshToken } = userData;
-
-  console.log(accessToken, loginType, userSub, refreshToken);
 
   const handleChangeInput = (e) => {
     setNickname(e.currentTarget.value);
@@ -24,13 +24,16 @@ export default function NicknameModal() {
 
   const handleClickButton = async () => {
     await dispatch(
-      action.user.createNickName({
-        nickname,
-        userSub,
-        accessToken,
-        refreshToken,
-        loginType,
-      })
+      action.user.createNickName(
+        {
+          nickname,
+          userSub,
+          accessToken,
+          refreshToken,
+          loginType,
+        },
+        navigate
+      )
     );
   };
 

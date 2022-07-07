@@ -30,6 +30,7 @@ export default function CustomRoutes() {
       { path: "/join", element: <Join /> },
       { path: "/oauth/kakao", element: <Kakao /> },
       { path: "/oauth/naver", element: <Naver /> },
+      { path: "/nickname", element: <Nickname /> },
     ],
   };
 
@@ -40,7 +41,6 @@ export default function CustomRoutes() {
       { path: "/member", element: <MyInfo /> },
       { path: "/member/playlist", element: <MyPlayList /> },
       { path: "/member/playlist/create", element: <CreatePlayList /> },
-      { path: "/nickname", element: <Nickname /> },
     ],
   };
   const routing = useRoutes([publicRoutes, authRoutes]);

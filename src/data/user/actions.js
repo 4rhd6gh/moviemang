@@ -18,19 +18,21 @@ export const snsLogin = (loginParams, navigate) => async (dispatch) => {
 
       console.log(response.data);
 
-      await dispatch({
+      let re = await dispatch({
         type: ActionTypes.LOGIN_SUCCESS,
         payload: response.data,
       });
+
+      console.log(re);
 
       if (response.data.message === "로그인 성공") {
         localStorage.setItem("Is", response.data.token);
         localStorage.setItem("nickname", response.data.nickname);
 
         if (loginParams.loginType === "google") {
-          navigate(-1);
+          navigate("/");
         }
-        navigate(-2);
+        navigate("/");
       } else if (response.data.message === "닉네임을 설정해 주세요.") {
         navigate("/nickname");
       }

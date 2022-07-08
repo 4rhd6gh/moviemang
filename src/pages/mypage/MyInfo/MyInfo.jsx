@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as selector from "@data/rootSelectors";
+import * as action from "@data/rootActions";
+
 import Button from "@component/Button";
 import Input from "@component/Input";
 import SNB from "../SNB";
@@ -9,10 +11,13 @@ import Chart from "./chart";
 import PlayListCard from "@page/common/playListCard";
 import * as Mock from "@data/mock";
 import { BsPersonFill as PersonIcon } from "react-icons/bs";
+import * as apis from "@service/apis/movieMang";
 
 export default function MyPage() {
   const userData = useSelector(selector.user.getUserData);
   const [nickname, setNickName] = useState(userData.nickname);
+
+  const dispatch = useDispatch();
 
   function loginType() {
     let sns = userData.loginType;
@@ -41,10 +46,13 @@ export default function MyPage() {
     setNickName(e.currentTarget.value);
   }
 
-  function handleButtonClick() {
-    console.log(nickname);
-    //nickname 변경 api
-  }
+  const handleButtonClick = async () => {
+    await dispatch(
+      action.user.editNickName({
+        nickname,
+      })
+    );
+  };
 
   return (
     <div className="flex w-[1170px] mx-auto">

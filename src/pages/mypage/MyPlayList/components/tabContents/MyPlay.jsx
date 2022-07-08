@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PlayListCard from "@page/common/playListCard";
 import * as Mock from "@data/mock";
+import * as actions from "@data/rootActions";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { IoMdAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function MyPlayList() {
+  const dispatch = useDispatch();
+  //const playList = useSelector((state) => state.user.playList);
+  const nickname = useSelector((state) => state.user.nickname);
+
+  useEffect(() => {
+    //dispatch(actions.user.getPlayList());
+  }, []);
+
   return (
     <>
       <div className="mt-10 ">

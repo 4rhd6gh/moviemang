@@ -62,7 +62,7 @@ export default function MovieDetail() {
         <div>
           <img
             loading="lazy"
-            data-src={
+            src={
               movieDetailInfo?.poster_path === null
                 ? NoImage
                 : Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path

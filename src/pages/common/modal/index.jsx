@@ -31,15 +31,22 @@ export default function Modal(props) {
       onClose(false);
     }
   };
+
+  //TODO 페이징 처리
   async function getPlayList() {
+    console.log("getplaylist");
     let response;
     try {
-      response = await apis.requestAxios("get", "/myplaylist/playlist");
+      response = await apis.requestAxios(
+        "get",
+        "/myplaylist/playlistForCreate?page=0&limit=10"
+      );
+      console.log("response", response);
     } catch (err) {
       console.log(err);
     }
 
-    setArrPlaylist(response.data.playList);
+    setArrPlaylist(response.data.playListArray);
   }
   useEffect(() => {
     getPlayList();

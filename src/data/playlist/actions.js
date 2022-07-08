@@ -24,3 +24,22 @@ export const createPlaylist = (createPlaylistParams) => async (dispatch) => {
     }
   } catch (err) {}
 };
+
+export const getMyPlaylist = () => async (dispatch) => {
+  console.log("my playlist 요청 시작");
+  try {
+    dispatch(actions.common.startLoading);
+
+    const response = await apis.requestAxios("get", "/myplaylist/playlist");
+
+    console.log(response);
+
+    if (response.status === 200) {
+      dispatch(actions.common.endLoading);
+      return response.data.playList;
+    } else {
+      dispatch(actions.common.endLoading);
+      return response.status;
+    }
+  } catch (err) {}
+};

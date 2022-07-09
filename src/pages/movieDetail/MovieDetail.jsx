@@ -176,6 +176,7 @@ export default function MovieDetail() {
         movieInfo={{
           mvTitle: movieDetailInfo?.title,
           mvPosterPath: movieDetailInfo?.poster_path,
+          tm_id: movieId,
         }}
         crew={movieDetailInfo?.crew}
         callback={addMovieCallback}

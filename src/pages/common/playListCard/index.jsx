@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import Tag from "@component/Tag";
+import * as Constants from "@constant";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmarkFill } from "react-icons/bs";
 import Tooltip from "@component/Tooltip";
+import NoImage from "@res/img/noimg.png";
 
 function ImageOneLine(props) {
   const { images, len } = props;
@@ -16,21 +18,32 @@ function ImageOneLine(props) {
   } else if (len === 3) {
     width = "w-1/3";
   }
-  return (
-    <>
-      {images.map((image, index) => {
-        return (
-          <img
-            key={index}
-            loading="lazy"
-            className={`object-cover h-full inline-block ${width}`}
-            src={image}
-            alt="movies"
-          />
-        );
-      })}
-    </>
-  );
+  if (len === 0) {
+    return (
+      <img
+        loading="lazy"
+        className={` object-fill h-full inline-block ${width}`}
+        src={NoImage}
+        alt="movies"
+      />
+    );
+  } else {
+    return (
+      <>
+        {images.map((image, index) => {
+          return (
+            <img
+              key={index}
+              loading="lazy"
+              className={`object-cover h-full inline-block ${width}`}
+              src={image}
+              alt="movies"
+            />
+          );
+        })}
+      </>
+    );
+  }
 }
 
 function ImageTwoLine(props) {
@@ -75,12 +88,26 @@ function ImageTwoLine(props) {
 }
 
 export default function PlayListCard(props) {
-  const { imageArray, title, id, likeCount, movieCount, tagArray, onClick } =
-    props;
+  const {
+    movieArray = [],
+    title,
+    id,
+    likeCount,
+    movieCount,
+    nickname,
+    tagArray,
+    onClick,
+  } = props;
+  let imageArray = [];
+  movieArray.map((item) => {
+    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath);
+  });
+
   let imgLen = imageArray.length;
+
   if (imgLen > 3 && imgLen < 6) {
     imgLen = 3;
-    imageArray.slice(0, 3);
+    imageArray = imageArray.slice(0, 3);
   }
   return (
     <div
@@ -98,7 +125,7 @@ export default function PlayListCard(props) {
         <h4 className="p-3 text-sm h-[60px] text-textMainColor">{title}</h4>
         <div className="flex justify-start">
           <span className="ml-4 mr-1 text-xs text-red-600">ID</span>
-          <span className="text-xs">{id}</span>
+          <span className="text-xs text-[#dcf836]">{nickname}</span>
         </div>
         <div className="flex items-center justify-start pl-4 mt-2">
           <StaticIcon
@@ -123,7 +150,7 @@ export default function PlayListCard(props) {
         <div className="flex items-center justify-start pb-4 pl-3 mt-3">
           {tagArray.map((tag, index) => (
             <div className="pl-2" key={index}>
-              <Tag key={index} text={tag} size="small" />
+              <Tag key={index} text={tag.tagName} size="small" />
             </div>
           ))}
         </div>
@@ -136,6 +163,7 @@ PlayListCard.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   imageArray: PropTypes.array,
+  nickname: PropTypes.string.isRequired,
   likeCount: PropTypes.number.isRequired,
   movieCount: PropTypes.number.isRequired,
   tagArray: PropTypes.array,

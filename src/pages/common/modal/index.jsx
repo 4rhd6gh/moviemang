@@ -18,6 +18,7 @@ export default function Modal(props) {
           mvTitle: movieInfo.mvTitle,
           mvPosterPath: movieInfo.mvPosterPath,
           mvDirector,
+          tm_id: movieInfo.tm_id,
         }
       );
       console.log("response", response);
@@ -72,16 +73,15 @@ export default function Modal(props) {
                     <ol className="mt-4 ">
                       {arrPlaylist.map((item) => {
                         return (
-                          <>
+                          <div key={item.playlistId}>
                             <li
-                              key={item.playlistId}
                               onClick={() => createPlMovies(item.playlistId)}
                               className="px-4 py-2 text-sm font-bold leading-5 text-black cursor-pointer hover:italic hover:text-gray-900"
                             >
                               {item.playlistTitle}
                             </li>
                             <div className="border-b-2 border-black border-solid"></div>
-                          </>
+                          </div>
                         );
                       })}
                     </ol>

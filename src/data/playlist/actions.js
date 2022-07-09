@@ -1,5 +1,6 @@
 import * as apis from "@service/apis/movieMang";
 import * as actions from "@data/rootActions";
+import * as ActionTypes from "@data/rootActionTypes";
 
 export const createPlaylist = (createPlaylistParams) => async (dispatch) => {
   console.log("playlist 생성 요청 시작");
@@ -25,21 +26,32 @@ export const createPlaylist = (createPlaylistParams) => async (dispatch) => {
   } catch (err) {}
 };
 
-export const getMyPlaylist = () => async (dispatch) => {
+export const getMyPlaylist = (page, limit) => async (dispatch) => {
   console.log("my playlist 요청 시작");
   try {
     dispatch(actions.common.startLoading);
 
-    const response = await apis.requestAxios("get", "/myplaylist/playlist");
+    const response = await apis.requestAxios(
+      "get",
+      `/myplaylist/playlist?page=${page}&limit=${limit}`
+    );
 
     console.log(response);
 
     if (response.status === 200) {
       dispatch(actions.common.endLoading);
-      return response.data.playList;
+      dispatch({
+        type: ActionTypes.REQUEST_PLAYLIST_SUCCESS,
+        payload: response.data.playList,
+      });
     } else {
       dispatch(actions.common.endLoading);
-      return response.status;
+      dispatch({
+        type: ActionTypes.REQUEST_PLAYLIST_FAILURE,
+        payload: response.data,
+      });
     }
-  } catch (err) {}
+  } catch (err) {
+    dispatch(actions.common.endLoading);
+  }
 };

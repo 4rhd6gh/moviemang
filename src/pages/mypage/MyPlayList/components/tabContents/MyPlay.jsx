@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PlayListCard from "@page/common/playListCard";
 import * as Mock from "@data/mock";
 import * as actions from "@data/rootActions";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { IoMdAddCircle } from "react-icons/io";
+import * as selector from "@data/rootSelectors";
 import { Link } from "react-router-dom";
+
+const PAGE_DATA_LIMIT = 10;
 
 export default function MyPlayList() {
   const dispatch = useDispatch();
-  //const playList = useSelector((state) => state.user.playList);
-  const nickname = useSelector((state) => state.user.nickname);
+  const myPlayList = useSelector(selector.playlist.getMyPlaylist);
+  const nickname = useSelector(selector.user.getNickname);
+  //TODO paging 처리
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    //dispatch(actions.user.getPlayList());
+    dispatch(actions.playlist.getMyPlaylist(page, PAGE_DATA_LIMIT));
   }, []);
 
   return (
@@ -30,16 +35,17 @@ export default function MyPlayList() {
           </div>
         </Link>
         <div className="grid grid-cols-3 pl-10 gap-x-44 gap-y-10">
-          {Mock.playList.playList.map((movie, index) => {
+          {myPlayList.map((playlist, index) => {
             return (
               <div key={index} className="mr-10 md:last:hidden">
                 <PlayListCard
-                  title={movie.title}
-                  id={movie.id}
-                  imageArray={movie.image}
-                  likeCount={movie.likeCount}
-                  movieCount={movie.movieCount}
-                  tagArray={movie.tagArray}
+                  title={playlist.playlistTitle}
+                  id={playlist.playlistId}
+                  nickname={nickname}
+                  movieArray={playlist.movies}
+                  likeCount={0}
+                  movieCount={playlist.movies.length}
+                  tagArray={playlist.tags}
                 />
               </div>
             );

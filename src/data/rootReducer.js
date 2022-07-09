@@ -6,6 +6,7 @@ import user from "./user/reducers";
 import movie from "./movie/reducers";
 import search from "./search/reducers";
 import common from "./common/reducers";
+import playlist from "./playlist/reducers";
 
 const persistConfig = {
   key: "root",
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   movie,
   search,
   common,
+  playlist,
 });
 export default persistReducer(persistConfig, rootReducer);

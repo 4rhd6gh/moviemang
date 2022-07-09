@@ -62,7 +62,7 @@ export default function MovieDetail() {
         <div>
           <img
             loading="lazy"
-            data-src={
+            src={
               movieDetailInfo?.poster_path === null
                 ? NoImage
                 : Constants.TM_MOVIE_IMAGE_URL + movieDetailInfo?.poster_path
@@ -176,6 +176,7 @@ export default function MovieDetail() {
         movieInfo={{
           mvTitle: movieDetailInfo?.title,
           mvPosterPath: movieDetailInfo?.poster_path,
+          tm_id: movieId,
         }}
         crew={movieDetailInfo?.crew}
         callback={addMovieCallback}

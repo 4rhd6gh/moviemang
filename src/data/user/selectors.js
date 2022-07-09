@@ -3,3 +3,4 @@ export const getError = (state) => state.user.hasError;
 export const getErrorMessage = (state) => state.user.errorMessage;
 export const getAccessToken = (state) => state.user.accessToken;
 export const getRefreshToken = (state) => state.user.refreshToken;
+export const getNickname = (state) => state.user.userData.nickname;

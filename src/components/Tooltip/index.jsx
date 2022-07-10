@@ -44,11 +44,7 @@ export default function Tooltip({ children, tooltipText }) {
     tipRef.current.style.marginLeft = "10px";
   }
   return (
-    <div
-      className="relative flex items-center"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative flex items-center">
       {/* TODO:bg-[#dd003f] tailwindcss 전역 색으로 바꾸기 */}
       <div
         className="absolute flex items-center px-4 py-2 text-xs text-white whitespace-no-wrap transition-all duration-150 rounded w-36 bg-[#dd003f]"
@@ -58,7 +54,9 @@ export default function Tooltip({ children, tooltipText }) {
         <div className="absolute w-3 h-3 bg-[#dd003f]" style={tooltipArrow} />
         {tooltipText}
       </div>
-      {children}
+      <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        {children}
+      </div>
     </div>
   );
 }

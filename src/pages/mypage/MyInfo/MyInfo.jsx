@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as selector from "@data/rootSelectors";
@@ -14,15 +14,15 @@ import { BsPersonFill as PersonIcon } from "react-icons/bs";
 
 export default function MyPage() {
   const userData = useSelector(selector.user.getUserData);
+
   const [nickname, setNickName] = useState(userData.nickname);
+  const [isNickNameSame, setIsNickNameSame] = useState(false);
 
   const dispatch = useDispatch();
 
   const currentUserNickName = localStorage.getItem("nickname");
 
-  console.log(currentUserNickName);
-
-  function loginType() {
+  const loginType = () => {
     let sns = userData.loginType;
     console.log(sns);
     if (sns === "kakao") {
@@ -44,20 +44,29 @@ export default function MyPage() {
         </div>
       );
     }
-  }
+  };
 
-  function handleNickNameInputChange(e) {
+  const handleNickNameInputChange = (e) => {
     setNickName(e.currentTarget.value);
-  }
+  };
 
   const handleNickNameChangeRequest = async (e) => {
     e.preventDefault();
+
     await dispatch(
       action.user.editNickName({
         nickname,
       })
     );
   };
+
+  useEffect(() => {
+    if (nickname === currentUserNickName) {
+      setIsNickNameSame(true);
+    } else {
+      setIsNickNameSame(false);
+    }
+  }, [currentUserNickName, nickname]);
 
   return (
     <div className="flex w-[1170px] mx-auto">
@@ -91,6 +100,7 @@ export default function MyPage() {
               height="h-[38px]"
               backgroundColor="bg-themePink"
               borderRadius="rounded"
+              disabled={isNickNameSame}
             />
             {loginType()}
           </form>

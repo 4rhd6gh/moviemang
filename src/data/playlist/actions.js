@@ -42,7 +42,7 @@ export const getMyPlaylist = (page, limit) => async (dispatch) => {
       dispatch(actions.common.endLoading);
       dispatch({
         type: ActionTypes.REQUEST_PLAYLIST_SUCCESS,
-        payload: response.data.playList,
+        payload: response.data,
       });
     } else {
       dispatch(actions.common.endLoading);

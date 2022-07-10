@@ -101,7 +101,7 @@ export default function CreatePlayList() {
               width="w-full"
               padding="p-3"
               margin="mb-3"
-              textColor="text-black"
+              textColor="text-textMainColor"
               backgroundColor="bg-[#233A50]"
               borderRadius="rounded-lg"
               onChange={handleTitleChange}
@@ -112,7 +112,7 @@ export default function CreatePlayList() {
               placeholder="상세 설명"
               onChange={handleContentsChange}
               required
-              className="w-full p-3 mb-3 bg-[#233A50] rounded-lg h-40 resize-none"
+              className="w-full p-3 mb-3 bg-[#233A50] text-textMainColor rounded-lg h-40 resize-none"
             />
             <div className="flex flex-row flex-wrap p-3 justify-center">
               {Tags()}

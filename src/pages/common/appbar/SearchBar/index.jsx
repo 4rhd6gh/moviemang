@@ -14,9 +14,11 @@ export default function SearchBar() {
   };
 
   const handleFormSubmit = (e) => {
+    e.preventDefault();
     if (value === "") return;
 
     navigate("/search/" + value);
+    setValue("");
   };
 
   return (

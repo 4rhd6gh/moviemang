@@ -20,6 +20,12 @@ export default function user(state = initialState, action) {
       return { hasError: false, errorMessage: null };
     case ActionTypes.LOGOUT_SUCCESS:
       return { hasError: false, errorMessage: null };
+
+    case ActionTypes.CHANGE_NICKNAME_SUCCESS:
+      return {
+        ...state,
+        userData: { ...state.userData, nickname: action.payload },
+      };
     default:
       return state;
   }

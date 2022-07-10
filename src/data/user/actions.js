@@ -73,7 +73,7 @@ export const createNickName =
           payload: response.data,
         });
 
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("Is", response.data.token);
         localStorage.setItem("nickname", response.data.nickname);
         navigate("/");
       } else {
@@ -87,6 +87,37 @@ export const createNickName =
       console.log(err);
     }
   };
+
+export const editNickName = (editNickNameParams) => async (dispatch) => {
+  console.log("edit 요청 시작");
+  try {
+    dispatch(actions.common.startLoading);
+
+    const response = await apis.requestAxios(
+      "put",
+      "/user/nickname",
+      {},
+      editNickNameParams
+    );
+
+    console.log(response);
+
+    if (response.status === 200) {
+      dispatch(actions.common.endLoading);
+
+      await dispatch({
+        type: ActionTypes.CHANGE_NICKNAME_SUCCESS,
+        payload: response.data.nickname,
+      });
+
+      localStorage.setItem("nickname", response.data.nickname);
+    } else {
+      dispatch(actions.common.endLoading);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const logout = (navigate) => (dispatch) => {
   dispatch({

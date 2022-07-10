@@ -24,7 +24,7 @@ export default function ProfileDropDown({ isDropDownOpen, setIsDropDownOpen }) {
 
   return (
     <ul
-      className="absolute flex flex-col left-[-20px] gap-3 p-4 text-sm text-center rounded-md w-28 bg-profileDropDownBackgroundColor top-10"
+      className="absolute flex flex-col left-[-35px] gap-3 p-4 text-sm text-center rounded-md w-28 bg-profileDropDownBackgroundColor top-10"
       ref={dropDownRef}
     >
       <li

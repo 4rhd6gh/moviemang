@@ -18,11 +18,13 @@ export default function NicknameModal() {
 
   const { accessToken, loginType, userSub, refreshToken } = userData;
 
-  const handleChangeInput = (e) => {
+  const handleNickNameInputChange = (e) => {
     setNickname(e.currentTarget.value);
   };
 
-  const handleClickButton = async () => {
+  const handleNickNameCreateRequest = async (e) => {
+    e.preventDefault();
+
     await dispatch(
       action.user.createNickName(
         {
@@ -39,12 +41,14 @@ export default function NicknameModal() {
 
   return (
     <div className="max-w-3xl mx-auto my-6 mt-28 w-96">
-      <div className="flex flex-col bg-white border-0 rounded-lg shadow-lg outline-none ">
+      <form
+        className="flex flex-col bg-white border-0 rounded-lg shadow-lg outline-none"
+        onSubmit={handleNickNameCreateRequest}
+      >
         <div className="flex flex-col items-center justify-center p-5 border-b border-solid rounded-t border-slate-200">
           <h3 className="text-3xl font-semibold text-black">JOIN</h3>
           <p>닉네임을 입력해 주세요</p>
         </div>
-
         <div className="flex flex-col items-center justify-center p-6 border-t border-solid rounded-b border-slate-200 ">
           <Input
             type="text"
@@ -55,10 +59,9 @@ export default function NicknameModal() {
             backgroundColor="bg-transparent"
             borderRadius="rounded-lg"
             border="border-solid border border-slate-400"
-            onChange={handleChangeInput}
+            onChange={handleNickNameInputChange}
           />
         </div>
-
         <div className="flex flex-col items-center justify-center px-6 py-2 border-t border-solid rounded-b border-slate-200 ">
           <Button
             variant="contained"
@@ -68,10 +71,9 @@ export default function NicknameModal() {
             width="w-full"
             backgroundColor="bg-themePink"
             borderRadius="rounded-lg"
-            onClick={handleClickButton}
-          ></Button>
+          />
         </div>
-      </div>
+      </form>
     </div>
   );
 }

@@ -36,13 +36,17 @@ export default function Button(props) {
     ? "focus:outline-none focus:ring-1 focus:ring-offset-2"
     : "";
 
+  const buttonDisabledStyle = disabled ? "bg-opacity-[0.7]" : "";
+
+  const buttonCursorPointer = disabled ? "" : "cursor-pointer";
+
   return (
     <button
       disabled={disabled}
       type={type}
       form={form}
       value={value}
-      className={` cursor-pointer ${margin} ${borderRadius} ${width} ${height} ${color} ${buttonType} ${buttonFocus} ${backgroundColor} `}
+      className={`${buttonCursorPointer} ${margin} ${borderRadius} ${width} ${height} ${color} ${buttonType} ${buttonFocus} ${backgroundColor} ${buttonDisabledStyle}`}
       onClick={disabled ? null : onClick}
     >
       {text}

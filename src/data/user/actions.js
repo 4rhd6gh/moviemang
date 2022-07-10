@@ -73,7 +73,7 @@ export const createNickName =
           payload: response.data,
         });
 
-        localStorage.setItem("ls", response.data.token);
+        localStorage.setItem("Is", response.data.token);
         localStorage.setItem("nickname", response.data.nickname);
         navigate("/");
       } else {

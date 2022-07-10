@@ -12,7 +12,7 @@ export default function Appbar(props) {
 
   const accessToken = localStorage.getItem("Is");
 
-  const handleOnJoinClick = () => {
+  const handleJoinClick = () => {
     navigate("/join");
   };
 
@@ -97,7 +97,7 @@ export default function Appbar(props) {
                 height="h-[35px]"
                 backgroundColor="bg-themePink"
                 borderRadius="rounded-2xl"
-                onClick={handleOnJoinClick}
+                onClick={handleJoinClick}
               ></Button>
             </>
           )}

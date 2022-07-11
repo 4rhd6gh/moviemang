@@ -111,7 +111,7 @@ export default function PlayListCard(props) {
   }
   return (
     <div
-      className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2"
+      className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2 cursor-pointer"
       onClick={onClick}
     >
       <div className="h-[246px] w-full bg-white rounded-lg tablet:h-[200px] md:h-[150px]">

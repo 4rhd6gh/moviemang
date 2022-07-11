@@ -28,7 +28,7 @@ export default function MyPlayList() {
             ]}
           />
         </div>
-        <div className="w-[700px]">
+        <div className="w-full">
           {activeTab === 0 ? <MyPlay /> : <JjimPlay />}
         </div>
       </div>

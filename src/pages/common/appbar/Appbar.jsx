@@ -30,25 +30,25 @@ export default function Appbar(props) {
         }`}
     >
       {/* 로고 및 검색바 부분 */}
-      <div className="flex items-center h-20 w-[1170px] mr-auto ml-auto pr-10 pl-10 tablet:w-[970px] md:w-[600px] md:pr-0 md:pl-0 mobile:w-full mobile:pr-10 mobile:pl-10 mobile:min-w-[437px] ">
+      <div className="flex items-center h-20 w-[1170px] tablet:w-[1050px] px-10 tablet:px-20 md:w-[600px] md:pr-0 md:pl-0 mobile:w-full mobile:pr-10 mobile:pl-10 mobile:min-w-[437px]">
         {/* 로고 */}
         <div
-          className="relative flex items-center cursor-pointer hover:"
+          className="relative flex items-center cursor-pointer text-[80px] md:text-[60px] font-bold text-themePink"
           onClick={handleLogoClick}
         >
-          <div className="text-[70px] font-bold logo text-themePink flex items-center ">
+          <div className="flex items-center">
             M
-            <span className="mt-2 ml-[2px] text-4xl tracking-wider text-white">
+            <span className="mt-2 ml-[2px] text-4xl tracking-wider text-white md:text-3xl">
               OVIEMAN
-              <span className="text-themePink ml-[1px] text-4xl">G</span>
+              <span className="text-themePink ml-[1px]">G</span>
             </span>
           </div>
-          <div className="absolute text-[70px] font-bold top-[-7px] left-[4px] logo text-themePink z-[-1] opacity-[0.5]">
+          <div className="absolute top-[-7px] left-[4px] z-[-1] opacity-[0.5]">
             M
           </div>
         </div>
         <SearchBar />
-        <nav className="flex items-center mt-2 ml-auto font-bold tracking-widest text-l text-textMainColor nav_container md:hidden">
+        <nav className="flex items-center mt-2 ml-auto font-bold tracking-widest whitespace-pre text-l tablet:ml-[100px] text-textMainColor md:hidden">
           {accessToken && (
             <NavLink
               to="/member/playlist"
@@ -98,12 +98,12 @@ export default function Appbar(props) {
                 backgroundColor="bg-themePink"
                 borderRadius="rounded-2xl"
                 onClick={handleJoinClick}
-              ></Button>
+              />
             </>
           )}
         </nav>
-        <div className="flex ml-auto">
-          <MenuIcon className="hidden w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2 md:block " />
+        <div className="hidden md:ml-auto md:block">
+          <MenuIcon className="w-[40px] h-[40px] p-[3px] border-2 mr-0 mt-2" />
         </div>
       </div>
     </header>

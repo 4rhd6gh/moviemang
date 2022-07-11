@@ -3,7 +3,8 @@ import ProbTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
-const tagColors = ["#1692bb", "#f5b50a", "#ec5a1a"];
+
+const tagColors = ["#1692BB", "#F5B50A", "#EC5A1A"];
 
 export default function MainSection(props) {
   const { tags, playListTitle } = props;
@@ -18,9 +19,7 @@ export default function MainSection(props) {
                 tagColors[index % 3]
               }] pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
             >
-              <span className="text-sm font-bold text-white">
-                {tag.tagName}
-              </span>
+              <a className="text-sm font-bold text-white">{tag.tagName}</a>
             </span>
           ))}
         </div>

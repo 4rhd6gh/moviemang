@@ -11,21 +11,23 @@ export default function Paging(props) {
     <div className=" w-full flex items-center justify-center border-t-[1px] border-b-[1px] border-solid border-[#405266]">
       <div className="">
         <div className=" text-[#4280bf] pl-5 pr-5" href="#">
-          {Array.from(
-            Array(Math.ceil(totalCount / PAGE_DATA_LIMIT)).keys()
-          ).map((index) => {
-            return (
-              <a
-                key={index}
-                className={`${
-                  index === page ? "text-[#bcf836]" : "text-gray-600"
-                } pl-2 pr-2`}
-                onClick={() => onChange(index)}
-              >
-                {index + 1}
-              </a>
-            );
-          })}
+          {totalCount === 0
+            ? Array.from(
+                Array(Math.ceil(totalCount / PAGE_DATA_LIMIT)).keys()
+              ).map((index) => {
+                return (
+                  <a
+                    key={index}
+                    className={`${
+                      index === page ? "text-[#bcf836]" : "text-gray-600"
+                    } pl-2 pr-2 cursor-pointer`}
+                    onClick={() => onChange(index)}
+                  >
+                    {index + 1}
+                  </a>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>

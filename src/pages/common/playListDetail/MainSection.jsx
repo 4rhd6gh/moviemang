@@ -121,7 +121,9 @@ export default function MainSection(props) {
                 tagColors[index % 3]
               } pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
             >
-              <a className="text-sm font-bold text-white">{tag.tagName}</a>
+              <span className="text-sm font-bold text-white">
+                {tag.tagName}
+              </span>
             </span>
           ))}
         </div>

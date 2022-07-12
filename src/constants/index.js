@@ -1,8 +1,8 @@
 export const TOKEN_KEY = "token";
 export const TM_MOVIE_URL = `https://api.themoviedb.org/3`;
 
-export const MOVIE_MANG_URL = "http://35.203.6.209:8000";
-//export const MOVIE_MANG_URL = "http://localhost:8000";
+//export const MOVIE_MANG_URL = "http://35.203.6.209:8000";
+export const MOVIE_MANG_URL = "http://localhost:8000";
 export const DEFAULT_TIME_OUT = 2500;
 export const TM_MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/original";
 

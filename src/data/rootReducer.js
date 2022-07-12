@@ -11,7 +11,7 @@ import playlist from "./playlist/reducers";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "playlist"],
 };
 
 export const rootReducer = combineReducers({

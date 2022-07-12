@@ -13,7 +13,9 @@ export default function MainPage() {
   return (
     <>
       <div className="flex pl-6 text-2xl items-center w-[1250px] mr-auto ml-auto pt-6">
-        <h1 className="pr-4 text-base">인기태그</h1>
+        <h1 className="pr-4 ml-16 text-base tablet:text-xl md:ml-8 text-gray-500">
+          인기태그
+        </h1>
         {Mock.popularTags.tags.map((tag, index) => {
           return (
             <div className="pr-2" key={index}>
@@ -22,7 +24,6 @@ export default function MainPage() {
           );
         })}
       </div>
-
       <section className=" pt-4 w-[1200px] tablet:w-[970px] md:w-[700px] mr-auto ml-auto">
         <h1 className="ml-16 text-2xl font-bold text-textMainColor tablet:text-xl md:ml-8 md:text-lg">
           # 좋아요가 가장 많은

@@ -74,7 +74,7 @@ export default function MyPage() {
         <SNB />
       </div>
       <div className="w-full max-w-2xl p-10 ">
-        <div className="flex">
+        <div className="flex justify-center">
           <div className="bg-gray-400 rounded w-52 h-52">
             <PersonIcon className="w-52 h-52" fill="#d1d5db" />
           </div>

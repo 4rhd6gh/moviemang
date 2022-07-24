@@ -24,7 +24,7 @@ pipeline {
                 echo "Docker RUN"
                 docker run -d ${GIT_COMMIT_TAG}
                 docker rm -f mmfront
-                docker run -d -p 8000:8000 --name mmfront ${GIT_COMMIT_TAG}
+                docker run -d -p 3000:3000 --name mmfront ${GIT_COMMIT_TAG}
                 '''
             }
         }

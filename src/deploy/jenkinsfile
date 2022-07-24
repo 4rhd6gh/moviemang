@@ -1,8 +1,5 @@
-#!groovy
-@Library('dockerBuild') _
 pipeline {
     agent any
-
     environment{
         GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
         GIT_COMMIT_TAG = "${GIT_COMMIT_HASH.substring(0,8)}"
@@ -11,10 +8,13 @@ pipeline {
     stages {
         stage('Docker Build') {
         steps {
-            docker.build("${GIT_COMMIT_TAG}")
             sh '''
             echo "Building Docker Image"
             pwd
+            echo "GIT_COMMIT_HASH: ${GIT_COMMIT_HASH}"
+            echo "GIT_COMMIT_TAG: ${GIT_COMMIT_TAG}"
+            docker build -t ${GIT_COMMIT_TAG} .
+            docker tag ${GIT_COMMIT_TAG} ${GIT_COMMIT_TAG}:latest
             '''
             }
         }
@@ -22,8 +22,9 @@ pipeline {
             steps {
                 sh '''
                 echo "Docker RUN"
+                docker run -d ${GIT_COMMIT_TAG}
                 docker rm -f mmfront
-                docker run -d -p 3000:3000 --name mmfront ${GIT_COMMIT_TAG}
+                docker run -d -p 8000:8000 --name mmfront ${GIT_COMMIT_TAG}
                 '''
             }
         }

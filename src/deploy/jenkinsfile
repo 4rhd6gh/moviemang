@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Docker Build') {
         steps {
-            dockerBuild("${GIT_COMMIT_TAG}")
+            docker.build("${GIT_COMMIT_TAG}")
             sh '''
             echo "Building Docker Image"
             pwd
@@ -22,8 +22,8 @@ pipeline {
             steps {
                 sh '''
                 echo "Docker RUN"
-                docker rm -f mmback
-                docker run -d -p 8000:8000 --name mmback ${GIT_COMMIT_TAG}
+                docker rm -f mmfront
+                docker run -d -p 3000:3000 --name mmfront ${GIT_COMMIT_TAG}
                 '''
             }
         }

@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('React Build') {
             steps {
-                ehco "React build start"
+                echo "React build start"
                 sh 'pwd'
                 sh 'node -v'
             }

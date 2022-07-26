@@ -4,9 +4,9 @@ pipeline {
     stages {
         stage('React Build') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
+                ehco "React build start"
                 sh 'pwd'
+                sh 'node -v'
             }
         }
         stage('Docker build') {

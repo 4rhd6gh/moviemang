@@ -6,7 +6,7 @@ pipeline {
         stage('React Build') {
             steps {
                 echo "React build start"
-                sh 'npm install'
+                sh 'npm install --legacy-peer-deps'
                 sh 'npm run build'
             }
         }

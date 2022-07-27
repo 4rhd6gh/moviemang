@@ -14,14 +14,24 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                sh 'docker build -t nginx-react-image:latest .'
+                sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
+                def existPreBuildTag = sh (script: "docker images nginx-react-image:latest", returnStdout: true)
+                String[] preBuildTag = existPreBuildTag.split("\n")
+                if( preBuildTag.length > 1 ){
+                    sh 'docker rmi nginx-react-image:latest'
+                    sh 'docker build -t nginx-react-image:latest .'    
+                }else{
+                    sh 'docker build -t nginx-react-image:latest .'
+                }
+                
             }
         }
 
         stage('Docker run') {
             steps {
-                sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
+                
+                sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}' 
                 sh 'docker run -d --name nginx-react-container -p 80:80 nginx-react-image:latest'
             }
         }

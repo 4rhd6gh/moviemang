@@ -6,6 +6,7 @@ pipeline {
         stage('React Build') {
             steps {
                 echo "React build start"
+                sh 'pwd'
                 sh 'npm install --legacy-peer-deps'
                 sh 'npm run build'
             }
@@ -16,7 +17,7 @@ pipeline {
                 sh 'docker build -t nginx-react-image:latest .'
             }
         }
-        
+
         stage('Docker run') {
             steps {
                 sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'

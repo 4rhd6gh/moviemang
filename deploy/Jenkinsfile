@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
+                sh 'docker images -f nginx-react-image:latest | xargs --no-run-if-empty docker rmi'
                 sh 'docker build -t nginx-react-image:latest .'
             }
         }

@@ -1,32 +1,31 @@
 pipeline {
     agent any
-    environment{
-        GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
-        GIT_COMMIT_TAG = "${GIT_COMMIT_HASH.substring(0,8)}"
-    }
-    
+    tools {nodejs "nodejs"}
+
     stages {
-        stage('Docker Build') {
-        steps {
-            sh '''
-            echo "Building Docker Image"
-            pwd
-            echo "GIT_COMMIT_HASH: ${GIT_COMMIT_HASH}"
-            echo "GIT_COMMIT_TAG: ${GIT_COMMIT_TAG}"
-            docker build -t ${GIT_COMMIT_TAG} .
-            docker tag ${GIT_COMMIT_TAG} ${GIT_COMMIT_TAG}:latest
-            '''
+        stage('React Build') {
+            steps {
+                echo "React build start"
+                sh 'pwd'
+                sh 'npm install --force'
+                sh 'CI=false npm run build'
             }
         }
-        stage('Docker RUN') {
+
+        stage('Docker build') {
             steps {
-                sh '''
-                echo "Docker RUN"
-                docker run -d ${GIT_COMMIT_TAG}
-                docker rm -f mmfront
-                docker run -d -p 3000:3000 --name mmfront ${GIT_COMMIT_TAG}
-                '''
+                sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
+                sh 'docker build -t nginx-react-image:latest .'
+            }
+        }
+
+        stage('Docker run') {
+            steps {
+
+                sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}' 
+                sh 'docker run -d --name nginx-react-container -p 80:80 nginx-react-image:latest'
             }
         }
     }
-}
+} 

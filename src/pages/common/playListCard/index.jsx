@@ -6,7 +6,7 @@ import * as Constants from "@constant";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmarkFill } from "react-icons/bs";
 import Tooltip from "@component/Tooltip";
-import NoImage from "@res/img/noimg.png";
+import NoMovie from "@res/img/nomovie.png";
 
 function ImageOneLine(props) {
   const { images, len } = props;
@@ -22,8 +22,8 @@ function ImageOneLine(props) {
     return (
       <img
         loading="lazy"
-        className={` object-fill h-full inline-block ${width}`}
-        src={NoImage}
+        className={`bg-gray-300 object-fill h-full inline-block ${width}`}
+        src={NoMovie}
         alt="movies"
       />
     );

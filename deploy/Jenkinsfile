@@ -29,4 +29,21 @@ pipeline {
             }
         }
     }
+    post{
+        success {
+            slackSend(
+                channel: '#jenkins',
+                color: 'good',
+                message: '[Successful] Job:${env.JOB_NAME} - ${env.BUILD_URL}'
+            )
+        }
+        failure{
+            slackSend(
+                channel: '#jenkins',
+                color: 'danger',
+                message: '[Failed] Job:${env.JOB_NAME} - ${env.BUILD_URL}'
+            )
+        }
+    }
+
 }

@@ -45,14 +45,14 @@ pipeline {
             slackSend(
                 channel: '#4-2_젠킨스_프론트엔드_빌드알림',
                 color: 'good',
-                message: '[Successful] Job:${SYSTEM_NAME} '
+                message: '[Successful] Job:${SYSTEM_NAME} Commit:${GIT_COMMIT_HASH}'
             )
         }
         failure{
             slackSend(
                 channel: '#4-2_젠킨스_프론트엔드_빌드알림',
                 color: 'danger',
-                message: '[Failed] Job:${SYSTEM_NAME} '
+                message: '[Failed] Job:${SYSTEM_NAME} Commit:${GIT_COMMIT_HASH}'
             )
         }
     }

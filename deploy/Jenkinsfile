@@ -24,7 +24,7 @@ pipeline {
         stage('Docker run') {
             steps {
                 sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}' 
-                sh 'docker run -d --name nginx-react-container -p 80:80 -v /home/contentscuration/ssl:/opt -v /home/contentscuration/nginx-conf:/etc/nginx/conf.d nginx-react-image:latest'
+                sh 'docker run -d --name nginx-react-container -p 80:80 -p 443:443 -v /home/contentscuration/ssl:/opt -v /home/contentscuration/nginx-conf:/etc/nginx/conf.d nginx-react-image:latest'
             }
         }
     }

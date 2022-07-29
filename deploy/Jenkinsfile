@@ -2,6 +2,18 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
 
+    environment{
+        GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+        GIT_PRE_COMMIT_HASH = sh (script: "git show HEAD@{1} -1 --pretty=format:'%H'", returnStdout: true)
+        GIT_PRE_COMMIT_TAG = "${GIT_PRE_COMMIT_HASH.substring(0,8)}"
+        GIT_COMMIT_TAG = "${GIT_COMMIT_HASH.substring(0,8)}"
+        SYSTEM_NAME = sh (returnStdout: true,
+        script: """
+            basename \$(git remote get-url origin) | sed -e "s/.git\$//"
+        """)
+    }
+
+
     stages {
         stage('React Build') {
             steps {
@@ -33,14 +45,14 @@ pipeline {
             slackSend(
                 channel: '#4-2_젠킨스_프론트엔드_빌드알림',
                 color: 'good',
-                message: '[Successful] Job:${env.JOB_NAME} - ${env.BUILD_URL}'
+                message: '[Successful] Job:${SYSTEM_NAME} '
             )
         }
         failure{
             slackSend(
                 channel: '#4-2_젠킨스_프론트엔드_빌드알림',
                 color: 'danger',
-                message: '[Failed] Job:${env.JOB_NAME} - ${env.BUILD_URL}'
+                message: '[Failed] Job:${SYSTEM_NAME} '
             )
         }
     }

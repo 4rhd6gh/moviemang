@@ -15,7 +15,7 @@ pipeline {
 
 
     stages {
-        stage('STEP1----------------------React Build!!!') {
+        stage('STEP1--------------------------React Build!!!') {
             steps {
                 echo "React build start"
                 sh 'pwd'
@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-        stage('STEP2----------------------Docker Build!!!') {
+        stage('STEP2--------------------------Docker Build!!!') {
             steps {
                 sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('STEP3----------------------Docker Run!!!') {
+        stage('STEP3--------------------------Docker Run!!!') {
             steps {
                 sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}' 
                 sh 'docker run -d --name nginx-react-container -p 80:80 -p 443:443 -v /home/contentscuration/ssl:/opt -v /home/contentscuration/nginx-conf:/etc/nginx/conf.d nginx-react-image:latest'

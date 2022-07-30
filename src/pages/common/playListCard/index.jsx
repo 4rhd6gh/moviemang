@@ -91,7 +91,6 @@ export default function PlayListCard(props) {
   const {
     movieArray = [],
     title,
-    id,
     likeCount,
     movieCount,
     nickname,
@@ -99,9 +98,10 @@ export default function PlayListCard(props) {
     onClick,
   } = props;
   let imageArray = [];
-  movieArray.map((item) => {
-    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath);
-  });
+
+  movieArray.map((item) =>
+    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
+  );
 
   let imgLen = imageArray.length;
 

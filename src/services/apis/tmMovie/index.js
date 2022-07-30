@@ -39,6 +39,7 @@ export async function requestAxios(method = "get", url, params, body) {
       }
     }
     return errorResponse;
+    // eslint-disable-next-line no-unreachable
     console.log(e.response);
   }
 }

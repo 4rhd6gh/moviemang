@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 const PAGE_DATA_LIMIT = 9;
@@ -16,6 +16,7 @@ export default function Paging(props) {
                 Array(Math.ceil(totalCount / PAGE_DATA_LIMIT)).keys()
               ).map((index) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
                   <a
                     key={index}
                     className={`${

@@ -2,30 +2,58 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
 
+    environment{
+        GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+        GIT_PRE_COMMIT_HASH = sh (script: "git show HEAD@{1} -1 --pretty=format:'%H'", returnStdout: true)
+        GIT_PRE_COMMIT_TAG = "${GIT_PRE_COMMIT_HASH.substring(0,8)}"
+        GIT_COMMIT_TAG = "${GIT_COMMIT_HASH.substring(0,8)}"
+        SYSTEM_NAME = sh (returnStdout: true,
+        script: """
+            basename \$(git remote get-url origin) | sed -e "s/.git\$//"
+        """)
+    }
+
+
     stages {
-        stage('React Build') {
+        stage('STEP1--------------------------React Build!!!') {
             steps {
-                echo "React build start"
                 sh 'pwd'
                 sh 'npm install --force'
                 sh 'CI=false npm run build'
             }
         }
 
-        stage('Docker build') {
+        stage('STEP2--------------------------Docker Build!!!') {
             steps {
                 sh 'docker ps -f name=nginx-react-container -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=nginx-react-container -q | xargs -r docker container rm'
+                sh 'docker images -f nginx-react-image:latest | xargs --no-run-if-empty docker rmi'
                 sh 'docker build -t nginx-react-image:latest .'
             }
         }
 
-        stage('Docker run') {
+        stage('STEP3--------------------------Docker Run!!!') {
             steps {
-                
                 sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}' 
-                sh 'docker run -d --name nginx-react-container -p 80:80 nginx-react-image:latest'
+                sh 'docker run -d --name nginx-react-container -p 80:80 -p 443:443 -v /home/contentscuration/ssl:/opt -v /home/contentscuration/nginx-conf:/etc/nginx/conf.d nginx-react-image:latest'
             }
         }
     }
+    post{
+        success {
+            slackSend(
+                channel: '#4-2_젠킨스_프론트엔드_빌드알림',
+                color: 'good',
+                message: '[Successful] Job:${SYSTEM_NAME} Commit:${GIT_COMMIT_HASH}'
+            )
+        }
+        failure{
+            slackSend(
+                channel: '#4-2_젠킨스_프론트엔드_빌드알림',
+                color: 'danger',
+                message: '[Failed] Job:${SYSTEM_NAME} Commit:${GIT_COMMIT_HASH}'
+            )
+        }
+    }
+
 }

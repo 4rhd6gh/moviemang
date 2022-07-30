@@ -3,14 +3,18 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import * as actions from "@data/rootActions";
-import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from "../../constants/index";
+import {
+  KAKAO_AUTH_URL,
+  NAVER_AUTH_URL,
+  MOVIE_MANG_BACKEND_URL,
+} from "../../constants/index";
 
 import GoogleLogin from "./Google";
 import { kakaoLoginImage, naverLoginImage } from "@assets/index";
 
 export default function Login() {
   const dispatch = useDispatch();
-  console.log({ NAVER_AUTH_URL });
+  console.log({ MOVIE_MANG_BACKEND_URL });
 
   useEffect(() => {
     //남아 있는 에러메시지 날리기

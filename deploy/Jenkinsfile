@@ -4,7 +4,7 @@ pipeline {
 
     environment{
         GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
-        GIT_PRE_COMMIT_HASH = sh (script: "git show HEAD@{1} -1 --pretty=format:'%H'", returnStdout: true)
+        GIT_PRE_COMMIT_HASH = sh (script: "git show HEAD@{1} -1 --pretty=format:'%H'", returnStdout:true)
         GIT_PRE_COMMIT_TAG = "${GIT_PRE_COMMIT_HASH.substring(0,8)}"
         GIT_COMMIT_TAG = "${GIT_COMMIT_HASH.substring(0,8)}"
         SYSTEM_NAME = sh (returnStdout: true,

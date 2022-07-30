@@ -10,6 +10,7 @@ import { kakaoLoginImage, naverLoginImage } from "@assets/index";
 
 export default function Login() {
   const dispatch = useDispatch();
+  console.log({ NAVER_AUTH_URL });
 
   useEffect(() => {
     //남아 있는 에러메시지 날리기

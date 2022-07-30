@@ -1,5 +1,4 @@
 import axios from "axios";
-import * as Constants from "@constant";
 
 export async function requestAxios(method = "get", url, params, body) {
   let response;
@@ -12,7 +11,7 @@ export async function requestAxios(method = "get", url, params, body) {
     response = await axios({
       method: method,
       headers: header,
-      url: Constants.MOVIE_MANG_URL + url,
+      url: process.env.REACT_APP_MOVIE_MANG_BACK_URL + url,
       params: params,
       data: body,
     });

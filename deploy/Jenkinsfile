@@ -17,7 +17,6 @@ pipeline {
     stages {
         stage('STEP1--------------------------React Build!!!') {
             steps {
-                echo "React build start"
                 sh 'pwd'
                 sh 'npm install --force'
                 sh 'CI=false npm run build'

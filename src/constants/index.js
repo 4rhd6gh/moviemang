@@ -4,7 +4,7 @@ export const TM_MOVIE_IMAGE_URL = "https://image.tmdb.org/t/p/original";
 export const MOVIE_MANG_BACKEND_URL =
   process.env.NODE_ENV === "development"
     ? `${process.env.REACT_APP_MOVIE_MANG_BACK_URL}`
-    : "http://localhost:8000";
+    : "10.174.0.3:8000";
 
 const baseURL =
   process.env.NODE_ENV === "development"

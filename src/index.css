@@ -25,7 +25,7 @@
 }
 
 .backgroundImg {
-  background: url("./assets/backgroundImg.PNG");
+  background: url("./assets/backgroundImg.jpg");
   width: 100vw;
   position: fixed;
   z-index: -2;

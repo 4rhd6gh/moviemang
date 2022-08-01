@@ -5,7 +5,7 @@ export async function requestAxios(method = "get", url, params, body) {
   let response;
 
   const finParams = {
-    api_key: Constants.TM_API_KEY,
+    api_key: process.env.REACT_APP_TM_API_KEY,
     language: "ko-KR",
     ...params,
   };
@@ -39,6 +39,7 @@ export async function requestAxios(method = "get", url, params, body) {
       }
     }
     return errorResponse;
+    // eslint-disable-next-line no-unreachable
     console.log(e.response);
   }
 }

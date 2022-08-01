@@ -22,7 +22,7 @@ export default function MyPlayList() {
 
   useEffect(() => {
     dispatch(actions.playlist.getMyPlaylist(page * 9, PAGE_DATA_LIMIT));
-  }, [page]);
+  }, [dispatch, page]);
 
   return (
     <>

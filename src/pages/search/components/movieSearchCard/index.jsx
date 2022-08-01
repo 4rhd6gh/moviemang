@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import StaticIcon from "@component/Icons/StaticIcon";
-import { IoMdAddCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 export default function MovieSearchCard(props) {

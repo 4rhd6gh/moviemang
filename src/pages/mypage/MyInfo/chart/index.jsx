@@ -1,7 +1,7 @@
 import React from "react";
 import { data } from "../../data";
 
-export default function Chart() {
+function Chart() {
   const playList = data.data.playlist;
   const tagList = playList.reduce(function (accumulator, currentValue) {
     return [...accumulator, ...currentValue.tags];
@@ -39,3 +39,4 @@ export default function Chart() {
     </div>
   );
 }
+export default React.memo(Chart);

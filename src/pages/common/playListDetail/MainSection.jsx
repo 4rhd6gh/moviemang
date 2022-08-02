@@ -3,7 +3,7 @@ import ProbTypes from "prop-types";
 import * as Constants from "@constant";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart } from "react-icons/ai";
-import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+import { FaRegBookmark } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import NoImage from "@res/img/noimg.png";
 
@@ -99,9 +99,9 @@ export default function MainSection(props) {
   } = props;
 
   let imageArray = [];
-  movieArray.map((item) => {
-    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath);
-  });
+  movieArray.map((item) =>
+    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
+  );
 
   let imgLen = imageArray.length;
 

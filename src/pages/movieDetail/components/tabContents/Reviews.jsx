@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import * as action from "@data/rootActions";
-import * as selector from "@data/rootSelectors";
 import * as Mock from "@data/mock";
 
 export default function Reviews() {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as selector from "@data/rootSelectors";
@@ -22,7 +22,7 @@ export default function MyPage() {
 
   const currentUserNickName = localStorage.getItem("nickname");
 
-  const loginType = () => {
+  const loginType = useCallback(() => {
     let sns = userData.loginType;
     console.log(sns);
     if (sns === "kakao") {
@@ -44,7 +44,7 @@ export default function MyPage() {
         </div>
       );
     }
-  };
+  }, [userData.loginType]);
 
   const handleNickNameInputChange = (e) => {
     setNickName(e.currentTarget.value);

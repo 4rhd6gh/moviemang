@@ -54,6 +54,7 @@ export default function MovieDetail() {
     dispatch(action.movie.getPopularMovieDetail(movieId));
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     getMovieDetail();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (

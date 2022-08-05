@@ -60,9 +60,10 @@ export default function Overview(props) {
           <ul className="pb-3">
             {recommand.map((item, index) => {
               return (
-                <li
+                <a
                   key={index}
                   className="inline-block p-4 m-0 overflow-hidden rounded-lg "
+                  href={`/movieDetail/${item.id}`}
                 >
                   <img
                     src={
@@ -77,7 +78,7 @@ export default function Overview(props) {
                   <div className="mt-3 text-sm text-center text-white">
                     {item.title}
                   </div>
-                </li>
+                </a>
               );
             })}
           </ul>

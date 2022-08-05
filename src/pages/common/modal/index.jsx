@@ -2,10 +2,23 @@ import React, { useEffect, useState } from "react";
 import Button from "@component/Button";
 import PropTypes from "prop-types";
 import * as apis from "@service/apis/movieMang";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import * as selector from "@data/rootSelectors";
+import Paging from "@component/Paging";
+import * as actions from "@data/rootActions";
+
+const PAGE_DATA_LIMIT = 9;
 
 export default function Modal(props) {
   const { open, movieInfo, onClose, crew = [], callback } = props;
-  const [arrPlaylist, setArrPlaylist] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const myPlayList = useSelector(selector.playlist.getMyPlaylist);
+  const totalCount = useSelector(selector.playlist.getTotalCount);
+  const nickname = useSelector(selector.user.getNickname);
+  const [page, setPage] = useState(0);
+
   async function createPlMovies(playlistId) {
     const mvDirector = crew.find((item) => item.job === "Director")?.name;
     try {
@@ -33,25 +46,9 @@ export default function Modal(props) {
     }
   };
 
-  //TODO 페이징 처리
-  async function getPlayList() {
-    console.log("getplaylist");
-    let response;
-    try {
-      response = await apis.requestAxios(
-        "get",
-        "/myplaylist/playlistForCreate?page=0&limit=10"
-      );
-      console.log("response", response);
-    } catch (err) {
-      console.log(err);
-    }
-
-    setArrPlaylist(response.data.playListArray);
-  }
   useEffect(() => {
-    getPlayList();
-  }, []);
+    dispatch(actions.playlist.getMyPlaylist(page * 9, PAGE_DATA_LIMIT));
+  }, [dispatch, page]);
   return (
     <>
       {open ? (
@@ -62,7 +59,7 @@ export default function Modal(props) {
           >
             <div className="relative w-auto max-w-3xl mx-auto my-6">
               <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
-                <div className="flex items-center justify-center p-5 border-b border-solid rounded-t border-slate-200">
+                <div className="items-center justify-center p-5 border-b border-solid rounded-t border-slate-200">
                   <div>
                     <h1 className="text-2xl font-semibold text-gray-900 ">
                       PlayList
@@ -71,7 +68,7 @@ export default function Modal(props) {
                       영화를 담을 플레이리스트를 선택하세요.
                     </div>
                     <ol className="mt-4 ">
-                      {arrPlaylist.map((item) => {
+                      {myPlayList.map((item) => {
                         return (
                           <div key={item.playlistId}>
                             <li
@@ -85,6 +82,13 @@ export default function Modal(props) {
                         );
                       })}
                     </ol>
+                  </div>
+                  <div className="items-center justify-center px-5 mt-8">
+                    <Paging
+                      totalCount={totalCount}
+                      page={page}
+                      onChange={setPage}
+                    />
                   </div>
                 </div>
                 <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">

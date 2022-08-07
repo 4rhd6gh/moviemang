@@ -3,7 +3,13 @@ import Button from "@component/Button";
 import PropTypes from "prop-types";
 
 export default function Alert(props) {
-  const { open, onClose, message } = props;
+  const {
+    open,
+    onClose,
+    message,
+    onConfirm = null,
+    targetMovieId = "",
+  } = props;
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       onClose(false);
@@ -24,18 +30,45 @@ export default function Alert(props) {
                     <h1 className="text-2xl font-semibold text-gray-900 ">
                       Message
                     </h1>
-                    <div className="mt-4 ">{message}</div>
+                    <div className="mt-4 text-gray-500">{message}</div>
                   </div>
                 </div>
                 <div className="flex items-center justify-center p-6 border-t border-solid rounded-b border-slate-200">
-                  <Button
-                    variant="contained"
-                    text="확인"
-                    type="button"
-                    onClick={onCloseModal}
-                    width="w-20"
-                    backgroundColor="bg-themePink"
-                  />
+                  {onConfirm ? (
+                    <>
+                      <Button
+                        variant="outlined"
+                        text="취소"
+                        type="button"
+                        onClick={onCloseModal}
+                        width="w-20"
+                        backgroundColor="bg-white"
+                      />
+                      <div className="mr-3"></div>
+                      <Button
+                        variant="contained"
+                        text="확인"
+                        type="button"
+                        onClick={() => {
+                          onConfirm(targetMovieId);
+                          onClose(false);
+                        }}
+                        width="w-20"
+                        backgroundColor="bg-themePink"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        text="확인"
+                        type="button"
+                        onClick={onCloseModal}
+                        width="w-20"
+                        backgroundColor="bg-themePink"
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -49,5 +82,6 @@ export default function Alert(props) {
 Alert.propTypes = {
   open: PropTypes.bool.isRequired,
   message: PropTypes.string,
+  onConfirm: PropTypes.func,
   onClose: PropTypes.func,
 };

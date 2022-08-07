@@ -26,7 +26,7 @@ export default function Button(props) {
   } else if (variant === "outlined") {
     buttonType = disabled
       ? "border-2 border-gray-300 text-gray-300 cursor-not-allowed"
-      : "text-indigo-900 border-2 border-indigo-900 hover:bg-indigo-100";
+      : "text-themePink border-2 border-themePink hover:bg-indigo-100";
   } else {
     buttonType = null;
   }

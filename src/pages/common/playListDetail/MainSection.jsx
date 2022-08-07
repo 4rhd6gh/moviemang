@@ -90,7 +90,7 @@ function ImageTwoLine(props) {
 
 export default function MainSection(props) {
   const {
-    tags,
+    tags = [],
     playListTitle,
     kind,
     playListDesc,

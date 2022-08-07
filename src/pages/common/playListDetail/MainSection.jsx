@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProbTypes from "prop-types";
 import * as Constants from "@constant";
 import StaticIcon from "@component/Icons/StaticIcon";
@@ -6,6 +6,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import NoImage from "@res/img/noimg.png";
+import Alert from "@page/common/alert";
+import { useDispatch } from "react-redux";
+import * as actions from "@data/rootActions";
+import * as apis from "@service/apis/movieMang";
+import { useNavigate } from "react-router-dom";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 
@@ -92,11 +97,39 @@ export default function MainSection(props) {
   const {
     tags = [],
     playListTitle,
+    playListId,
     kind,
     playListDesc,
     movieArray = [],
     nickname,
   } = props;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const deleteAlert = () => {
+    setOpen(true);
+  };
+
+  async function deletePlaylist(playlistId) {
+    try {
+      dispatch(actions.common.startLoading);
+      const response = await apis.requestAxios(
+        "delete",
+        `/myplaylist/playlist/${playlistId}`,
+        {},
+        {}
+      );
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        setOpen(false);
+        navigate(`/member/playlist`);
+      }
+    } catch (err) {
+      dispatch(actions.common.endLoading);
+      console.log(err);
+    }
+  }
 
   let imageArray = [];
   movieArray.map((item) =>
@@ -147,7 +180,12 @@ export default function MainSection(props) {
           </div>
           <div className="ml-4">
             {kind === "my" ? (
-              <StaticIcon icon={BsTrash} size="medium" color="text-[#dd003f]" />
+              <StaticIcon
+                icon={BsTrash}
+                size="medium"
+                color="text-[#dd003f]"
+                onClick={() => deleteAlert()}
+              />
             ) : (
               <StaticIcon
                 icon={FaRegBookmark}
@@ -167,6 +205,13 @@ export default function MainSection(props) {
           )}
         </div>
       </div>
+      <Alert
+        open={open}
+        message={`"${playListTitle}" 플레이리스트를 삭제하시겠습니까? 플레이리스트 삭제 시 플레이리스트에 담긴 모든 영화를 삭제하며 복구할 수 없습니다.`}
+        onConfirm={deletePlaylist}
+        targetId={playListId}
+        onClose={setOpen}
+      />
     </div>
   );
 }

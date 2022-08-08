@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import * as Mock from "@data/mock";
-import * as apis from "@service/apis/movieMang";
-import { useState } from "react";
 
 export default function MainPage() {
   const [popularTags, setPopularTags] = useState([]);
@@ -18,6 +16,9 @@ export default function MainPage() {
       response = await apis.requestAxios("get", "/playlist/popularTag");
       setPopularTags(response.data.popularTag);
     } catch (err) {
+      console.log(err);
+    }
+  }
 
   const dispatch = useDispatch();
   const [likeOrderPlayList, setLikeOrderPlayList] = useState([]);

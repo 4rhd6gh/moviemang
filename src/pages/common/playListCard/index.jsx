@@ -125,12 +125,8 @@ export default function PlayListCard(props) {
           <span className="text-xs text-[#dcf836]">{nickname}</span>
         </div>
         <div className="flex items-center justify-start pl-4 mt-2">
-          <StaticIcon
-            icon={AiOutlineHeart}
-            size="small"
-            color="text-gray-300"
-          />
-          <span className="ml-[3px] text-xs text-gray-300">{likeCount}</span>
+          <StaticIcon icon={AiOutlineHeart} size="small" color="text-red-600" />
+          <span className="ml-[3px] text-lg text-red-600">{likeCount}</span>
           <span className="ml-3 text-xs text-gray-300">
             영화 {movieCount}편
           </span>

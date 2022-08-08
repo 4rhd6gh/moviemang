@@ -24,6 +24,7 @@ export default function MyPlayListDetail() {
       );
 
       if (response.status === 200) {
+        console.log(response.data);
         dispatch(actions.common.endLoading);
         setPlayList(response.data.playList);
         setLikeStatus(response.data.playList.likeStatus);
@@ -43,6 +44,7 @@ export default function MyPlayListDetail() {
     <main className="text-white w-[1100px] mr-auto ml-auto mt-8">
       <MainSection
         tags={playlist.tags}
+        playListId={playlistId}
         playListTitle={playlist.playlistTitle}
         kind={"my"}
         playListDesc={playlist.playlistDesc}

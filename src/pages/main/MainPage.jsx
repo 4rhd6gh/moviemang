@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "@data/rootActions";
+import * as apis from "@service/apis/movieMang";
 import * as Mock from "@data/mock";
 import * as apis from "@service/apis/movieMang";
 import { useState } from "react";
@@ -16,11 +18,34 @@ export default function MainPage() {
       response = await apis.requestAxios("get", "/playlist/popularTag");
       setPopularTags(response.data.popularTag);
     } catch (err) {
+
+  const dispatch = useDispatch();
+  const [likeOrderPlayList, setLikeOrderPlayList] = useState([]);
+  async function getLikeOrderPlaylist() {
+    try {
+      dispatch(actions.common.startLoading);
+      const response = await apis.requestAxios(
+        "get",
+        `/playlist/likeOrder`,
+        {},
+        {}
+      );
+      console.log(response);
+      if (response.status === 200) {
+        dispatch(actions.common.endLoading);
+        setLikeOrderPlayList(response.data.playList);
+      } else {
+        dispatch(actions.common.endLoading);
+      }
+    } catch (err) {
+      dispatch(actions.common.endLoading);
+
       console.log(err);
     }
   }
 
   useEffect(() => {
+    getLikeOrderPlaylist();
     window.scrollTo(0, 0);
     getPopularTags();
   }, []);
@@ -28,7 +53,7 @@ export default function MainPage() {
   return (
     <>
       <div className="flex pl-6 text-2xl items-center w-[1250px] mr-auto ml-auto pt-6">
-        <h1 className="pr-4 ml-16 text-base tablet:text-xl md:ml-8 text-gray-500">
+        <h1 className="pr-4 ml-16 text-base text-gray-500 tablet:text-xl md:ml-8">
           인기태그
         </h1>
         {popularTags.map((tag, index) => {
@@ -44,17 +69,18 @@ export default function MainPage() {
           # 좋아요가 가장 많은
         </h1>
         <div className="flex justify-between items-center mt-3 w-[95%] ml-auto mr-auto pr-10 pl-10 md:w-[700px] md:justify-center">
-          {Mock.playList.playList.map((movie, index) => {
+          {likeOrderPlayList.map((playlist, index) => {
             return (
-              <div key={index} className="md:last:hidden">
+              <div key={index} className="mr-10 md:last:hidden">
                 <PlayListCard
-                  title={movie.title}
-                  id={movie.id}
-                  imageArray={movie.image}
-                  nickname={movie.id}
-                  likeCount={movie.likeCount}
-                  movieCount={movie.movieCount}
-                  tagArray={movie.tagArray}
+                  title={playlist.playlistTitle}
+                  id={playlist.playlistId}
+                  nickname={playlist.nickname}
+                  movieArray={playlist.movies}
+                  likeCount={playlist.like}
+                  movieCount={playlist.movies.length}
+                  tagArray={playlist.tags}
+                  onClick={() => console.log("detail 이동")}
                 />
               </div>
             );

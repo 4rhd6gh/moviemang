@@ -46,7 +46,7 @@ export default function MyPlayList() {
                   id={playlist.playlistId}
                   nickname={nickname}
                   movieArray={playlist.movies}
-                  likeCount={0}
+                  likeCount={playlist.like}
                   movieCount={playlist.movies.length}
                   tagArray={playlist.tags}
                   onClick={() =>

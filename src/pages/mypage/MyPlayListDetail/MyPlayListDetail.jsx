@@ -13,6 +13,7 @@ export default function MyPlayListDetail() {
   const { playlistId } = useParams();
   const [playlist, setPlayList] = useState([]);
   const nickname = useSelector(selector.user.getNickname);
+  const [likeStatus, setLikeStatus] = useState();
 
   const getMyPlaylistDetail = async () => {
     try {
@@ -25,6 +26,7 @@ export default function MyPlayListDetail() {
       if (response.status === 200) {
         dispatch(actions.common.endLoading);
         setPlayList(response.data.playList);
+        setLikeStatus(response.data.playList.likeStatus);
       } else {
         dispatch(actions.common.endLoading);
       }
@@ -36,6 +38,7 @@ export default function MyPlayListDetail() {
   useEffect(() => {
     getMyPlaylistDetail();
   }, []);
+
   return (
     <main className="text-white w-[1100px] mr-auto ml-auto mt-8">
       <MainSection
@@ -46,6 +49,8 @@ export default function MyPlayListDetail() {
         movieArray={playlist.movies}
         nickname={nickname}
         playlistId={playlistId}
+        likeStatus={likeStatus}
+        setLikeStatus={setLikeStatus}
       />
       <MovieListSection
         movieArray={playlist.movies}

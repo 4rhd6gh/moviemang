@@ -98,9 +98,9 @@ export default function MainSection(props) {
     playListDesc,
     movieArray = [],
     nickname,
+    likeStatus,
+    setLikeStatus,
   } = props;
-
-  const [isHearted, setIsHearted] = useState(false);
 
   let imageArray = [];
   movieArray.map((item) =>
@@ -116,13 +116,13 @@ export default function MainSection(props) {
 
   const handleHeartonClick = async (e) => {
     const response = await apis.requestAxios(
-      isHearted ? "delete" : "post",
+      likeStatus ? "delete" : "post",
       "/playlist/like",
       {},
       { playlistId: playlistId }
     );
 
-    setIsHearted((prev) => !prev);
+    setLikeStatus((prev) => !prev);
     console.log(response);
   };
 
@@ -156,7 +156,7 @@ export default function MainSection(props) {
         <div className="flex mt-5">
           <div>
             <StaticIcon
-              icon={isHearted ? AiFillHeart : AiOutlineHeart}
+              icon={likeStatus ? AiFillHeart : AiOutlineHeart}
               size="medium"
               color="text-[#dd003f]"
               onClick={handleHeartonClick}

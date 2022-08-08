@@ -4,10 +4,25 @@ import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
 import * as Mock from "@data/mock";
+import * as apis from "@service/apis/movieMang";
+import { useState } from "react";
 
 export default function MainPage() {
+  const [popularTags, setPopularTags] = useState([]);
+
+  async function getPopularTags() {
+    let response;
+    try {
+      response = await apis.requestAxios("get", "/playlist/popularTag");
+      setPopularTags(response.data.popularTag);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    getPopularTags();
   }, []);
 
   return (
@@ -16,10 +31,10 @@ export default function MainPage() {
         <h1 className="pr-4 ml-16 text-base tablet:text-xl md:ml-8 text-gray-500">
           인기태그
         </h1>
-        {Mock.popularTags.tags.map((tag, index) => {
+        {popularTags.map((tag, index) => {
           return (
             <div className="pr-2" key={index}>
-              <Tag text={tag} size="small" />
+              <Tag text={tag.tagName} size="small" />
             </div>
           );
         })}

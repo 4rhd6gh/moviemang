@@ -17,13 +17,10 @@ import Alert from "@page/common/alert";
 export default function MovieDetail() {
   const dispatch = useDispatch();
   const movieId = useParams().movieId;
-  const [activeTab, setActiveTab] = useState(0);
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const onClickTab = (index) => {
-    setActiveTab(index);
-  };
+
   const movieDetailInfo = useSelector(selector.movie.getMovieDetail);
   let buyProviders = [];
   let rentProviders = [];
@@ -132,13 +129,6 @@ export default function MovieDetail() {
           <div className="flex mt-5">
             <div>
               <StaticIcon
-                icon={AiOutlineHeart}
-                size="medium"
-                color="text-[#dd003f]"
-              />
-            </div>
-            <div className="ml-4">
-              <StaticIcon
                 icon={IoMdAddCircle}
                 size="medium"
                 color="text-[#dd003f]"
@@ -147,27 +137,16 @@ export default function MovieDetail() {
             </div>
           </div>
           <div className="mt-16 mb-14">
-            <Tabs
-              activeTab={activeTab}
-              onClick={onClickTab}
-              menuList={[
-                { href: "#overview", name: "overview" },
-                { href: "#reviews", name: "reviews" },
-              ]}
-            />
+            <Tabs menuList={[{ href: "#overview", name: "overview" }]} />
           </div>
           <div>
-            {activeTab === 0 ? (
-              <Overview
-                overview={movieDetailInfo?.overview}
-                genres={movieDetailInfo?.genres}
-                crew={movieDetailInfo?.crew}
-                cast={movieDetailInfo?.cast}
-                recommand={movieDetailInfo?.recommend}
-              />
-            ) : (
-              <Reviews />
-            )}
+            <Overview
+              overview={movieDetailInfo?.overview}
+              genres={movieDetailInfo?.genres}
+              crew={movieDetailInfo?.crew}
+              cast={movieDetailInfo?.cast}
+              recommand={movieDetailInfo?.recommend}
+            />
           </div>
         </div>
       </div>

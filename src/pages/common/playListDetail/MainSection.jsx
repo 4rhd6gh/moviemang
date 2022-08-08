@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProbTypes from "prop-types";
 import * as Constants from "@constant";
 import StaticIcon from "@component/Icons/StaticIcon";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import { useNavigate } from "react-router-dom";
+import * as apis from "@service/apis/movieMang";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 
@@ -96,6 +97,7 @@ function ImageTwoLine(props) {
 
 export default function MainSection(props) {
   const {
+    playlistId,
     tags = [],
     playListTitle,
     playListId,
@@ -103,6 +105,8 @@ export default function MainSection(props) {
     playListDesc,
     movieArray = [],
     nickname,
+    likeStatus,
+    setLikeStatus,
   } = props;
 
   const dispatch = useDispatch();
@@ -144,6 +148,18 @@ export default function MainSection(props) {
     imageArray = imageArray.slice(0, 3);
   }
 
+  const handleHeartonClick = async (e) => {
+    const response = await apis.requestAxios(
+      likeStatus ? "delete" : "post",
+      "/playlist/like",
+      {},
+      { playlistId: playlistId }
+    );
+
+    setLikeStatus((prev) => !prev);
+    console.log(response);
+  };
+
   return (
     <div className="flex">
       <div className=" w-[66%] pl-3 pr-3">
@@ -174,9 +190,10 @@ export default function MainSection(props) {
         <div className="flex mt-5">
           <div>
             <StaticIcon
-              icon={AiOutlineHeart}
+              icon={likeStatus ? AiFillHeart : AiOutlineHeart}
               size="medium"
               color="text-[#dd003f]"
+              onClick={handleHeartonClick}
             />
           </div>
           <div className="ml-4">

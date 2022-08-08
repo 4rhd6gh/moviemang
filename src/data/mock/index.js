@@ -59,7 +59,11 @@ export const playList = {
       ],
       likeCount: 220,
       movieCount: 1,
-      tagArray: ["액션", "모험", "애니메이션"],
+      tagArray: [
+        { tagName: "액션" },
+        { tagName: "모험" },
+        { tagName: "애니메이션" },
+      ],
     },
     {
       id: "abcdefg",
@@ -69,7 +73,11 @@ export const playList = {
       ],
       likeCount: 10,
       movieCount: 2,
-      tagArray: ["멜로", "사랑", "로멘스"],
+      tagArray: [
+        { tagName: "멜로" },
+        { tagName: "사랑" },
+        { tagName: "로멘스" },
+      ],
     },
     {
       id: "xij38",
@@ -81,7 +89,11 @@ export const playList = {
       ],
       likeCount: 40,
       movieCount: 3,
-      tagArray: ["중국영화", "무협", "양조위"],
+      tagArray: [
+        { tagName: "중국영화" },
+        { tagName: "무협" },
+        { tagName: "양조위" },
+      ],
     },
     {
       id: "dlj398",
@@ -96,7 +108,11 @@ export const playList = {
       ],
       likeCount: 3,
       movieCount: 6,
-      tagArray: ["킬링타임", "모험", "코미디"],
+      tagArray: [
+        { tagName: "킬링타임" },
+        { tagName: "모험" },
+        { tagName: "코미디" },
+      ],
     },
   ],
 };

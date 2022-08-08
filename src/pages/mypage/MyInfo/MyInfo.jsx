@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as selector from "@data/rootSelectors";
 import * as action from "@data/rootActions";
@@ -8,8 +7,6 @@ import Button from "@component/Button";
 import Input from "@component/Input";
 import SNB from "../SNB";
 import Chart from "./chart";
-import PlayListCard from "@page/common/playListCard";
-import * as Mock from "@data/mock";
 import { BsPersonFill as PersonIcon } from "react-icons/bs";
 
 export default function MyPage() {
@@ -107,30 +104,6 @@ export default function MyPage() {
         </div>
         <div className="my-10">
           <Chart />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold text-textMainColor">
-            나의 플레이리스트
-          </h1>
-          <div className="float-right mb-4 text-xs text-textMainColor">
-            <NavLink to={"playlist"}>전체보기</NavLink>
-          </div>
-          <div className="flex items-center justify-between w-full">
-            {Mock.playList.playList.slice(0, 2).map((movie, index) => {
-              return (
-                <div key={index}>
-                  <PlayListCard
-                    title={movie.title}
-                    id={movie.id}
-                    imageArray={movie.image}
-                    likeCount={movie.likeCount}
-                    movieCount={movie.movieCount}
-                    tagArray={movie.tagArray}
-                  />
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </div>

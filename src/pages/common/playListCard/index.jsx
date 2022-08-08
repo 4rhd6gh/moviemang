@@ -4,8 +4,6 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import Tag from "@component/Tag";
 import * as Constants from "@constant";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsBookmarkFill } from "react-icons/bs";
-import Tooltip from "@component/Tooltip";
 import NoMovie from "@res/img/nomovie.png";
 
 function ImageOneLine(props) {
@@ -98,7 +96,6 @@ export default function PlayListCard(props) {
     onClick,
   } = props;
   let imageArray = [];
-
   movieArray.map((item) =>
     imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
   );
@@ -134,15 +131,6 @@ export default function PlayListCard(props) {
             color="text-gray-300"
           />
           <span className="ml-[3px] text-xs text-gray-300">{likeCount}</span>
-          <div className="ml-3" id="bookmark">
-            <Tooltip tooltipText="해당 플레이리스트를 즐겨찾기 해두고 영화를 감상하세요.">
-              <StaticIcon
-                icon={BsBookmarkFill}
-                size="small"
-                color="text-gray-300"
-              />
-            </Tooltip>
-          </div>
           <span className="ml-3 text-xs text-gray-300">
             영화 {movieCount}편
           </span>

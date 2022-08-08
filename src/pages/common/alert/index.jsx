@@ -3,13 +3,7 @@ import Button from "@component/Button";
 import PropTypes from "prop-types";
 
 export default function Alert(props) {
-  const {
-    open,
-    onClose,
-    message,
-    onConfirm = null,
-    targetMovieId = "",
-  } = props;
+  const { open, onClose, message, onConfirm = null, targetId = "" } = props;
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       onClose(false);
@@ -50,7 +44,7 @@ export default function Alert(props) {
                         text="확인"
                         type="button"
                         onClick={() => {
-                          onConfirm(targetMovieId);
+                          onConfirm(targetId);
                           onClose(false);
                         }}
                         width="w-20"
@@ -84,4 +78,5 @@ Alert.propTypes = {
   message: PropTypes.string,
   onConfirm: PropTypes.func,
   onClose: PropTypes.func,
+  targetId: PropTypes.string,
 };

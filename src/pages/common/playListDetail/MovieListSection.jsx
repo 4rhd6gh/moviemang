@@ -74,7 +74,7 @@ export default function MovieListSection(props) {
         open={open}
         message={`"${targetMovieName}" 영화를 삭제하시겠습니까?`}
         onConfirm={deleteMovie}
-        targetMovieId={targetMovieId}
+        targetId={targetMovieId}
         onClose={setOpen}
       />
     </div>

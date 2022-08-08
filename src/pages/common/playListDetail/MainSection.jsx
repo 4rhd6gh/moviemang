@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import { useNavigate } from "react-router-dom";
-import * as apis from "@service/apis/movieMang";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 

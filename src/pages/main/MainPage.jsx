@@ -36,6 +36,7 @@ export default function MainPage() {
                   title={movie.title}
                   id={movie.id}
                   imageArray={movie.image}
+                  nickname={movie.id}
                   likeCount={movie.likeCount}
                   movieCount={movie.movieCount}
                   tagArray={movie.tagArray}
@@ -57,6 +58,7 @@ export default function MainPage() {
                   title={movie.title}
                   id={movie.id}
                   imageArray={movie.image}
+                  nickname={movie.id}
                   likeCount={movie.likeCount}
                   movieCount={movie.movieCount}
                   tagArray={movie.tagArray}
@@ -86,6 +88,7 @@ export default function MainPage() {
                   title={movie.title}
                   id={movie.id}
                   imageArray={movie.image}
+                  nickname={movie.id}
                   likeCount={movie.likeCount}
                   movieCount={movie.movieCount}
                   tagArray={movie.tagArray}

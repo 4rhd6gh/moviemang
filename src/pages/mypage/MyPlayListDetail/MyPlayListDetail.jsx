@@ -23,6 +23,7 @@ export default function MyPlayListDetail() {
       );
 
       if (response.status === 200) {
+        console.log(response.data);
         dispatch(actions.common.endLoading);
         setPlayList(response.data.playList);
       } else {

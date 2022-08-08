@@ -5,6 +5,7 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
+import { BiPencil } from "react-icons/bi";
 import NoImage from "@res/img/noimg.png";
 import Alert from "@page/common/alert";
 import { useDispatch } from "react-redux";
@@ -193,6 +194,16 @@ export default function MainSection(props) {
                 color="text-[#dd003f]"
               />
             )}
+          </div>
+          <div className="ml-4">
+            {kind === "my" ? (
+              <StaticIcon
+                icon={BiPencil}
+                size="medium"
+                color="text-[#dd003f]"
+                onClick={() => deleteAlert()}
+              />
+            ) : null}
           </div>
         </div>
       </div>

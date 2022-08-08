@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as selector from "@data/rootSelectors";
+import * as actions from "@data/rootActions";
+import * as apis from "@service/apis/movieMang";
+import { useDispatch } from "react-redux";
 import MainSection from "@page/common/playListDetail/MainSection";
 import MovieListSection from "@page/common/playListDetail/MovieListSection";
 
 export default function MyPlayListDetail() {
+  const dispatch = useDispatch();
   const { playlistId } = useParams();
-  const myPlayList = useSelector(selector.playlist.getMyPlaylist);
+  const [playlist, setPlayList] = useState([]);
   const nickname = useSelector(selector.user.getNickname);
-  const playlist = myPlayList.find(
-    (playlist) => playlist.playlistId === playlistId
-  );
+
+  const getMyPlaylistDetail = async () => {
+    try {
+      dispatch(actions.common.startLoading);
+      const response = await apis.requestAxios(
+        "get",
+        `/myplaylist/playlist/${playlistId}`
+      );
+
+      if (response.status === 200) {
+        dispatch(actions.common.endLoading);
+        setPlayList(response.data.playList);
+      } else {
+        dispatch(actions.common.endLoading);
+      }
+    } catch (err) {
+      dispatch(actions.common.endLoading);
+    }
+  };
+
+  useEffect(() => {
+    getMyPlaylistDetail();
+  }, []);
   return (
     <main className="text-white w-[1100px] mr-auto ml-auto mt-8">
       <MainSection
@@ -23,7 +47,12 @@ export default function MyPlayListDetail() {
         nickname={nickname}
         playlistId={playlistId}
       />
-      <MovieListSection movieArray={playlist.movies} kind={"my"} />
+      <MovieListSection
+        movieArray={playlist.movies}
+        kind={"my"}
+        refreshFunc={getMyPlaylistDetail}
+        playlistId={playlistId}
+      />
     </main>
   );
 }

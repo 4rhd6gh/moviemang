@@ -92,7 +92,7 @@ function ImageTwoLine(props) {
 export default function MainSection(props) {
   const {
     playlistId,
-    tags,
+    tags = [],
     playListTitle,
     kind,
     playListDesc,

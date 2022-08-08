@@ -21,6 +21,7 @@ export default function MyPlayListDetail() {
         playListDesc={playlist.playlistDesc}
         movieArray={playlist.movies}
         nickname={nickname}
+        playlistId={playlistId}
       />
       <MovieListSection movieArray={playlist.movies} kind={"my"} />
     </main>

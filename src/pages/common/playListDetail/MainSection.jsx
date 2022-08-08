@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ProbTypes from "prop-types";
 import * as Constants from "@constant";
 import StaticIcon from "@component/Icons/StaticIcon";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import NoImage from "@res/img/noimg.png";
+import * as apis from "@service/apis/movieMang";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 
@@ -90,6 +91,7 @@ function ImageTwoLine(props) {
 
 export default function MainSection(props) {
   const {
+    playlistId,
     tags,
     playListTitle,
     kind,
@@ -97,6 +99,8 @@ export default function MainSection(props) {
     movieArray = [],
     nickname,
   } = props;
+
+  const [isHearted, setIsHearted] = useState(false);
 
   let imageArray = [];
   movieArray.map((item) =>
@@ -109,6 +113,18 @@ export default function MainSection(props) {
     imgLen = 3;
     imageArray = imageArray.slice(0, 3);
   }
+
+  const handleHeartonClick = async (e) => {
+    const response = await apis.requestAxios(
+      isHearted ? "delete" : "post",
+      "/playlist/like",
+      {},
+      { playlistId: playlistId }
+    );
+
+    setIsHearted((prev) => !prev);
+    console.log(response);
+  };
 
   return (
     <div className="flex">
@@ -140,9 +156,10 @@ export default function MainSection(props) {
         <div className="flex mt-5">
           <div>
             <StaticIcon
-              icon={AiOutlineHeart}
+              icon={isHearted ? AiFillHeart : AiOutlineHeart}
               size="medium"
               color="text-[#dd003f]"
+              onClick={handleHeartonClick}
             />
           </div>
           <div className="ml-4">

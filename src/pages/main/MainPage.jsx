@@ -6,8 +6,19 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import * as Mock from "@data/mock";
+import * as apis from "@service/apis/movieMang";
+import { useState } from "react";
 
 export default function MainPage() {
+  const [popularTags, setPopularTags] = useState([]);
+
+  async function getPopularTags() {
+    let response;
+    try {
+      response = await apis.requestAxios("get", "/playlist/popularTag");
+      setPopularTags(response.data.popularTag);
+    } catch (err) {
+
   const dispatch = useDispatch();
   const [likeOrderPlayList, setLikeOrderPlayList] = useState([]);
   async function getLikeOrderPlaylist() {
@@ -28,6 +39,7 @@ export default function MainPage() {
       }
     } catch (err) {
       dispatch(actions.common.endLoading);
+
       console.log(err);
     }
   }
@@ -35,6 +47,7 @@ export default function MainPage() {
   useEffect(() => {
     getLikeOrderPlaylist();
     window.scrollTo(0, 0);
+    getPopularTags();
   }, []);
 
   return (
@@ -43,10 +56,10 @@ export default function MainPage() {
         <h1 className="pr-4 ml-16 text-base text-gray-500 tablet:text-xl md:ml-8">
           인기태그
         </h1>
-        {Mock.popularTags.tags.map((tag, index) => {
+        {popularTags.map((tag, index) => {
           return (
             <div className="pr-2" key={index}>
-              <Tag text={tag} size="small" />
+              <Tag text={tag.tagName} size="small" />
             </div>
           );
         })}

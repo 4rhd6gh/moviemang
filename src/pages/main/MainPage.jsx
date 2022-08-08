@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Tag from "@component/Tag";
 import PlayListCard from "@page/common/playListCard";
 import EventBar from "@page/main/components/eventBar";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import * as Mock from "@data/mock";
 
 export default function MainPage() {
   const [popularTags, setPopularTags] = useState([]);
+  const dispatch = useDispatch();
+  const [likeOrderPlayList, setLikeOrderPlayList] = useState([]);
 
   async function getPopularTags() {
     let response;
@@ -20,8 +22,6 @@ export default function MainPage() {
     }
   }
 
-  const dispatch = useDispatch();
-  const [likeOrderPlayList, setLikeOrderPlayList] = useState([]);
   async function getLikeOrderPlaylist() {
     try {
       dispatch(actions.common.startLoading);
@@ -47,8 +47,9 @@ export default function MainPage() {
 
   useEffect(() => {
     getLikeOrderPlaylist();
-    window.scrollTo(0, 0);
     getPopularTags();
+
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -81,7 +82,6 @@ export default function MainPage() {
                   likeCount={playlist.like}
                   movieCount={playlist.movies.length}
                   tagArray={playlist.tags}
-                  onClick={() => console.log("detail 이동")}
                 />
               </div>
             );

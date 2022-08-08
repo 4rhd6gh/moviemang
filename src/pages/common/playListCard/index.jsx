@@ -5,6 +5,7 @@ import Tag from "@component/Tag";
 import * as Constants from "@constant";
 import { AiOutlineHeart } from "react-icons/ai";
 import NoMovie from "@res/img/nomovie.png";
+import { useNavigate } from "react-router-dom";
 
 function ImageOneLine(props) {
   const { images, len } = props;
@@ -86,14 +87,16 @@ function ImageTwoLine(props) {
 }
 
 export default function PlayListCard(props) {
+  const navigate = useNavigate();
+
   const {
+    id,
     movieArray = [],
     title,
     likeCount,
     movieCount,
     nickname,
     tagArray,
-    onClick,
   } = props;
   let imageArray = [];
   movieArray.map((item) =>
@@ -109,7 +112,9 @@ export default function PlayListCard(props) {
   return (
     <div
       className="mb-2 overflow-hidden playlistCard rounded-xl w-[246px] tablet:w-[200px] md:mr-2 md:ml-2 cursor-pointer"
-      onClick={onClick}
+      onClick={() => {
+        navigate(`/member/playlist/${id}`);
+      }}
     >
       <div className="h-[246px] w-full bg-white rounded-lg tablet:h-[200px] md:h-[150px]">
         {imgLen < 6 ? (

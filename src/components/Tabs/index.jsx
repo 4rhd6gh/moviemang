@@ -2,14 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function Tabs(props) {
-  const { activeTab, onClick, menuList = [] } = props;
+  const { activeTab = 0, menuList = [] } = props;
 
   return (
     <ul className="flex">
       {menuList.map((menu, index) => (
         <li className="pr-10" key={index}>
           <a
-            onClick={() => onClick(index)}
             className={
               activeTab === index
                 ? "border-b-4 border-solid border-[#dcf836] text-[#dcf836] uppercase font-bold pb-3"

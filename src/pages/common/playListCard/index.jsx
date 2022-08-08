@@ -4,8 +4,6 @@ import StaticIcon from "@component/Icons/StaticIcon";
 import Tag from "@component/Tag";
 import * as Constants from "@constant";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsBookmarkFill } from "react-icons/bs";
-import Tooltip from "@component/Tooltip";
 import NoMovie from "@res/img/nomovie.png";
 
 function ImageOneLine(props) {
@@ -98,7 +96,6 @@ export default function PlayListCard(props) {
     onClick,
   } = props;
   let imageArray = [];
-
   movieArray.map((item) =>
     imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
   );

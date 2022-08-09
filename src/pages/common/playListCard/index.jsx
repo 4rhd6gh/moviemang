@@ -136,9 +136,9 @@ export default function PlayListCard(props) {
             영화 {movieCount}편
           </span>
         </div>
-        <div className="flex items-center justify-start pb-4 pl-3 mt-3">
+        <div className="flex flex-row flex-wrap justify-start pb-4 pl-2 pr-2 mt-3">
           {tagArray.map((tag, index) => (
-            <div className="pl-2" key={index}>
+            <div className="pl-2 mb-1" key={index}>
               <Tag key={index} text={tag.tagName} size="small" />
             </div>
           ))}

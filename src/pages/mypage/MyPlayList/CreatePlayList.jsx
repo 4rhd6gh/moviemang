@@ -12,7 +12,7 @@ export default function CreatePlayList() {
   const [contents, setContents] = useState("");
   const [tags, setTags] = useState([]);
   const [clickedTags, setClickedTags] = useState([]);
-  const [warningTextColor, setWarningTextColor] = useState("invisible");
+  const [tagWarningVisibilty, setTagWarningVisibility] = useState("invisible");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -71,7 +71,8 @@ export default function CreatePlayList() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (clickedTags.length === 0) setWarningTextColor("text-[#dcf836]");
+
+    if (clickedTags.length === 0) setTagWarningVisibility("");
     else {
       const response = await dispatch(
         action.playlist.createPlaylist({
@@ -81,6 +82,7 @@ export default function CreatePlayList() {
         })
       );
 
+      //TODO 에러처리
       if (response === 200) navigate("/member/playlist");
     }
   };
@@ -90,7 +92,7 @@ export default function CreatePlayList() {
   };
 
   return (
-    <div className="flex justify-center w-full">
+    <main className="flex justify-center w-full">
       <div className="flex flex-col justify-center w-[60%] p-10 border-4 border-solid rounded-b border-[#0E2133] bg-[#0C1A2A] ">
         <h2 className="mb-5 text-textMainColor">플레이리스트 생성하기</h2>
         <div className="flex flex-col justify-center ">
@@ -114,11 +116,11 @@ export default function CreatePlayList() {
               required
               className="w-full p-3 mb-3 bg-[#233A50] text-textMainColor rounded-lg h-40 resize-none"
             />
-            <div className="flex flex-row flex-wrap justify-center p-3">
+            <div className="flex flex-row flex-wrap justify-center gap-2 p-3">
               {Tags()}
             </div>
             <p
-              className={`${warningTextColor} mt-2 text-sm flex flex-row-reverse`}
+              className={`${tagWarningVisibilty} text-[#dcf836] mt-2 text-sm flex flex-row-reverse`}
             >
               하나 이상의 태그를 선택해 주세요
             </p>
@@ -148,6 +150,6 @@ export default function CreatePlayList() {
           </form>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

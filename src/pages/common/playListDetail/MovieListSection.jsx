@@ -14,6 +14,7 @@ export default function MovieListSection(props) {
   const [targetMovieId, setTargetMovieId] = useState("");
   const [targetMovieName, setTargetMovieName] = useState("");
   const dispatch = useDispatch();
+
   async function deleteMovie(movieId) {
     try {
       dispatch(actions.common.startLoading);
@@ -44,40 +45,44 @@ export default function MovieListSection(props) {
   };
 
   return (
-    <div className="mt-16">
-      {movieArray.map((movie, index) => {
-        return (
-          <div key={index} className="flex items-center mb-6">
-            <img
-              src={Constants.TM_MOVIE_IMAGE_URL + movie.mvPosterPath}
-              alt="movies"
-              className="object-cover w-[103px] h-[153px]"
-            />
-            <div className=" bg-[#091a2c] px-3 py-3 w-[82%] h-[153px]">
-              <h2 className="text-xl">{movie.mvTitle}</h2>
-              <div className=" text-[#abb7c4]">{movie.mvDirector}</div>
-            </div>
-            {kind === "my" ? (
-              <div>
-                <StaticIcon
-                  icon={BsTrash}
-                  size="small"
-                  color="text-[#dd003f]"
-                  onClick={() => deleteAlert(movie.tm_id, movie.mvTitle)}
-                />
+    <section className="mt-16">
+      <ul>
+        {movieArray.map((movie, index) => {
+          return (
+            <li key={index} className="flex items-center mb-6">
+              <img
+                src={
+                  process.env.REACT_APP_TM_MOVIE_IMAGE_URL + movie.mvPosterPath
+                }
+                alt="movies"
+                className="object-cover w-[103px] h-[153px]"
+              />
+              <div className=" bg-[#091a2c] px-3 py-3 w-[82%] h-[153px]">
+                <h2 className="text-xl">{movie.mvTitle}</h2>
+                <div className=" text-[#abb7c4]">{movie.mvDirector}</div>
               </div>
-            ) : null}
-          </div>
-        );
-      })}
-      <Alert
-        open={open}
-        message={`"${targetMovieName}" 영화를 삭제하시겠습니까?`}
-        onConfirm={deleteMovie}
-        targetId={targetMovieId}
-        onClose={setOpen}
-      />
-    </div>
+              {kind === "my" ? (
+                <div>
+                  <StaticIcon
+                    icon={BsTrash}
+                    size="small"
+                    color="text-[#dd003f]"
+                    onClick={() => deleteAlert(movie.tm_id, movie.mvTitle)}
+                  />
+                </div>
+              ) : null}
+            </li>
+          );
+        })}
+        <Alert
+          open={open}
+          message={`"${targetMovieName}" 영화를 삭제하시겠습니까?`}
+          onConfirm={deleteMovie}
+          targetId={targetMovieId}
+          onClose={setOpen}
+        />
+      </ul>
+    </section>
   );
 }
 

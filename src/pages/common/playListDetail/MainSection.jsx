@@ -111,6 +111,7 @@ export default function MainSection(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
   const deleteAlert = () => {
     setOpen(true);
   };
@@ -137,7 +138,9 @@ export default function MainSection(props) {
 
   let imageArray = [];
   movieArray.map((item) =>
-    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
+    imageArray.push(
+      process.env.REACT_APP_TM_MOVIE_IMAGE_URL + item.mvPosterPath
+    )
   );
 
   let imgLen = imageArray.length;
@@ -160,7 +163,7 @@ export default function MainSection(props) {
   };
 
   return (
-    <div className="flex">
+    <section className="flex">
       <div className=" w-[66%] pl-3 pr-3">
         <div className="mb-4 ">
           {tags.map((tag, index) => (
@@ -201,7 +204,7 @@ export default function MainSection(props) {
                 icon={BsTrash}
                 size="medium"
                 color="text-[#dd003f]"
-                onClick={() => deleteAlert()}
+                onClick={deleteAlert}
               />
             ) : (
               <StaticIcon
@@ -217,13 +220,13 @@ export default function MainSection(props) {
                 icon={BiPencil}
                 size="medium"
                 color="text-[#dd003f]"
-                onClick={() => deleteAlert()}
+                onClick={deleteAlert}
               />
             ) : null}
           </div>
         </div>
       </div>
-      <div className=" w-[34%]">
+      <div className="w-[34%]">
         <div className="h-[400px] w-[85%] bg-white rounded-lg tablet:h-[200px] md:h-[150px]">
           {imgLen < 6 ? (
             <ImageOneLine images={imageArray} len={imgLen} />
@@ -239,7 +242,7 @@ export default function MainSection(props) {
         targetId={playListId}
         onClose={setOpen}
       />
-    </div>
+    </section>
   );
 }
 

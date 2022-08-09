@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as selector from "@data/rootSelectors";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
-import { useDispatch } from "react-redux";
 import MainSection from "@page/common/playListDetail/MainSection";
 import MovieListSection from "@page/common/playListDetail/MovieListSection";
 
 export default function MyPlayListDetail() {
   const dispatch = useDispatch();
   const { playlistId } = useParams();
-  const [playlist, setPlayList] = useState([]);
   const nickname = useSelector(selector.user.getNickname);
+  const [playlist, setPlayList] = useState([]);
   const [likeStatus, setLikeStatus] = useState();
 
   const getMyPlaylistDetail = async () => {

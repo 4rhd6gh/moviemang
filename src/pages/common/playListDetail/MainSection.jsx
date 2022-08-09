@@ -108,13 +108,23 @@ export default function MainSection(props) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const deleteAlert = () => {
-    setOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  async function deletePlaylist(playlistId) {
+  const editAlert = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleOnEditConfirm = () => {
+    navigate(`/member/playlist/edit/${playListId}`);
+  };
+
+  const deletePlaylist = async (playlistId) => {
     try {
       dispatch(actions.common.startLoading);
       const response = await apis.requestAxios(
@@ -125,14 +135,14 @@ export default function MainSection(props) {
       );
       if (response.status === 204) {
         dispatch(actions.common.endLoading);
-        setOpen(false);
+        setIsDeleteModalOpen(false);
         navigate(`/member/playlist`);
       }
     } catch (err) {
       dispatch(actions.common.endLoading);
       console.log(err);
     }
-  }
+  };
 
   let imageArray = [];
   movieArray.map((item) =>
@@ -218,7 +228,7 @@ export default function MainSection(props) {
                 icon={BiPencil}
                 size="medium"
                 color="text-[#dd003f]"
-                onClick={deleteAlert}
+                onClick={editAlert}
               />
             ) : null}
           </div>
@@ -234,11 +244,18 @@ export default function MainSection(props) {
         </div>
       </div>
       <Alert
-        open={open}
+        open={isDeleteModalOpen}
         message={`"${playListTitle}" 플레이리스트를 삭제하시겠습니까? 플레이리스트 삭제 시 플레이리스트에 담긴 모든 영화를 삭제하며 복구할 수 없습니다.`}
         onConfirm={deletePlaylist}
         targetId={playListId}
-        onClose={setOpen}
+        onClose={setIsDeleteModalOpen}
+      />
+      <Alert
+        open={isEditModalOpen}
+        message={`"${playListTitle}" 플레이리스트를 수정하시겠습니까?`}
+        onConfirm={handleOnEditConfirm}
+        targetId={playListId}
+        onClose={setIsEditModalOpen}
       />
     </section>
   );

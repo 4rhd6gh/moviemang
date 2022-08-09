@@ -20,6 +20,11 @@ export default function movie(state = initialState, action) {
         ...state,
         popMovieDetail: action.payload,
       };
+    case ActionTypes.POPULAR_MOVIE_DETAIL_RESET:
+      return {
+        ...state,
+        popMovieDetail: {},
+      };
     default:
       return state;
   }

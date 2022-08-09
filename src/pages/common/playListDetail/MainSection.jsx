@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import ProbTypes from "prop-types";
-import * as Constants from "@constant";
+import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
@@ -96,7 +95,6 @@ function ImageTwoLine(props) {
 
 export default function MainSection(props) {
   const {
-    playlistId,
     tags = [],
     playListTitle,
     playListId,
@@ -155,7 +153,7 @@ export default function MainSection(props) {
       likeStatus ? "delete" : "post",
       "/playlist/like",
       {},
-      { playlistId: playlistId }
+      { playlistId: playListId }
     );
 
     setLikeStatus((prev) => !prev);
@@ -247,10 +245,13 @@ export default function MainSection(props) {
 }
 
 MainSection.propTypes = {
-  tags: ProbTypes.array,
-  playListTitle: ProbTypes.string,
-  kind: ProbTypes.string,
-  playListDesc: ProbTypes.string,
-  movieArray: ProbTypes.array,
-  nickname: ProbTypes.string,
+  tags: PropTypes.array,
+  playListTitle: PropTypes.string,
+  playListId: PropTypes.string,
+  kind: PropTypes.string,
+  playListDesc: PropTypes.string,
+  movieArray: PropTypes.array,
+  nickname: PropTypes.string,
+  likeStatus: PropTypes.bool,
+  setLikeStatus: PropTypes.func,
 };

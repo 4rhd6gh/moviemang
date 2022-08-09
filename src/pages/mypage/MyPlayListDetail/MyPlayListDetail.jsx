@@ -49,7 +49,6 @@ export default function MyPlayListDetail() {
         playListDesc={playlist.playlistDesc}
         movieArray={playlist.movies}
         nickname={nickname}
-        playlistId={playlistId}
         likeStatus={likeStatus}
         setLikeStatus={setLikeStatus}
       />

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import * as Constants from "@constant";
 import { BsTrash } from "react-icons/bs";
 import StaticIcon from "@component/Icons/StaticIcon";
 import * as actions from "@data/rootActions";
@@ -89,4 +88,6 @@ export default function MovieListSection(props) {
 MovieListSection.propTypes = {
   movieArray: PropTypes.array,
   kind: PropTypes.string,
+  refreshFunc: PropTypes.func,
+  playlistId: PropTypes.string,
 };

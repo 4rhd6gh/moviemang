@@ -2,6 +2,12 @@ import * as ActionTypes from "@data/rootActionTypes";
 import * as action from "@data/rootActions";
 import * as apis from "@service/apis/tmMovie";
 
+export const resetMovieDetail = () => {
+  return {
+    type: ActionTypes.POPULAR_MOVIE_DETAIL_RESET,
+  };
+};
+
 export const getPopularMovieList = (page) => async (dispatch) => {
   try {
     dispatch(action.common.startLoading);

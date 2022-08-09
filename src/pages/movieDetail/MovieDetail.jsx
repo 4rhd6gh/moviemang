@@ -48,6 +48,8 @@ export default function MovieDetail() {
   }
 
   async function getMovieDetail() {
+    // 기존 검색 기록 삭제를 위한 reset 액션 실행
+    dispatch(action.movie.resetMovieDetail());
     dispatch(action.movie.getPopularMovieDetail(movieId));
   }
   useEffect(() => {

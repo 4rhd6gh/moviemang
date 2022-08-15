@@ -56,32 +56,52 @@ export const getMyPlaylist = (page, limit) => async (dispatch) => {
   }
 };
 
-export const editPlaylist = (editPlaylistParams) => async (dispatch) => {
-  console.log("playlist 수정 요청 시작");
+export const editPlaylistContents =
+  (editPlaylistContentsParams) => async (dispatch) => {
+    console.log("playlist 내용 수정 요청 시작");
 
-  console.log(editPlaylistParams.tags);
+    try {
+      dispatch(actions.common.startLoading);
 
-  try {
-    dispatch(actions.common.startLoading);
+      const response = await apis.requestAxios(
+        "put",
+        "/myplaylist/playlist/contents",
+        {},
+        editPlaylistContentsParams
+      );
 
-    const response = await apis.requestAxios(
-      "put",
-      // `/myplaylist/playlist/${editPlaylistParams.playlistId}`,
-      `/myplaylist/playlist`,
-      {},
-      // 아래 네 가지 data 담아서 요청하였습니다.
-      // { playlistId, playlistTitle, playlistDesc, tags }
-      editPlaylistParams
-    );
+      console.log(response);
 
-    console.log(response);
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };
 
-    if (response.status === 200) {
-      dispatch(actions.common.endLoading);
-      return response.status;
-    } else {
-      dispatch(actions.common.endLoading);
-      return response.status;
-    }
-  } catch (err) {}
-};
+export const updatePlaylistTags =
+  (updatePlaylistParams) => async (dispatch) => {
+    console.log("태그 목록 수정 요청 시작");
+
+    try {
+      dispatch(actions.common.startLoading);
+
+      const response = await apis.requestAxios(
+        "put",
+        "/myplaylist/playlist/tags",
+        {},
+        updatePlaylistParams
+      );
+
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };

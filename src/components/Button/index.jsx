@@ -46,7 +46,7 @@ export default function Button(props) {
       type={type}
       form={form}
       value={value}
-      className={`${buttonCursorPointer} ${margin} ${borderRadius} ${width} ${height} ${color} ${buttonType} ${buttonFocus} ${backgroundColor} ${buttonDisabledStyle}`}
+      className={`${buttonCursorPointer} ${margin} ${borderRadius} ${width} ${height} ${color} ${buttonType} ${buttonFocus} ${backgroundColor} ${buttonDisabledStyle} whitespace-nowrap`}
       onClick={disabled ? null : onClick}
     >
       {text}

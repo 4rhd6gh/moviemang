@@ -28,7 +28,7 @@ export default function Input(props) {
       placeholder={placeholder}
       onChange={onChange}
       onBlur={handleBlur}
-      className={` ${width} ${border} ${padding} ${margin} ${borderRadius} ${textColor} ${backgroundColor} text-sm focus:outline-none`}
+      className={` ${width} ${border} ${padding} ${margin} ${borderRadius} ${textColor} ${backgroundColor} text-sm focus:outline-none peer`}
       disabled={disabled ? true : false}
       required={required ? true : false}
     ></input>

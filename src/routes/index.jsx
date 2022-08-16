@@ -10,7 +10,7 @@ import MyPlayList from "@page/mypage/MyPlayList";
 import MyPlayListDetail from "@page/mypage/MyPlayListDetail";
 import PlayListDetail from "@page/playListDetail";
 import CreatePlayList from "@page/mypage/MyPlayList/CreatePlayList";
-import EditPlayList from "@page/mypage/MyPlayList/EditPlayList";
+import EditPlayList from "@page/mypage/MyPlayList/EditPlayListContents";
 import Login from "@page/auth/Login";
 import Join from "@page/auth/Join";
 import Nickname from "@page/auth/Nickname";

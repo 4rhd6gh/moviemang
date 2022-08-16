@@ -90,10 +90,34 @@ export const updatePlaylistTags =
       dispatch(actions.common.startLoading);
 
       const response = await apis.requestAxios(
-        "put",
+        "post",
         "/myplaylist/playlist/tags",
         {},
         updatePlaylistParams
+      );
+
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };
+
+export const deletePlaylistTags =
+  (deletePlaylistParams) => async (dispatch) => {
+    console.log("태그 목록 수정 요청 시작");
+
+    try {
+      dispatch(actions.common.startLoading);
+
+      const response = await apis.requestAxios(
+        "delete",
+        "/myplaylist/playlist/tags",
+        {},
+        deletePlaylistParams
       );
 
       if (response.status === 204) {

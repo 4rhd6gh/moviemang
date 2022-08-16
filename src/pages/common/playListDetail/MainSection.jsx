@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import NoImage from "@res/img/noimg.png";
@@ -11,6 +12,7 @@ import { useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import { useNavigate } from "react-router-dom";
+import TagListEditModal from "@page/mypage/MyPlayList/components/playlistEdit/TagListEditModal";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 
@@ -111,6 +113,7 @@ export default function MainSection(props) {
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isTagListEditModalOpen, setIsTagListEditModalOpen] = useState(false);
 
   const deleteAlert = () => {
     setIsDeleteModalOpen(true);
@@ -118,6 +121,10 @@ export default function MainSection(props) {
 
   const editAlert = () => {
     setIsEditModalOpen(true);
+  };
+
+  const handleOnTagListEditIconClick = () => {
+    setIsTagListEditModalOpen(true);
   };
 
   const handleOnEditConfirm = () => {
@@ -170,29 +177,41 @@ export default function MainSection(props) {
     console.log(response);
   };
 
+  const filteredCurrentUserTags = tags.map((tagData) => tagData.tagName);
+
   return (
     <section className="flex">
       <div className=" w-[66%] pl-3 pr-3">
-        <div className="mb-4 ">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className={`${
-                tagColors[index % 3]
-              } pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
-            >
-              <span className="text-sm font-bold text-white">
-                {tag.tagName}
+        <div className="flex items-center gap-1 mb-4">
+          <div>
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className={`${
+                  tagColors[index % 3]
+                } pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
+              >
+                <span className="text-sm font-bold text-white">
+                  {tag.tagName}
+                </span>
               </span>
-            </span>
-          ))}
+            ))}
+          </div>
+          <div>
+            <StaticIcon
+              icon={MdOutlineAddToPhotos}
+              size="small"
+              color="text-[#dd003f]"
+              onClick={handleOnTagListEditIconClick}
+            />
+          </div>
         </div>
         <div>
           <span className="mr-2 text-xl italic text-[#F5B50A]">{nickname}</span>
-          <span className="italic text-[#abb7c4]">님의 플레이리스트</span>
+          <span className="text-[#abb7c4]">님의 플레이리스트</span>
         </div>
         <h1>
-          <span className="text-5xl font-bold text">{playListTitle}</span>
+          <span className="text-5xl font-bold">{playListTitle}</span>
         </h1>
         <div className="mt-4">
           <span className="text-sm text-gray-600">{playListDesc}</span>
@@ -257,6 +276,13 @@ export default function MainSection(props) {
         targetId={playListId}
         onClose={setIsEditModalOpen}
       />
+      {isTagListEditModalOpen && (
+        <TagListEditModal
+          playlistId={playListId}
+          setIsOpen={setIsTagListEditModalOpen}
+          currentUserTags={filteredCurrentUserTags}
+        />
+      )}
     </section>
   );
 }

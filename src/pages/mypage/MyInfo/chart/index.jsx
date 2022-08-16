@@ -24,6 +24,9 @@ function Chart() {
 
   function drawChart(tags) {
     Highcharts.chart("container", {
+      credits: {
+        enabled: false,
+      },
       chart: {
         type: "column",
         backgroundColor: "transparent",
@@ -73,7 +76,7 @@ function Chart() {
 
   return (
     <div className="w-full mx-auto">
-      <h1 className="text-xl mb-2 font-bold text-l text-textMainColor">
+      <h1 className="mb-2 text-xl font-bold text-l text-textMainColor">
         나의 플레이리스트 태그 통계
       </h1>
       <figure className="highcharts-figure">

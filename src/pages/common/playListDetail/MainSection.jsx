@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ProbTypes from "prop-types";
-import * as Constants from "@constant";
+import PropTypes from "prop-types";
 import StaticIcon from "@component/Icons/StaticIcon";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaRegBookmark } from "react-icons/fa";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import NoImage from "@res/img/noimg.png";
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import * as actions from "@data/rootActions";
 import * as apis from "@service/apis/movieMang";
 import { useNavigate } from "react-router-dom";
+import TagListEditModal from "@page/mypage/MyPlayList/components/playlistEdit/TagListEditModal";
 
 const tagColors = ["bg-[#1692BB]", "bg-[#F5B50A]", "bg-[#EC5A1A]"];
 
@@ -96,7 +97,6 @@ function ImageTwoLine(props) {
 
 export default function MainSection(props) {
   const {
-    playlistId,
     tags = [],
     playListTitle,
     playListId,
@@ -110,12 +110,28 @@ export default function MainSection(props) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isTagListEditModalOpen, setIsTagListEditModalOpen] = useState(false);
+
   const deleteAlert = () => {
-    setOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  async function deletePlaylist(playlistId) {
+  const editAlert = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleOnTagListEditIconClick = () => {
+    setIsTagListEditModalOpen(true);
+  };
+
+  const handleOnEditConfirm = () => {
+    navigate(`/member/playlist/edit/${playListId}`);
+  };
+
+  const deletePlaylist = async (playlistId) => {
     try {
       dispatch(actions.common.startLoading);
       const response = await apis.requestAxios(
@@ -126,18 +142,20 @@ export default function MainSection(props) {
       );
       if (response.status === 204) {
         dispatch(actions.common.endLoading);
-        setOpen(false);
+        setIsDeleteModalOpen(false);
         navigate(`/member/playlist`);
       }
     } catch (err) {
       dispatch(actions.common.endLoading);
       console.log(err);
     }
-  }
+  };
 
   let imageArray = [];
   movieArray.map((item) =>
-    imageArray.push(Constants.TM_MOVIE_IMAGE_URL + item.mvPosterPath)
+    imageArray.push(
+      process.env.REACT_APP_TM_MOVIE_IMAGE_URL + item.mvPosterPath
+    )
   );
 
   let imgLen = imageArray.length;
@@ -152,36 +170,48 @@ export default function MainSection(props) {
       likeStatus ? "delete" : "post",
       "/playlist/like",
       {},
-      { playlistId: playlistId }
+      { playlistId: playListId }
     );
 
     setLikeStatus((prev) => !prev);
     console.log(response);
   };
 
+  const filteredCurrentUserTags = tags.map((tagData) => tagData.tagName);
+
   return (
-    <div className="flex">
+    <section className="flex">
       <div className=" w-[66%] pl-3 pr-3">
-        <div className="mb-4 ">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className={`${
-                tagColors[index % 3]
-              } pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
-            >
-              <span className="text-sm font-bold text-white">
-                {tag.tagName}
+        <div className="flex items-center gap-1 mb-4">
+          <div>
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className={`${
+                  tagColors[index % 3]
+                } pb-1 pt-1 pr-2 pl-2 rounded-sm mr-1`}
+              >
+                <span className="text-sm font-bold text-white">
+                  {tag.tagName}
+                </span>
               </span>
-            </span>
-          ))}
+            ))}
+          </div>
+          <div>
+            <StaticIcon
+              icon={MdOutlineAddToPhotos}
+              size="small"
+              color="text-[#dd003f]"
+              onClick={handleOnTagListEditIconClick}
+            />
+          </div>
         </div>
         <div>
           <span className="mr-2 text-xl italic text-[#F5B50A]">{nickname}</span>
-          <span className="italic text-[#abb7c4]">님의 플레이리스트</span>
+          <span className="text-[#abb7c4]">님의 플레이리스트</span>
         </div>
         <h1>
-          <span className="text-5xl font-bold text">{playListTitle}</span>
+          <span className="text-5xl font-bold">{playListTitle}</span>
         </h1>
         <div className="mt-4">
           <span className="text-sm text-gray-600">{playListDesc}</span>
@@ -201,7 +231,7 @@ export default function MainSection(props) {
                 icon={BsTrash}
                 size="medium"
                 color="text-[#dd003f]"
-                onClick={() => deleteAlert()}
+                onClick={deleteAlert}
               />
             ) : (
               <StaticIcon
@@ -217,13 +247,13 @@ export default function MainSection(props) {
                 icon={BiPencil}
                 size="medium"
                 color="text-[#dd003f]"
-                onClick={() => deleteAlert()}
+                onClick={editAlert}
               />
             ) : null}
           </div>
         </div>
       </div>
-      <div className=" w-[34%]">
+      <div className="w-[34%]">
         <div className="h-[400px] w-[85%] bg-white rounded-lg tablet:h-[200px] md:h-[150px]">
           {imgLen < 6 ? (
             <ImageOneLine images={imageArray} len={imgLen} />
@@ -233,21 +263,38 @@ export default function MainSection(props) {
         </div>
       </div>
       <Alert
-        open={open}
+        open={isDeleteModalOpen}
         message={`"${playListTitle}" 플레이리스트를 삭제하시겠습니까? 플레이리스트 삭제 시 플레이리스트에 담긴 모든 영화를 삭제하며 복구할 수 없습니다.`}
         onConfirm={deletePlaylist}
         targetId={playListId}
-        onClose={setOpen}
+        onClose={setIsDeleteModalOpen}
       />
-    </div>
+      <Alert
+        open={isEditModalOpen}
+        message={`"${playListTitle}" 플레이리스트를 수정하시겠습니까?`}
+        onConfirm={handleOnEditConfirm}
+        targetId={playListId}
+        onClose={setIsEditModalOpen}
+      />
+      {isTagListEditModalOpen && (
+        <TagListEditModal
+          playlistId={playListId}
+          setIsOpen={setIsTagListEditModalOpen}
+          currentUserTags={filteredCurrentUserTags}
+        />
+      )}
+    </section>
   );
 }
 
 MainSection.propTypes = {
-  tags: ProbTypes.array,
-  playListTitle: ProbTypes.string,
-  kind: ProbTypes.string,
-  playListDesc: ProbTypes.string,
-  movieArray: ProbTypes.array,
-  nickname: ProbTypes.string,
+  tags: PropTypes.array,
+  playListTitle: PropTypes.string,
+  playListId: PropTypes.string,
+  kind: PropTypes.string,
+  playListDesc: PropTypes.string,
+  movieArray: PropTypes.array,
+  nickname: PropTypes.string,
+  likeStatus: PropTypes.bool,
+  setLikeStatus: PropTypes.func,
 };

@@ -54,7 +54,7 @@ export default function Modal(props) {
       {open ? (
         <>
           <div
-            className="fixed inset-0 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none z-90 focus:outline-none"
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none"
             onClick={onCloseModal}
           >
             <div className="relative w-auto max-w-3xl mx-auto my-6">

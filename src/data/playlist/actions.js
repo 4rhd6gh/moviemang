@@ -55,3 +55,77 @@ export const getMyPlaylist = (page, limit) => async (dispatch) => {
     dispatch(actions.common.endLoading);
   }
 };
+
+export const editPlaylistContents =
+  (editPlaylistContentsParams) => async (dispatch) => {
+    console.log("playlist 내용 수정 요청 시작");
+
+    try {
+      dispatch(actions.common.startLoading);
+
+      const response = await apis.requestAxios(
+        "put",
+        "/myplaylist/playlist/contents",
+        {},
+        editPlaylistContentsParams
+      );
+
+      console.log(response);
+
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };
+
+export const updatePlaylistTags =
+  (updatePlaylistParams) => async (dispatch) => {
+    console.log("태그 목록 수정 요청 시작");
+
+    try {
+      dispatch(actions.common.startLoading);
+
+      const response = await apis.requestAxios(
+        "post",
+        "/myplaylist/playlist/tags",
+        {},
+        updatePlaylistParams
+      );
+
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };
+
+export const deletePlaylistTags =
+  (deletePlaylistParams) => async (dispatch) => {
+    console.log("태그 목록 수정 요청 시작");
+
+    try {
+      dispatch(actions.common.startLoading);
+
+      const response = await apis.requestAxios(
+        "delete",
+        "/myplaylist/playlist/tags",
+        {},
+        deletePlaylistParams
+      );
+
+      if (response.status === 204) {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      } else {
+        dispatch(actions.common.endLoading);
+        return response.status;
+      }
+    } catch (err) {}
+  };
